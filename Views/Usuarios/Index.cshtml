@@ -1,0 +1,46 @@
+﻿@model List<IPC2.Models.ViewModels.ListTablaViewModel>
+@{
+    ViewBag.Title = "Datos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row" style="text-align:right; padding:5px;">
+    <a href="~/Usuarios/Nuevo" class="btn btn-primary">Nuevo</a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>NickName</th>
+                <th>Primer Nombre</th>
+                <th>Segundo Nombre</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Pais</th>
+                <th>Contraseña</th>
+                <th>Email</th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.Nickname</td>
+                    <td>@oElemento.PrimerNombre</td>
+                    <td>@oElemento.SegundoNombre</td>
+                    <td>@oElemento.PrimerApellido</td>
+                    <td>@oElemento.SegundoApellido</td>
+                    <td>@oElemento.FechaNacimiento</td>
+                    <td>@oElemento.Pais</td>
+                    <td>@oElemento.Password</td>
+                    <td>@oElemento.Email</td>
+
+                    
+                </tr>
+            }
+        </table>
+
+    </div>
+
+</div>
