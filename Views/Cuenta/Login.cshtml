@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/_LayoutLogin.cshtml";
+}
+
+    <div class="padding-all">
+        <div class="header">
+            <h1>Othello</h1>
+        </div>
+
+        <div class="design">
+            <div class="mail-form-agile">
+                <form action="~/Cuenta/Verify" method="post">
+                    <input type="text" name="Nickname" placeholder="NickName" required="" />
+                    <input type="password" name="Password" class="padding" placeholder="Password" required="" />
+                    <input type="submit" value="Login">
+                </form>
+                <form action="~/Usuarios/Nuevo">
+                    <input type="submit" value="Crear nuevo Usuario">
+                </form>
+            </div>
+            <div class="clear"> </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
