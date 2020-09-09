@@ -63,7 +63,7 @@ namespace IPC2.Controllers
                         db.usuarios.Add(oTabla);
                         db.SaveChanges();
                     }
-                    return  Redirect("~/Usuarios/");
+                    return  Redirect("~/Home/Index");
                 }
                 return View(model);
 
