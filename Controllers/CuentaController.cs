@@ -10,9 +10,9 @@ namespace IPC2.Controllers
 {
     public class CuentaController : Controller
     {
-        SqlConnection connect = new SqlConnection();
+        /*SqlConnection connect = new SqlConnection();
         SqlCommand command = new SqlCommand();
-        SqlDataReader rd;
+        SqlDataReader rd;*/
         // GET: Usuario
         [HttpGet]
         public ActionResult Login()
@@ -20,14 +20,32 @@ namespace IPC2.Controllers
             return View();
         }
 
-        void connectionString()
+
+        /*void connectionString()
         {
             connect.ConnectionString = "data source= localhost; database= Othello; integrated security = SSPI;";
-        }
+        }*/
         [HttpPost]
 
         public ActionResult Verify(Cuenta account)
         {
+            using(OthelloEntities db = new OthelloEntities())
+            {
+                var lst = from d in db.usuarios
+                          where d.nickname == account.Nickname && d.contraseña == account.Password
+                          select d;
+                if (lst.Count() > 0)
+                {
+                    usuarios oUser = lst.First();
+                    Session["User"] = oUser;
+                    return Redirect("~/Home/Index");
+                }
+                else
+                {
+                    return Redirect("~/Cuenta/Login");
+                }
+            }
+            /*
             connectionString();
             connect.Open();
             command.Connection = connect;
@@ -42,8 +60,9 @@ namespace IPC2.Controllers
             else
             {
                 connect.Close();
-                return RedirectToAction("Login", new { message = ("No se reconocen los datos ingresados") });
+                return Content("Datos no encontrados");
             }
+            */
         }
 
     }

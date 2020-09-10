@@ -1,9 +1,28 @@
 ﻿
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/_LayoutLogin.cshtml";
+    Layout = null;
 }
+<!DOCTYPE html>
 
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <title>Othello</title>
+    <link rel="icon" type="image/png" href="../Images/icon.png">
+    @Styles.Render("~/Content/css")
+    <link href="~/styles/style3.css" rel="stylesheet" />
+    <style>
+        body {
+            text-align: center;
+            background: url("../Images/Othello.jpg") 0px 0px no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
     <div class="padding-all">
         <div class="header">
             <h1>Othello</h1>
@@ -24,3 +43,5 @@
         </div>
     </div>
     @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

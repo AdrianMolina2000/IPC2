@@ -1,64 +1,86 @@
 ﻿@model IPC2.Models.ViewModels.TablaViewModel
 @{
     ViewBag.Title = "Nuevo";
-    Layout = "~/Views/_LayoutCrear.cshtml";
+    Layout = null;
 
 }
+<!DOCTYPE html>
 
-<h2>@ViewBag.Title</h2>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Crear Usuario</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/styles/style3.css" rel="stylesheet" />
+    <script>
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    <style>
+        body {
+            text-align: center;
+            background: url("../Images/Crear.jpg") 0px 0px no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Nuevo", "Usuarios", FormMethod.Post))
+    {
+        <div class="design">
+            <div class="mail-form-agile">
+                <div>
 
-@using (Html.BeginForm("Nuevo","Usuarios", FormMethod.Post))
-{
-<div class="design">
-    <div class="mail-form-agile">
-        <div>
-            
-            @Html.TextBoxFor(d => d.Nickname, "", new { @placeholder = "NickName" })<br />
-            @Html.ValidationMessageFor(d => d.Nickname, null, new { @class = "red" })
-        </div>
-        <div>
-            @Html.TextBoxFor(d => d.PrimerNombre, "", new { @placeholder = "Primer Nombre" })<br />
-            @Html.ValidationMessageFor(d => d.PrimerNombre, null, new { @class = "red" })
+                    @Html.TextBoxFor(d => d.Nickname, "", new { @placeholder = "NickName" })<br />
+                    @Html.ValidationMessageFor(d => d.Nickname, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(d => d.PrimerNombre, "", new { @placeholder = "Primer Nombre" })<br />
+                    @Html.ValidationMessageFor(d => d.PrimerNombre, null, new { @class = "red" })
 
-        </div>
-        <div>
-            @Html.TextBoxFor(d => d.SegundoNombre, "", new { @placeholder = "Segundo Nombre" })<br />
-            @Html.ValidationMessageFor(d => d.SegundoNombre, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(d => d.SegundoNombre, "", new { @placeholder = "Segundo Nombre" })<br />
+                    @Html.ValidationMessageFor(d => d.SegundoNombre, null, new { @class = "red" })
 
-        </div>
-        <div>
-            @Html.TextBoxFor(d => d.PrimerApellido, "", new { @placeholder = "Primer Apellido" })<br />
-            @Html.ValidationMessageFor(d => d.PrimerApellido, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(d => d.PrimerApellido, "", new { @placeholder = "Primer Apellido" })<br />
+                    @Html.ValidationMessageFor(d => d.PrimerApellido, null, new { @class = "red" })
 
-        </div>
-        <div>
-            @Html.TextBoxFor(d => d.SegundoApellido, "", new { @placeholder = "Segundo Apellido" })<br />
-            @Html.ValidationMessageFor(d => d.SegundoApellido, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(d => d.SegundoApellido, "", new { @placeholder = "Segundo Apellido" })<br />
+                    @Html.ValidationMessageFor(d => d.SegundoApellido, null, new { @class = "red" })
 
-        </div>
-        <div>
-            @Html.TextBoxFor(d => d.Pais, "", new { @placeholder = "Pais" })<br />
-            @Html.ValidationMessageFor(d => d.Pais, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(d => d.Pais, "", new { @placeholder = "Pais" })<br />
+                    @Html.ValidationMessageFor(d => d.Pais, null, new { @class = "red" })
 
-        </div>
-        <div>
-            @Html.TextBoxFor(d => d.Password, "", new { @placeholder = "Contraseña" })<br />
-            @Html.ValidationMessageFor(d => d.Password, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(d => d.Password, "", new { @placeholder = "Contraseña" })<br />
+                    @Html.ValidationMessageFor(d => d.Password, null, new { @class = "red" })
 
-        </div>
-        <div>
-            @Html.TextBoxFor(d => d.Email, "", new { @placeholder = "Email" })<br />
-            @Html.ValidationMessageFor(d => d.Email, null, new { @class = "red" })
-        </div>
-        <div>
-            @Html.LabelFor(d => d.FechaNacimiento)<br />
-            @Html.EditorFor(d => d.FechaNacimiento, "", new { @class = "form-control" })<br />
-            @Html.ValidationMessageFor(d => d.FechaNacimiento, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.TextBoxFor(d => d.Email, "", new { @placeholder = "Email" })<br />
+                    @Html.ValidationMessageFor(d => d.Email, null, new { @class = "red" })
+                </div>
+                <div>
+                    @Html.LabelFor(d => d.FechaNacimiento)<br />
+                    @Html.EditorFor(d => d.FechaNacimiento, "", new { @class = "form-control" })<br />
+                    @Html.ValidationMessageFor(d => d.FechaNacimiento, null, new { @class = "red" })
 
+                </div>
+                <div style="text-align:center;">
+                    <input type="submit" value="Guardar" />
+                </div>
+            </div>
         </div>
-         <div style="text-align:center;">
-             <input type="submit" value="Guardar" />
-         </div>
-     </div>
- </div>
-}
+    }
+</body>
+</html>
+
+
