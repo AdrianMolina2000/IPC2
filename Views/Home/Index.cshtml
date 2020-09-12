@@ -1,4 +1,5 @@
-﻿
+﻿@model IPC2.Models.Archi
+
 @{
     ViewBag.Title = "Home Page";
     Layout = null;
@@ -12,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <link rel="icon" type="image/png" href="../Images/icon.png">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
@@ -53,7 +55,7 @@
         <div class="row">
             <div class="col-md-4 bg-dark">
                 <h2 class="text-white padd2">Jugar Solo</h2>
-                <p class="padd2"><a class="btn btn-light"  href="#">Jugar <i class="fas fa-dice-one"></i></a></p>
+                <p class="padd2"><a class="btn btn-light" href="~/Jugar/Single">Jugar <i class="fas fa-dice-one"></i></a></p>
             </div>
             <div class="col-md-4 bg-light">
                 <h2 class="padd2">Multijugador</h2>
@@ -67,8 +69,54 @@
         <div class="row">
             <div class="col-md-4 bg-light">
                 <h2 class="padd2">Cargar Partida</h2>
-                <p class="padd2"><a class="btn btn-dark" href="#">Subir Documento <i class="fas fa-file-upload"></i></a></p>
+                <!--<p class="padd2"><a class="btn btn-dark" href="~/Archivo/Index">Subir Documento <i class="fas fa-file-upload"></i></a></p>-->
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal">
+                    Subir Documento <i class="fas fa-file-upload"></i>
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Subir Documento</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @using (Html.BeginForm("Save", "Archivo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.AntiForgeryToken();
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-3 form-group">
+                                        @Html.TextBoxFor(d => d.Archivo1, new { type = "File", accept = ".xml" })
+                                        @Html.ValidationMessageFor(d => d.Archivo1, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group justify-content-end">
+                                        <input type="submit" class="btn btn-primary" value="Guardar"/>
+                                </div>
+                                }
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
             </div>
+
+
+
+
+
+
+
+
+
+
+
             <div class="col-md-4 bg-dark">
                 <h2 class="text-white padd2">Guardar Partida</h2>
                 <p class="padd2"><a class="btn btn-light" href="#">Bajar Documento <i class="fas fa-file-download"></i></a></p>
