@@ -1,0 +1,46 @@
+﻿body {
+    text-align: center;
+    background: url("../Images/fondo.jpg") 0px 0px no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+#Tablero {
+    margin: auto;
+    width: 500px;
+    height: 500px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fila {
+    padding: 0px;
+}
+
+.fas, .far {
+    font-size: 40px;
+}
+
+.white {
+    color: white;
+}
+
+.casilla {
+    border: 1px solid white;
+    width: 48px;
+    height: 48px;
+    float: left;
+    font-size: 2em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.dentro {
+    background-color: rgb(122, 122, 122);
+}
+

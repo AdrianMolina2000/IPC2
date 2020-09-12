@@ -1,122 +1,46 @@
-﻿    <main id="Tablero" class="bg-dark">
+﻿<main id="Tablero" class="bg-dark">
+    <div class="fila font-weight-bold text-black">
+        <div class="casilla dentro border-0"></div>
+        <div class="casilla dentro border-0">A</div>
+        <div class="casilla dentro border-0">B</div>
+        <div class="casilla dentro border-0">C</div>
+        <div class="casilla dentro border-0">D</div>
+        <div class="casilla dentro border-0">E</div>
+        <div class="casilla dentro border-0">F</div>
+        <div class="casilla dentro border-0">G</div>
+        <div class="casilla dentro border-0">H</div>
+        <div class="casilla dentro border-0"></div>
+    </div>
+
+    @{
+        string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H" };
+
+        for (int i = 0; i < letras.Length; i++)
+        {
+            var id2 = i + 1;
         <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0"></div>
-            <div class="casilla dentro border-0">A</div>
-            <div class="casilla dentro border-0">B</div>
-            <div class="casilla dentro border-0">C</div>
-            <div class="casilla dentro border-0">D</div>
-            <div class="casilla dentro border-0">E</div>
-            <div class="casilla dentro border-0">F</div>
-            <div class="casilla dentro border-0">G</div>
-            <div class="casilla dentro border-0">H</div>
-            <div class="casilla dentro border-0"></div>
+            <div class="casilla dentro border-0">@id2</div>
+
+            @for(int j = 0; j < letras.Length; j++){
+            var id = letras[j] + (i+1);
+            <div id=@id class="casilla dentro"></div>
+            }
+
+            <div class="casilla dentro border-0">@id2</div>
         </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">1</div>
-            <div id="A1" class="casilla dentro"></div>
-            <div id="B1" class="casilla dentro"></div>
-            <div id="C1" class="casilla dentro"></div>
-            <div id="D1" class="casilla dentro"></div>
-            <div id="E1" class="casilla dentro"></div>
-            <div id="F1" class="casilla dentro"></div>
-            <div id="G1" class="casilla dentro"></div>
-            <div id="H1" class="casilla dentro"></div>
-            <div id="" class="casilla dentro border-0">1</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">2</div>
-            <div id="A2" class="casilla dentro"></div>
-            <div id="B2" class="casilla dentro"></div>
-            <div id="C2" class="casilla dentro"></div>
-            <div id="D2" class="casilla dentro"></div>
-            <div id="E2" class="casilla dentro"></div>
-            <div id="F2" class="casilla dentro"></div>
-            <div id="G2" class="casilla dentro"></div>
-            <div id="H2" class="casilla dentro"></div>
-            <div class="casilla dentro border-0">2</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">3</div>
-            <div id="A3" class="casilla dentro"></div>
-            <div id="B3" class="casilla dentro"></div>
-            <div id="C3" class="casilla dentro"></div>
-            <div id="D3" class="casilla dentro"></div>
-            <div id="E3" class="casilla dentro"></div>
-            <div id="F3" class="casilla dentro"></div>
-            <div id="G3" class="casilla dentro"></div>
-            <div id="H3" class="casilla dentro"></div>
-            <div class="casilla dentro border-0">3</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">4</div>
-            <div id="A4" class="casilla dentro"></div>
-            <div id="B4" class="casilla dentro"></div>
-            <div id="C4" class="casilla dentro"></div>
-            <div id="D4" class="casilla dentro"><i class="fas fa-circle white"></i></div>
-            <div id="E4" class="casilla dentro"><i class="fas fa-circle"></i></div>
-            <div id="F4" class="casilla dentro"></div>
-            <div id="G4" class="casilla dentro"></div>
-            <div id="H4" class="casilla dentro"></div>
-            <div class="casilla dentro border-0">4</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">5</div>
-            <div id="A5" class="casilla dentro"></div>
-            <div id="B5" class="casilla dentro"></div>
-            <div id="C5" class="casilla dentro"></div>
-            <div class="casilla dentro"><i class="fas fa-circle"></i></div>
-            <div class="casilla dentro"><i class="fas fa-circle white"></i></div>
-            <div id="F5" class="casilla dentro"></div>
-            <div id="G5" class="casilla dentro"></div>
-            <div id="H5" class="casilla dentro"></div>
-            <div class="casilla dentro border-0">5</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">6</div>
-            <div id="A6" class="casilla dentro"></div>
-            <div id="B6" class="casilla dentro"></div>
-            <div id="C6" class="casilla dentro"></div>
-            <div id="D6" class="casilla dentro"></div>
-            <div id="E6" class="casilla dentro"></div>
-            <div id="F6" class="casilla dentro"></div>
-            <div id="G6" class="casilla dentro"></div>
-            <div id="H6" class="casilla dentro"></div>
-            <div class="casilla dentro border-0">6</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">7</div>
-            <div id="A7" class="casilla dentro"></div>
-            <div id="B7" class="casilla dentro"></div>
-            <div id="C7" class="casilla dentro"></div>
-            <div id="D7" class="casilla dentro"></div>
-            <div id="E7" class="casilla dentro"></div>
-            <div id="F7" class="casilla dentro"></div>
-            <div id="G7" class="casilla dentro"></div>
-            <div id="H7" class="casilla dentro"></div>
-            <div class="casilla dentro border-0">7</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0">8</div>
-            <div id="A8" class="casilla dentro"></div>
-            <div id="B8" class="casilla dentro"></div>
-            <div id="C8" class="casilla dentro"></div>
-            <div id="D8" class="casilla dentro"></div>
-            <div id="E8" class="casilla dentro"></div>
-            <div id="F8" class="casilla dentro"></div>
-            <div id="G8" class="casilla dentro"></div>
-            <div id="H8" class="casilla dentro"></div>
-            <div class="casilla dentro border-0">8</div>
-        </div>
-        <div class="fila font-weight-bold text-black">
-            <div class="casilla dentro border-0"></div>
-            <div class="casilla dentro border-0">A</div>
-            <div class="casilla dentro border-0">B</div>
-            <div class="casilla dentro border-0">C</div>
-            <div class="casilla dentro border-0">D</div>
-            <div class="casilla dentro border-0">E</div>
-            <div class="casilla dentro border-0">F</div>
-            <div class="casilla dentro border-0">G</div>
-            <div class="casilla dentro border-0">H</div>
-            <div class="casilla dentro border-0"></div>
-        </div>
-    </main>
+        }
+    }
+
+    <div class="fila font-weight-bold text-black">
+        <div class="casilla dentro border-0"></div>
+        <div class="casilla dentro border-0">A</div>
+        <div class="casilla dentro border-0">B</div>
+        <div class="casilla dentro border-0">C</div>
+        <div class="casilla dentro border-0">D</div>
+        <div class="casilla dentro border-0">E</div>
+        <div class="casilla dentro border-0">F</div>
+        <div class="casilla dentro border-0">G</div>
+        <div class="casilla dentro border-0">H</div>
+        <div class="casilla dentro border-0"></div>
+    </div>
+</main>
