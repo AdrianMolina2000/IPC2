@@ -1,23 +1,4 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tablero</title>
-    <link href="~/styles/tablero.css" rel="stylesheet" />
-    <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
-    <link rel="icon" type="image/png" href="../Images/icon.png">
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-</head>
-<body>
-
-    <main id="Tablero" class="bg-dark">
+﻿    <main id="Tablero" class="bg-dark">
         <div class="fila font-weight-bold text-black">
             <div class="casilla dentro border-0"></div>
             <div class="casilla dentro border-0">A</div>
@@ -139,8 +120,3 @@
             <div class="casilla dentro border-0"></div>
         </div>
     </main>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
-</body>
-</html>

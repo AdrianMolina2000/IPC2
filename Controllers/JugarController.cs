@@ -11,6 +11,7 @@ namespace IPC2.Controllers
         // GET: Jugar
         public ActionResult Single()
         {
+
             return View();
         }
     }
