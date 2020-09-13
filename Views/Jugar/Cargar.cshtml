@@ -3,8 +3,8 @@
 }
 @using (Html.BeginForm("UploadXML", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="file" id="fileUpload" name="fileUpload" style="float:left" />
-    <input type="submit" value="Get User List" />
+    <input type="file" id="fileUpload" name="fileUpload" style="float:left" class="btn btn-primary"/>
+    <input type="submit" value="Get User List" style="float:right" class="btn btn-success"/>
 }
 
 
