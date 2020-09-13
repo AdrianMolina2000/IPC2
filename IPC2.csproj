@@ -141,6 +141,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Archi.cs" />
+    <Compile Include="Models\Fichas.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -380,6 +381,7 @@
     <Content Include="Views\Archivo\Index.cshtml" />
     <Content Include="Views\_LayoutTablero.cshtml" />
     <Content Include="Views\Jugar\Single.cshtml" />
+    <Content Include="Views\Jugar\Cargar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

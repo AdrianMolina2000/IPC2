@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-4 bg-light">
                 <h2 class="padd2">Multijugador</h2>
-                <p class="padd2"><a class="btn btn-dark" href="#">Jugar <i class="fas fa-dice-two"></i></a></p>
+                <p class="padd2"><a class="btn btn-dark" href="~/Jugar/Cargar">Jugar <i class="fas fa-dice-two"></i></a></p>
             </div>
             <div class="col-md-4 bg-dark">
                 <h2 class="text-white padd2">Torneo</h2>
@@ -86,7 +86,6 @@
                             <div class="modal-body">
                                 @using (Html.BeginForm("Save", "Archivo", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                 {
-                                    @Html.AntiForgeryToken();
                                 <div class="row">
                                     <div class="col-md-6 col-lg-3 form-group">
                                         @Html.TextBoxFor(d => d.Archivo1, new { type = "File", accept = ".xml" })

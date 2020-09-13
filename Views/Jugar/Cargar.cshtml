@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@using (Html.BeginForm("UploadXML", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" id="fileUpload" name="fileUpload" style="float:left" />
+    <input type="submit" value="Get User List" />
+}
+
+
+@if (ViewBag.ShowList)
+{
+    List<IPC2.Models.Fichas> fichasVector = new List<IPC2.Models.Fichas>();
+    foreach (var item in Model)
+    {
+        string color = item.color;
+        string columna = item.columna;
+        string fila = item.fila;
+        IPC2.Models.Fichas ficha = new IPC2.Models.Fichas();
+        ficha.color = color;
+        ficha.columna = columna;
+        ficha.fila = fila;
+        fichasVector.Add(ficha);
+    }
+
+    bool buscar(string fila, string columna, List<IPC2.Models.Fichas> lista)
+    {
+        bool bandera = false;
+        foreach (var item in lista)
+        {
+            if (item.fila == columna && item.columna == fila)
+            {
+                bandera = true;
+            }
+            else
+            {
+                bandera = false;
+            }
+        }
+        return bandera;
+    }
+
+    IPC2.Models.Fichas devolver(string fila, string columna, List<IPC2.Models.Fichas> lista)
+    {
+        IPC2.Models.Fichas ficha = null;
+        foreach (var item in lista)
+        {
+            if (item.fila == columna && item.columna == fila)
+            {
+                ficha = item;
+            }
+        }
+        return ficha;
+    }
+
+    <main id="Tablero" class="bg-dark">
+        <div class="fila font-weight-bold text-black">
+            <div class="casilla dentro border-0"></div>
+            <div class="casilla dentro border-0">A</div>
+            <div class="casilla dentro border-0">B</div>
+            <div class="casilla dentro border-0">C</div>
+            <div class="casilla dentro border-0">D</div>
+            <div class="casilla dentro border-0">E</div>
+            <div class="casilla dentro border-0">F</div>
+            <div class="casilla dentro border-0">G</div>
+            <div class="casilla dentro border-0">H</div>
+            <div class="casilla dentro border-0"></div>
+        </div>
+
+        @{
+
+            string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H" };
+
+
+            for (int i = 0; i < letras.Length; i++)
+            {
+                var id2 = i + 1;
+                <div class="fila font-weight-bold text-black">
+                    <div class="casilla dentro border-0">@id2</div>
+
+                    @for (int j = 0; j < letras.Length; j++)
+                    {
+                        var id = letras[j] + (i + 1);
+
+                        if (buscar(letras[j],id2.ToString(),fichasVector))
+                        {
+                            IPC2.Models.Fichas ficha2 = devolver(letras[j], id2.ToString(), fichasVector);
+                            
+                            if (ficha2.color == "blanco")
+                            {
+                                <div id=@id class="casilla dentro"><i class="fas fa-circle white"></i></div>
+                            }
+                            else
+                            {
+                                <div id=@id class="casilla dentro"><i class="fas fa-circle"></i></div>
+                            }
+
+                        }
+                        else
+                        {
+                            <div id=@id class="casilla dentro"></div>
+                        }
+
+                    }
+
+                    <div class="casilla dentro border-0">@id2</div>
+                </div>
+
+            }
+        }
+
+        <div class="fila font-weight-bold text-black">
+            <div class="casilla dentro border-0"></div>
+            <div class="casilla dentro border-0">A</div>
+            <div class="casilla dentro border-0">B</div>
+            <div class="casilla dentro border-0">C</div>
+            <div class="casilla dentro border-0">D</div>
+            <div class="casilla dentro border-0">E</div>
+            <div class="casilla dentro border-0">F</div>
+            <div class="casilla dentro border-0">G</div>
+            <div class="casilla dentro border-0">H</div>
+            <div class="casilla dentro border-0"></div>
+        </div>
+    </main>
+}
+        }
