@@ -141,6 +141,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Archi.cs" />
+    <Compile Include="Models\Ficha2.cs" />
     <Compile Include="Models\Fichas.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>

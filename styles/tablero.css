@@ -10,7 +10,6 @@
     width: 500px;
     height: 500px;
     padding: 10px;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -38,6 +37,8 @@
     align-items: center;
     justify-content: center;
 }
+
+
 
 
 .dentro {
