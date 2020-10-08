@@ -15,13 +15,15 @@ namespace IPC2.Models
         public string color { get; set; }
         public string columna { get; set; }
         public string fila { get; set; }
+        public string permitida { get; set; }
 
-        public Fichas(string fi, string col, string co)
+
+        public Fichas(string fi, string col, string co = "", string per = "no")
         {
             fila = fi;
             columna = col;
             color = co;
-
+            permitida = per;
         }
     }
 

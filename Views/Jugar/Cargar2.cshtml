@@ -4,7 +4,7 @@
 @using (Html.BeginForm("UploadXML", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="file" id="fileUpload" name="fileUpload" style="float:left" class="btn btn-primary" />
-    <input type="submit" value="Mostrar" style="float:right" class="btn btn-success" />
+    <input type="submit" value="Get User List" style="float:right" class="btn btn-success" />
 }
 
 
@@ -55,16 +55,16 @@
     }
 
     <main id="Tablero" class="bg-dark">
-        <div class="font-weight-bold text-black">
+        <div class="fila font-weight-bold text-black">
             <div class="casilla dentro border-0"></div>
-            <div class="casilla dentro border-0">A</div>
-            <div class="casilla dentro border-0">B</div>
-            <div class="casilla dentro border-0">C</div>
-            <div class="casilla dentro border-0">D</div>
-            <div class="casilla dentro border-0">E</div>
-            <div class="casilla dentro border-0">F</div>
-            <div class="casilla dentro border-0">G</div>
-            <div class="casilla dentro border-0">H</div>
+            <div class="casilla dentro border-0">1</div>
+            <div class="casilla dentro border-0">2</div>
+            <div class="casilla dentro border-0">3</div>
+            <div class="casilla dentro border-0">4</div>
+            <div class="casilla dentro border-0">5</div>
+            <div class="casilla dentro border-0">6</div>
+            <div class="casilla dentro border-0">7</div>
+            <div class="casilla dentro border-0">8</div>
             <div class="casilla dentro border-0"></div>
         </div>
 
@@ -77,7 +77,7 @@
             {
                 var id2 = i + 1;
                 <div class="fila font-weight-bold text-black">
-                    <div class="casilla dentro border-0">@(i+1)</div>
+                    <div class="casilla dentro border-0">@letras[i]</div>
 
                     @for (int j = 0; j < letras.Length; j++)
                     {
@@ -104,25 +104,24 @@
 
                     }
 
-                    <div class="casilla dentro border-0">@(i+1)</div>
+                    <div class="casilla dentro border-0">@letras[i]</div>
                 </div>
 
             }
         }
 
-        <div class="font-weight-bold text-black">
+        <div class="fila font-weight-bold text-black">
             <div class="casilla dentro border-0"></div>
-            <div class="casilla dentro border-0">A</div>
-            <div class="casilla dentro border-0">B</div>
-            <div class="casilla dentro border-0">C</div>
-            <div class="casilla dentro border-0">D</div>
-            <div class="casilla dentro border-0">E</div>
-            <div class="casilla dentro border-0">F</div>
-            <div class="casilla dentro border-0">G</div>
-            <div class="casilla dentro border-0">H</div>
+            <div class="casilla dentro border-0">1</div>
+            <div class="casilla dentro border-0">2</div>
+            <div class="casilla dentro border-0">3</div>
+            <div class="casilla dentro border-0">4</div>
+            <div class="casilla dentro border-0">5</div>
+            <div class="casilla dentro border-0">6</div>
+            <div class="casilla dentro border-0">7</div>
+            <div class="casilla dentro border-0">8</div>
             <div class="casilla dentro border-0"></div>
         </div>
     </main>
-
-    <p class="padd2"><a class="btn btn-dark" href="~/Home/Index">Ir a Home<i class="fas fa-home"></i></a></p>
 }
+        }

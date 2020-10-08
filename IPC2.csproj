@@ -190,6 +190,7 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="files\archivo1.xml" />
+    <Content Include="files\guardado.xml" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Crear.jpg" />
@@ -383,6 +384,7 @@
     <Content Include="Views\_LayoutTablero.cshtml" />
     <Content Include="Views\Jugar\Single.cshtml" />
     <Content Include="Views\Jugar\Cargar.cshtml" />
+    <Content Include="Views\Jugar\Cargar2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

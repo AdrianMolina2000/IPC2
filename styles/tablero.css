@@ -26,6 +26,10 @@
     color: white;
 }
 
+.grey {
+    color: #3AB800;
+}
+
 .casilla {
     border: 1px solid white;
     width: 48px;

@@ -1,6 +1,7 @@
 ﻿using IPC2.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,147 +11,38 @@ namespace IPC2.Controllers
 {
     public class JugarController : Controller
     {
-        public static List<Ficha2> listaFichas = new List<Ficha2>();
-        public static Ficha2[] listaFichas2 = new Ficha2[64];
+        public static Fichas[,] bidiFichas = new Fichas[8,8];
 
-        public void Cambiar(Ficha2 nueva)
+        public void Cambiar(int fila, int columna)
         {
-            //ABAJO
-            if (nueva.numero < 56)
-            {
-                if (listaFichas2[nueva.numero + 8] == null)
-                {
-                    int nu = 0;
-                }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero + 8].color)
-                {
-                    Ficha2[] listaFichasCambio = listaFichas2;
-                    List<int> indices = new List<int>();
-
-                    for (int i = nueva.numero + 8; i < 64; i += 8)
-                    {
-                        if ((i+8)>64||listaFichas2[i + 8] == null)
-                        {
-                            break;
-                        }
-                        else if (listaFichas2[i].color == listaFichas2[i + 8].color)
-                        {
-                            indices.Add(i);
-                        }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
-                        {
-                            indices.Add(i);
-                            foreach (var item in indices)
-                            {
-                                listaFichas2[item].color = nueva.color;
-                            }
-                            break;
-                        }
-                    }
-
-                }
-            }
 
             //ARRIBA
-            if (nueva.numero > 8)
+            if (fila > 0)
             {
-                if (listaFichas2[nueva.numero - 8] == null)
+                if (bidiFichas[fila - 1, columna].color == "")
                 {
                     int nu = 0;
                 }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero - 8].color)
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila - 1, columna].color)
                 {
-                    Ficha2[] listaFichasCambio = listaFichas2;
                     List<int> indices = new List<int>();
 
-                    for (int i = nueva.numero - 8; i > 0; i -= 8)
+                    for (int i = fila - 1; i > 0; i -= 1)
                     {
-                        if ((i-8)<0||listaFichas2[i - 8] == null)
+                        if ((i - 1) < 0 || bidiFichas[i - 1, columna].color.Equals(""))
                         {
                             break;
                         }
-                        else if (listaFichas2[i].color == listaFichas2[i - 8].color)
+                        else if (bidiFichas[i, columna].color == bidiFichas[i - 1, columna].color)
                         {
                             indices.Add(i);
                         }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
+                        else if (bidiFichas[i, columna].color != bidiFichas[fila, columna].color)
                         {
                             indices.Add(i);
                             foreach (var item in indices)
                             {
-                                listaFichas2[item].color = nueva.color;
-                            }
-                            break;
-                        }
-                    }
-
-                }
-            }
-
-            //IZQUIERDA
-            if (nueva.numero > 0)
-            {
-                if (listaFichas2[nueva.numero - 1] == null)
-                {
-                    int nu = 0;
-                }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero - 1].color)
-                {
-                    Ficha2[] listaFichasCambio = listaFichas2;
-                    List<int> indices = new List<int>();
-
-                    for (int i = nueva.numero - 1; i > 0; i -= 1)
-                    {
-                        if (listaFichas2[i - 1] == null)
-                        {
-                            break;
-                        }
-                        else if (listaFichas2[i].color == listaFichas2[i - 1].color)
-                        {
-                            indices.Add(i);
-                        }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
-                        {
-                            indices.Add(i);
-                            foreach (var item in indices)
-                            {
-                                listaFichas2[item].color = nueva.color;
-                            }
-                            break;
-                        }
-                    }
-
-                }
-            }
-
-            //DERECHA
-            if (nueva.numero < 64)
-            {
-                if (nueva.numero + 1 == 64 || listaFichas2[nueva.numero + 1] == null)
-                {
-                    int nu = 0;
-                }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero + 1].color)
-                {
-                    Ficha2[] listaFichasCambio = listaFichas2;
-                    List<int> indices = new List<int>();
-
-                    for (int i = nueva.numero + 1; i < 64; i += 1)
-                    {
-                        if ((i+1)>63||listaFichas2[i + 1] == null)
-                        {
-                            break;
-                        }
-                        else if (listaFichas2[i].color == listaFichas2[i + 1].color)
-                        {
-                            indices.Add(i);
-                        }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
-                        {
-                            indices.Add(i);
-                            foreach (var item in indices)
-                            {
-                                listaFichas2[item].color = nueva.color;
+                                bidiFichas[item, columna].color = bidiFichas[fila, columna].color;
                             }
                             break;
                         }
@@ -160,33 +52,81 @@ namespace IPC2.Controllers
             }
 
             //ARRIBA-DERECHA
-            if (nueva.numero > 7)
+            if (fila > 0 && columna < 7)
             {
-                if (listaFichas2[nueva.numero - 7] == null)
+                if (bidiFichas[fila - 1, columna + 1].color == "")
                 {
                     int nu = 0;
                 }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero - 7].color)
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila - 1, columna + 1].color)
                 {
-                    Ficha2[] listaFichasCambio = listaFichas2;
-                    List<int> indices = new List<int>();
+                    Stack<int> indiceX = new Stack<int>();
+                    Stack<int> indiceY = new Stack<int>();
 
-                    for (int i = nueva.numero - 7; i >= 0; i -= 7)
+                    indiceX.Push(0);
+                    indiceY.Push(0);
+                    
+                    int i = fila - 1;
+                    int j = columna + 1;
+                    
+                    while(i>0 && j<8)
                     {
-                        if ((i-7)<0||listaFichas2[i - 7] == null)
+                        if ((i - 1) < 0 || (j + 1) > 7 || bidiFichas[i - 1, j+1].color.Equals(""))
                         {
                             break;
                         }
-                        else if (listaFichas2[i].color == listaFichas2[i - 7].color)
+                        else if (bidiFichas[i, j].color == bidiFichas[i - 1, j + 1].color)
+                        {
+                            indiceY.Push(i);
+                            indiceX.Push(j);
+                        }
+                        else if (bidiFichas[i, j].color != bidiFichas[fila, columna].color)
+                        {
+                            indiceY.Push(i);
+                            indiceX.Push(j);
+                            int maximo = indiceX.Count();
+                            for (int k = 0; k < maximo-1; k++)
+                            {
+                                int x = indiceY.Pop();
+                                int y = indiceX.Pop();
+                                bidiFichas[x, y].color = bidiFichas[fila, columna].color;
+                            }
+                            break;
+                        }
+                        i -= 1;
+                        j += 1;
+                    }
+                }
+            }
+
+
+            //DERECHA
+            if (columna < 7)
+            {
+                if (bidiFichas[fila, columna + 1].color == "")
+                {
+                    int nu = 0;
+                }
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila, columna + 1].color)
+                {
+                    List<int> indices = new List<int>();
+
+                    for (int i = columna + 1; i < 8; i += 1)
+                    {
+                        if ((i + 1) > 7 || bidiFichas[fila, i + 1].color.Equals(""))
+                        {
+                            break;
+                        }
+                        else if (bidiFichas[fila, i].color == bidiFichas[fila, i + 1].color)
                         {
                             indices.Add(i);
                         }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
+                        else if (bidiFichas[fila, i].color != bidiFichas[fila, columna].color)
                         {
                             indices.Add(i);
                             foreach (var item in indices)
                             {
-                                listaFichas2[item].color = nueva.color;
+                                bidiFichas[fila, item].color = bidiFichas[fila, columna].color;
                             }
                             break;
                         }
@@ -195,34 +135,82 @@ namespace IPC2.Controllers
                 }
             }
 
-            //ABAJO-DERECHA
-            if (nueva.numero < 55)
+            //DERECHA-ABAJO
+            if (fila < 7 && columna < 7)
             {
-                if (listaFichas2[nueva.numero + 9] == null)
+                if (bidiFichas[fila + 1, columna + 1].color == "")
                 {
                     int nu = 0;
                 }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero + 9].color)
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila + 1, columna + 1].color)
                 {
-                    Ficha2[] listaFichasCambio = listaFichas2;
-                    List<int> indices = new List<int>();
+                    Stack<int> indiceX = new Stack<int>();
+                    Stack<int> indiceY = new Stack<int>();
 
-                    for (int i = nueva.numero + 9; i < 64; i += 9)
+                    indiceX.Push(0);
+                    indiceY.Push(0);
+
+                    int i = fila + 1;
+                    int j = columna + 1;
+
+                    while (i < 8 && j < 8)
                     {
-                        if ((i+9)>64||listaFichas2[i + 9] == null)
+                        if ((i + 1) > 7 || (j + 1) > 7 || bidiFichas[i + 1, j + 1].color.Equals(""))
                         {
                             break;
                         }
-                        else if (listaFichas2[i].color == listaFichas2[i + 9].color)
+                        else if (bidiFichas[i, j].color == bidiFichas[i + 1, j + 1].color)
+                        {
+                            indiceY.Push(i);
+                            indiceX.Push(j);
+                        }
+                        else if (bidiFichas[i, j].color != bidiFichas[fila, columna].color)
+                        {
+                            indiceY.Push(i);
+                            indiceX.Push(j);
+                            int maximo = indiceX.Count();
+                            for (int k = 0; k < maximo - 1; k++)
+                            {
+                                int x = indiceY.Pop();
+                                int y = indiceX.Pop();
+                                bidiFichas[x, y].color = bidiFichas[fila, columna].color;
+                            }
+                            break;
+                        }
+                        i += 1;
+                        j += 1;
+                    }
+                }
+            }
+
+
+            //ABAJO
+            if ( fila < 7)
+            {
+                if (bidiFichas[fila + 1, columna].color == "")
+                {
+                    int nu = 0;
+                }
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila+1, columna].color)
+                {
+                    List<int> indices = new List<int>();
+
+                    for (int i = fila + 1; i < 8; i += 1)
+                    {
+                        if ((i+1)>7|| bidiFichas[i + 1, columna].color.Equals(""))
+                        {
+                            break;
+                        }
+                        else if (bidiFichas[i,columna].color == bidiFichas[i + 1, columna].color)
                         {
                             indices.Add(i);
                         }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
+                        else if (bidiFichas[i, columna].color != bidiFichas[fila,columna].color)
                         {
                             indices.Add(i);
                             foreach (var item in indices)
                             {
-                                listaFichas2[item].color = nueva.color;
+                                bidiFichas[item, columna].color = bidiFichas[fila, columna].color;
                             }
                             break;
                         }
@@ -232,33 +220,80 @@ namespace IPC2.Controllers
             }
 
             //ABAJO-IZQUIERDA
-            if (nueva.numero < 57)
+            if (fila < 7 && columna > 0)
             {
-                if (listaFichas2[nueva.numero + 7] == null)
+                if (bidiFichas[fila + 1, columna - 1].color == "")
                 {
                     int nu = 0;
                 }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero + 7].color)
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila + 1, columna - 1].color)
                 {
-                    Ficha2[] listaFichasCambio = listaFichas2;
-                    List<int> indices = new List<int>();
+                    Stack<int> indiceX = new Stack<int>();
+                    Stack<int> indiceY = new Stack<int>();
 
-                    for (int i = nueva.numero + 7; i < 57; i += 7)
+                    indiceX.Push(0);
+                    indiceY.Push(0);
+
+                    int i = fila + 1;
+                    int j = columna - 1;
+
+                    while (i < 8 && j > 0)
                     {
-                        if (listaFichas2[i + 7] == null)
+                        if ((i + 1) > 7 || (j - 1) < 0 || bidiFichas[i + 1, j - 1].color.Equals(""))
                         {
                             break;
                         }
-                        else if (listaFichas2[i].color == listaFichas2[i + 7].color)
+                        else if (bidiFichas[i, j].color == bidiFichas[i + 1, j - 1].color)
+                        {
+                            indiceY.Push(i);
+                            indiceX.Push(j);
+                        }
+                        else if (bidiFichas[i, j].color != bidiFichas[fila, columna].color)
+                        {
+                            indiceY.Push(i);
+                            indiceX.Push(j);
+                            int maximo = indiceX.Count();
+                            for (int k = 0; k < maximo - 1; k++)
+                            {
+                                int x = indiceY.Pop();
+                                int y = indiceX.Pop();
+                                bidiFichas[x, y].color = bidiFichas[fila, columna].color;
+                            }
+                            break;
+                        }
+                        i += 1;
+                        j -= 1;
+                    }
+                }
+            }
+
+            //IZQUIERDA
+            if (columna > 0)
+            {
+                if (bidiFichas[fila, columna - 1].color == "")
+                {
+                    int nu = 0;
+                }
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila, columna - 1].color)
+                {
+                    List<int> indices = new List<int>();
+
+                    for (int i = columna - 1; i > 0; i -= 1)
+                    {
+                        if ((i - 1) < 0 || bidiFichas[fila, i - 1].color.Equals(""))
+                        {
+                            break;
+                        }
+                        else if (bidiFichas[fila, i].color == bidiFichas[fila, i - 1].color)
                         {
                             indices.Add(i);
                         }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
+                        else if (bidiFichas[fila, i].color != bidiFichas[fila, columna].color)
                         {
                             indices.Add(i);
                             foreach (var item in indices)
                             {
-                                listaFichas2[item].color = nueva.color;
+                                bidiFichas[fila, item].color = bidiFichas[fila, columna].color;
                             }
                             break;
                         }
@@ -267,72 +302,567 @@ namespace IPC2.Controllers
                 }
             }
 
-            //ARRIBA-IZQUIERDA
-            if (nueva.numero > 7)
+            //IZQUIERDA-ARRIBA
+            if (fila > 0 && columna > 0)
             {
-                if ((nueva.numero-9)<0|| listaFichas2[nueva.numero - 9] == null)
+                if (bidiFichas[fila - 1, columna - 1].color == "")
                 {
                     int nu = 0;
                 }
-                else if (listaFichas2[nueva.numero].color != listaFichas2[nueva.numero - 9].color)
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila - 1, columna - 1].color)
                 {
-                    Ficha2[] listaFichasCambio = listaFichas2;
-                    List<int> indices = new List<int>();
+                    Stack<int> indiceX = new Stack<int>();
+                    Stack<int> indiceY = new Stack<int>();
 
-                    for (int i = nueva.numero - 9; i >= 0; i -= 9)
+                    indiceX.Push(0);
+                    indiceY.Push(0);
+
+                    int i = fila - 1;
+                    int j = columna - 1;
+
+                    while (i > 0 && j > 0)
                     {
-                        if ( (i-9)<0||listaFichas2[i - 9] == null)
+                        if ((i - 1) < 0 || (j - 1) < 0 || bidiFichas[i - 1, j - 1].color.Equals(""))
                         {
                             break;
                         }
-                        else if (listaFichas2[i].color == listaFichas2[i - 9].color)
+                        else if (bidiFichas[i, j].color == bidiFichas[i - 1, j - 1].color)
                         {
-                            indices.Add(i);
+                            indiceY.Push(i);
+                            indiceX.Push(j);
                         }
-                        else if (listaFichas2[i].color != listaFichas2[nueva.numero].color)
+                        else if (bidiFichas[i, j].color != bidiFichas[fila, columna].color)
                         {
-                            indices.Add(i);
-                            foreach (var item in indices)
+                            indiceY.Push(i);
+                            indiceX.Push(j);
+                            int maximo = indiceX.Count();
+                            for (int k = 0; k < maximo - 1; k++)
                             {
-                                listaFichas2[item].color = nueva.color;
+                                int x = indiceY.Pop();
+                                int y = indiceX.Pop();
+                                bidiFichas[x, y].color = bidiFichas[fila, columna].color;
                             }
                             break;
                         }
+                        i -= 1;
+                        j -= 1;
+                    }
+                }
+            }
+
+
+        }
+
+        public void Verificar(string color)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (bidiFichas[i, j].color.Equals(color))
+                    {
+
+                        //ARRIBA
+                        if (i > 0)
+                        {
+                            if (bidiFichas[i - 1, j].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i - 1, j].color)
+                            {
+                                for (int k = i - 1; k > 0; k -= 1)
+                                {
+                                    if ((k - 1) < 0 )
+                                    {
+                                        break;
+                                    }
+
+                                    else if (bidiFichas[k, j].color.Equals(bidiFichas[k - 1, j].color))
+                                    {
+                                        continue;
+                                    }
+                                    else if (bidiFichas[k - 1, j].color.Equals(""))
+                                    {
+                                        bidiFichas[k-1, j].permitida = "si";
+                                        break;
+                                    }
+                                    else if (bidiFichas[i, k].color != bidiFichas[k-1, j].color)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        //ARRIBA-DERECHA
+                        if (i > 0 && j < 7)
+                        {
+                            if (bidiFichas[i - 1, j + 1].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i - 1, j + 1].color)
+                            {
+                                Stack<int> indiceX = new Stack<int>();
+                                Stack<int> indiceY = new Stack<int>();
+
+                                indiceX.Push(0);
+                                indiceY.Push(0);
+
+                                int k = i - 1;
+                                int l = j + 1;
+
+                                while (k > 0 && l < 8)
+                                {
+                                    if ((k - 1) < 0 || (l + 1) > 7)
+                                    {
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color.Equals(bidiFichas[k - 1, l + 1].color))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                    }
+                                    else if (bidiFichas[k-1, l+1].color.Equals(""))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                        int maximo = indiceX.Count();
+                                        for (int m = 0; m < maximo - 2; m++)
+                                        {
+                                            indiceY.Pop();
+                                            indiceX.Pop();
+                                        }
+                                        bidiFichas[indiceY.Pop()-1, indiceX.Pop()+1].permitida = "si";
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color != bidiFichas[k-1, l + 1].color)
+                                    {
+                                        break;
+                                    }
+                                    k -= 1;
+                                    l += 1;
+                                }
+                            }
+                        }
+                       
+
+                        //DERECHA
+                        if (j < 7)
+                        {
+                            if (bidiFichas[i, j + 1].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i, j + 1].color)
+                            {
+                                for (int k = j + 1; k < 8; k += 1)
+                                {
+                                    if ((k + 1) > 7)
+                                    {
+                                        break;
+                                    }
+                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[i, k + 1].color))
+                                    {
+                                        continue;
+                                    }
+
+                                    else if (bidiFichas[i, k + 1].color.Equals(""))
+                                    {
+                                        bidiFichas[i, k + 1].permitida = "si";
+                                        break;
+                                    }
+
+                                    else if (bidiFichas[i, k].color != bidiFichas[i, k + 1].color)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        //DERECHA-ABAJO
+                        if (i < 7 && j < 7)
+                        {
+                            if (bidiFichas[i + 1, j + 1].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i + 1, j + 1].color)
+                            {
+                                Stack<int> indiceX = new Stack<int>();
+                                Stack<int> indiceY = new Stack<int>();
+
+                                indiceX.Push(0);
+                                indiceY.Push(0);
+
+                                int k = i + 1;
+                                int l = j + 1;
+
+                                while (k < 8 && l < 8)
+                                {
+                                    if ((k + 1) > 7 || (l + 1) > 7)
+                                    {
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color.Equals(bidiFichas[k + 1, l + 1].color))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                    }
+                                    else if (bidiFichas[k + 1, l + 1].color.Equals(""))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                        int maximo = indiceX.Count();
+                                        for (int m = 0; m < maximo - 2; m++)
+                                        {
+                                            indiceY.Pop();
+                                            indiceX.Pop();
+                                        }
+                                        bidiFichas[indiceY.Pop() + 1, indiceX.Pop() + 1].permitida = "si";
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color != bidiFichas[k + 1, l + 1].color)
+                                    {
+                                        break;
+                                    }
+                                    k += 1;
+                                    l += 1;
+                                }
+                            }
+                        }
+
+                        //ABAJO
+                        if (i < 7)
+                        {
+                            if (bidiFichas[i + 1, j].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i + 1, j].color)
+                            {
+                                for (int k = i + 1; k > 0; k += 1)
+                                {
+                                    if ((k + 1) > 7)
+                                    {
+                                        break;
+                                    }
+
+                                    else if (bidiFichas[k, j].color.Equals(bidiFichas[k + 1, j].color))
+                                    {
+                                        continue;
+                                    }
+                                    else if (bidiFichas[k + 1, j].color.Equals(""))
+                                    {
+                                        bidiFichas[k + 1, j].permitida = "si";
+                                        break;
+                                    }
+                                    else if (bidiFichas[i, k].color != bidiFichas[k + 1, j].color)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        //ABAJO-IZQUIERDA
+                        if (i < 7 && j > 0)
+                        {
+                            if (bidiFichas[i + 1, j - 1].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i + 1, j - 1].color)
+                            {
+                                Stack<int> indiceX = new Stack<int>();
+                                Stack<int> indiceY = new Stack<int>();
+
+                                indiceX.Push(0);
+                                indiceY.Push(0);
+
+                                int k = i + 1;
+                                int l = j - 1;
+
+                                while (k < 8 && l > 0)
+                                {
+                                    if ((k + 1) > 7 || (l - 1) < 0)
+                                    {
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color.Equals(bidiFichas[k + 1, l - 1].color))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                    }
+                                    else if (bidiFichas[k + 1, l - 1].color.Equals(""))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                        int maximo = indiceX.Count();
+                                        for (int m = 0; m < maximo - 2; m++)
+                                        {
+                                            indiceY.Pop();
+                                            indiceX.Pop();
+                                        }
+                                        bidiFichas[indiceY.Pop() + 1, indiceX.Pop() - 1].permitida = "si";
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color != bidiFichas[k + 1, l - 1].color)
+                                    {
+                                        break;
+                                    }
+                                    k += 1;
+                                    l -= 1;
+                                }
+                            }
+                        }
+
+                        //IZQUIERDA
+                        if (j > 0)
+                        {
+                            if (bidiFichas[i, j - 1].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i, j - 1].color)
+                            {
+                                for (int k = j - 1; k < 8; k -= 1)
+                                {
+                                    if ((k - 1) < 0)
+                                    {
+                                        break;
+                                    }
+                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[i, k - 1].color))
+                                    {
+                                        continue;
+                                    }
+
+                                    else if (bidiFichas[i, k - 1].color.Equals(""))
+                                    {
+                                        bidiFichas[i, k - 1].permitida = "si";
+                                        break;
+                                    }
+
+                                    else if (bidiFichas[i, k].color != bidiFichas[i, k - 1].color)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        //ARRIBA-IZQUIERDA
+                        if (i > 0 && j > 0)
+                        {
+                            if (bidiFichas[i - 1, j - 1].color == "")
+                            {
+                                var si = 0;
+                            }
+                            else if (bidiFichas[i, j].color != bidiFichas[i - 1, j - 1].color)
+                            {
+                                Stack<int> indiceX = new Stack<int>();
+                                Stack<int> indiceY = new Stack<int>();
+
+                                indiceX.Push(0);
+                                indiceY.Push(0);
+
+                                int k = i - 1;
+                                int l = j - 1;
+
+                                while (k > 0 && l > 0)
+                                {
+                                    if ((k - 1) < 0 || (l - 1) < 0)
+                                    {
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color.Equals(bidiFichas[k - 1, l - 1].color))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                    }
+                                    else if (bidiFichas[k - 1, l - 1].color.Equals(""))
+                                    {
+                                        indiceY.Push(k);
+                                        indiceX.Push(l);
+                                        int maximo = indiceX.Count();
+                                        for (int m = 0; m < maximo - 2; m++)
+                                        {
+                                            indiceY.Pop();
+                                            indiceX.Pop();
+                                        }
+                                        bidiFichas[indiceY.Pop() - 1, indiceX.Pop() - 1].permitida = "si";
+                                        break;
+                                    }
+                                    else if (bidiFichas[k, l].color != bidiFichas[k - 1, l - 1].color)
+                                    {
+                                        break;
+                                    }
+                                    k -= 1;
+                                    l -= 1;
+                                }
+                            }
+                        }
+
+
+
+
+                        //sss
+
+                    }
+                }
+            }
+        }//Fin de verificar
+
+
+
+        public int contarNegras()
+        {
+            int contador = 0;
+            for(int i = 0; i<8; i++)
+            {
+                for(int j = 0; j<8; j++)
+                {
+                    if (bidiFichas[i, j].color.Equals("fa-circle"))
+                    {
+                        contador += 1;
+                    }
+                    
+                }
+            }
+            return contador;
+        }
+
+        public int contarBlancas()
+        {
+            int contador = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (bidiFichas[i, j].color.Equals("fa-circle white"))
+                    {
+                        contador += 1;
                     }
 
                 }
             }
+            return contador;
         }
 
 
         // GET: Jugar
         [HttpPost]
-        public ActionResult Single(int id, string color)
+        public ActionResult Single(int fila, int columna, string color)
         {
-            listaFichas2[id] = new Ficha2(id, color);
-            if(color == "blanco")
+            bidiFichas[fila, columna] = new Fichas(fila.ToString(), columna.ToString(), color);
+            
+            for (int i = 0; i < 8; i++)
             {
-                TempData["Turno"] = "negro";
+                for (int j = 0; j < 8; j++)
+                {
+                    bidiFichas[i, j].permitida = "no";
+                }
+            }
+
+            string turno = color;
+
+            ViewBag.turno = "";
+            if(color == "fa-circle white")
+            {
+                TempData["Turno"] = "fa-circle";
+                turno = "fa-circle";
+                ViewBag.turno = "negras";
             }
             else
             {
-                TempData["Turno"] = "blanco";
+                TempData["Turno"] = "fa-circle white";
+                turno = "fa-circle white";
+                ViewBag.turno = "blancas";
             }
 
-            Cambiar(listaFichas2[id]);
+            Cambiar(fila, columna);
+            Verificar(turno);
 
-            return View(listaFichas2);
+
+            int verificadas = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if(bidiFichas[i, j].permitida.Equals("si"))
+                    {
+                        verificadas += 1;
+                    }
+                }
+            }
+
+            ViewBag.mensaje = "";
+
+            if (verificadas == 0)
+            {
+                if (TempData["Turno"].Equals("fa-circle white"))
+                {
+                    TempData["Turno"] = "fa-circle";
+                    ViewBag.turno = "negras";
+                    ViewBag.mensaje = "No quedan tiros disponibles, turno saltado";
+                    Verificar("fa-circle");
+                }
+                else
+                {
+                    TempData["Turno"] = "fa-circle white";
+                    ViewBag.turno = "blancas";
+                    ViewBag.mensaje = "No quedan tiros disponibles, turno saltado";
+                    Verificar("fa-circle white");
+                }
+            }
+
+            ViewBag.ganador = "";
+            if (contarBlancas() + contarNegras() == 64)
+            {
+                if (contarNegras() > contarBlancas())
+                {
+                    ViewBag.ganador = "El ganador es: Fichas Negras";
+                }
+                else
+                {
+                    ViewBag.ganador = "El ganador es: Fichas Blancas";
+                }
+                
+            }
+
+            ViewBag.numeroBlancas = contarBlancas();
+            ViewBag.numeroNegras = contarNegras();
+
+            return View(bidiFichas);
         }
 
         public ActionResult Single()
         {
-            listaFichas2[0] = new Ficha2(0, "negro");
-            listaFichas2[27] = new Ficha2(27, "negro");
-            listaFichas2[36] = new Ficha2(36, "negro");
-            listaFichas2[28] = new Ficha2(28, "blanco");
-            listaFichas2[35] = new Ficha2(35, "blanco");
-            TempData["Turno"] = "negro";
-            return View(listaFichas2);
+
+            for(int i = 0; i<8; i++)
+            {
+                for(int j = 0; j<8; j++)
+                {
+                    bidiFichas[i, j] = new Fichas(i.ToString(), j.ToString());
+                }
+            }
+
+
+            bidiFichas[3,3] = new Fichas("3","3", "fa-circle white");
+            bidiFichas[4,4] = new Fichas("4","4", "fa-circle white");
+            bidiFichas[4,3] = new Fichas("4","3", "fa-circle");
+            bidiFichas[3,4] = new Fichas("3","4", "fa-circle");
+
+            ViewBag.numeroBlancas = contarBlancas();
+            ViewBag.numeroNegras = contarNegras();
+            TempData["Turno"] = "fa-circle";
+            ViewBag.turno = "negras";
+            Verificar("fa-circle");
+            return View(bidiFichas);
         }
 
             
@@ -380,6 +910,45 @@ namespace IPC2.Controllers
             {
                 return RedirectToAction("Cargar");
             }
+        }
+
+
+        [HttpPost]
+        public ActionResult GuardarTablero()
+        {
+            string[] letras= { "A", "B", "C", "D", "E", "F", "G", "H"};
+
+            using (StreamWriter outputFile = new StreamWriter("C:\\Users\\Amc\\Desktop\\AS\\Programacion\\Visual\\IPC2 Proyect\\IPC2\\files\\guardado.xml"))
+            {
+                outputFile.WriteLine("<tablero>");
+                for(int i = 0; i < 8; i++)
+                {
+                    for (int j=0; j<8; j++)
+                    {
+                        if (bidiFichas[i,j].color.Equals("fa-circle"))
+                        {
+                            outputFile.WriteLine("  <ficha>");
+                            outputFile.WriteLine("      <color>negro</color>");
+                            outputFile.WriteLine("      <fila>"+(i+1)+"</fila>");
+                            outputFile.WriteLine("      <columna>"+letras[j]+"</columna>");
+                            outputFile.WriteLine("  </ficha>");
+                        }
+                        else if(bidiFichas[i, j].color.Equals("fa-circle white"))
+                        {
+                            outputFile.WriteLine("  <ficha>");
+                            outputFile.WriteLine("      <color>blanco</color>");
+                            outputFile.WriteLine("      <fila>" + (i+1) + "</fila>");
+                            outputFile.WriteLine("      <columna>" + letras[j] + "</columna>");
+                            outputFile.WriteLine("  </ficha>");
+                        }
+
+                    }
+                   
+                }
+                outputFile.WriteLine("</tablero>");
+            }
+            
+            return RedirectToAction("Single");
         }
 
     }
