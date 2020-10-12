@@ -12,7 +12,7 @@ namespace IPC2.Controllers
     public class JugarController : Controller
     {
         public static Fichas[,] bidiFichas = new Fichas[8,8];
-
+        public static Random random = new Random();
         public void Cambiar(int fila, int columna)
         {
 
@@ -391,25 +391,28 @@ namespace IPC2.Controllers
                                     {
                                         break;
                                     }
+                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[k - 1, j].color))
+                                    {
+                                        break;
+                                    }
                                 }
-
                             }
                         }
 
                         //ARRIBA-DERECHA
                         if (i > 0 && j < 7)
                         {
-                            if (bidiFichas[i - 1, j + 1].color == "")
+                            if (bidiFichas[i - 1, j + 1].color.Equals(""))
                             {
                                 var si = 0;
                             }
                             else if (bidiFichas[i, j].color != bidiFichas[i - 1, j + 1].color)
                             {
-                                Stack<int> indiceX = new Stack<int>();
-                                Stack<int> indiceY = new Stack<int>();
+                                //Stack<int> indiceX = new Stack<int>();
+                                //Stack<int> indiceY = new Stack<int>();
 
-                                indiceX.Push(0);
-                                indiceY.Push(0);
+                                //indiceX.Push(0);
+                                //indiceY.Push(0);
 
                                 int k = i - 1;
                                 int l = j + 1;
@@ -422,20 +425,23 @@ namespace IPC2.Controllers
                                     }
                                     else if (bidiFichas[k, l].color.Equals(bidiFichas[k - 1, l + 1].color))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
+                                        //indiceY.Push(k);
+                                        //indiceX.Push(l);
+                                        k -= 1;
+                                        l += 1;
+                                        continue;
                                     }
                                     else if (bidiFichas[k-1, l+1].color.Equals(""))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
-                                        int maximo = indiceX.Count();
-                                        for (int m = 0; m < maximo - 2; m++)
-                                        {
-                                            indiceY.Pop();
-                                            indiceX.Pop();
-                                        }
-                                        bidiFichas[indiceY.Pop()-1, indiceX.Pop()+1].permitida = "si";
+                                        //indiceY.Push(k);
+                                        //indiceX.Push(l);
+                                        //int maximo = indiceX.Count();
+                                        //for (int m = 0; m < maximo - 2; m++)
+                                        //{
+                                        //    indiceY.Pop();
+                                        //    indiceX.Pop();
+                                        //}
+                                        bidiFichas[k - 1, l + 1].permitida = "si";
                                         break;
                                     }
                                     else if (bidiFichas[k, l].color != bidiFichas[k-1, l + 1].color)
@@ -479,6 +485,10 @@ namespace IPC2.Controllers
                                     {
                                         break;
                                     }
+                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[i, k + 1].color))
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -486,17 +496,17 @@ namespace IPC2.Controllers
                         //DERECHA-ABAJO
                         if (i < 7 && j < 7)
                         {
-                            if (bidiFichas[i + 1, j + 1].color == "")
+                            if (bidiFichas[i + 1, j + 1].color.Equals(""))
                             {
                                 var si = 0;
                             }
                             else if (bidiFichas[i, j].color != bidiFichas[i + 1, j + 1].color)
                             {
-                                Stack<int> indiceX = new Stack<int>();
-                                Stack<int> indiceY = new Stack<int>();
+                                //Stack<int> indiceX = new Stack<int>();
+                                //Stack<int> indiceY = new Stack<int>();
 
-                                indiceX.Push(0);
-                                indiceY.Push(0);
+                                //indiceX.Push(0);
+                                //indiceY.Push(0);
 
                                 int k = i + 1;
                                 int l = j + 1;
@@ -509,20 +519,23 @@ namespace IPC2.Controllers
                                     }
                                     else if (bidiFichas[k, l].color.Equals(bidiFichas[k + 1, l + 1].color))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
+                                        //indiceY.Push(k);
+                                        //indiceX.Push(l);
+                                        k += 1;
+                                        l += 1;
+                                        continue;
                                     }
                                     else if (bidiFichas[k + 1, l + 1].color.Equals(""))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
-                                        int maximo = indiceX.Count();
-                                        for (int m = 0; m < maximo - 2; m++)
-                                        {
-                                            indiceY.Pop();
-                                            indiceX.Pop();
-                                        }
-                                        bidiFichas[indiceY.Pop() + 1, indiceX.Pop() + 1].permitida = "si";
+                                        //indiceY.Push(k);
+                                        //indiceX.Push(l);
+                                        //int maximo = indiceX.Count();
+                                        //for (int m = 0; m < maximo - 2; m++)
+                                        //{
+                                        //    indiceY.Pop();
+                                        //    indiceX.Pop();
+                                        //}
+                                        bidiFichas[k + 1, l + 1].permitida = "si";
                                         break;
                                     }
                                     else if (bidiFichas[k, l].color != bidiFichas[k + 1, l + 1].color)
@@ -564,6 +577,10 @@ namespace IPC2.Controllers
                                     {
                                         break;
                                     }
+                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[k + 1, j].color))
+                                    {
+                                        break;
+                                    }
                                 }
 
                             }
@@ -572,17 +589,17 @@ namespace IPC2.Controllers
                         //ABAJO-IZQUIERDA
                         if (i < 7 && j > 0)
                         {
-                            if (bidiFichas[i + 1, j - 1].color == "")
+                            if (bidiFichas[i + 1, j - 1].color.Equals(""))
                             {
                                 var si = 0;
                             }
                             else if (bidiFichas[i, j].color != bidiFichas[i + 1, j - 1].color)
                             {
-                                Stack<int> indiceX = new Stack<int>();
-                                Stack<int> indiceY = new Stack<int>();
+                                //Stack<int> indiceX = new Stack<int>();
+                                //Stack<int> indiceY = new Stack<int>();
 
-                                indiceX.Push(0);
-                                indiceY.Push(0);
+                                //indiceX.Push(0);
+                                //indiceY.Push(0);
 
                                 int k = i + 1;
                                 int l = j - 1;
@@ -595,20 +612,21 @@ namespace IPC2.Controllers
                                     }
                                     else if (bidiFichas[k, l].color.Equals(bidiFichas[k + 1, l - 1].color))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
+                                        k += 1;
+                                        l -= 1;
+                                        continue;
                                     }
                                     else if (bidiFichas[k + 1, l - 1].color.Equals(""))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
-                                        int maximo = indiceX.Count();
-                                        for (int m = 0; m < maximo - 2; m++)
-                                        {
-                                            indiceY.Pop();
-                                            indiceX.Pop();
-                                        }
-                                        bidiFichas[indiceY.Pop() + 1, indiceX.Pop() - 1].permitida = "si";
+                                        //indiceY.Push(k);
+                                        //indiceX.Push(l);
+                                        //int maximo = indiceX.Count();
+                                        //for (int m = 0; m < maximo - 2; m++)
+                                        //{
+                                        //    indiceY.Pop();
+                                        //    indiceX.Pop();
+                                        //}
+                                        bidiFichas[k + 1, l - 1].permitida = "si";
                                         break;
                                     }
                                     else if (bidiFichas[k, l].color != bidiFichas[k + 1, l - 1].color)
@@ -624,7 +642,7 @@ namespace IPC2.Controllers
                         //IZQUIERDA
                         if (j > 0)
                         {
-                            if (bidiFichas[i, j - 1].color == "")
+                            if (bidiFichas[i, j - 1].color.Equals(""))
                             {
                                 var si = 0;
                             }
@@ -651,6 +669,10 @@ namespace IPC2.Controllers
                                     {
                                         break;
                                     }
+                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[i, k - 1].color))
+                                    {
+                                        break;
+                                    }
                                 }
                             }
                         }
@@ -658,17 +680,17 @@ namespace IPC2.Controllers
                         //ARRIBA-IZQUIERDA
                         if (i > 0 && j > 0)
                         {
-                            if (bidiFichas[i - 1, j - 1].color == "")
+                            if (bidiFichas[i - 1, j - 1].color.Equals(""))
                             {
                                 var si = 0;
                             }
                             else if (bidiFichas[i, j].color != bidiFichas[i - 1, j - 1].color)
                             {
-                                Stack<int> indiceX = new Stack<int>();
-                                Stack<int> indiceY = new Stack<int>();
+                                //Stack<int> indiceX = new Stack<int>();
+                                //Stack<int> indiceY = new Stack<int>();
 
-                                indiceX.Push(0);
-                                indiceY.Push(0);
+                                //indiceX.Push(0);
+                                //indiceY.Push(0);
 
                                 int k = i - 1;
                                 int l = j - 1;
@@ -681,20 +703,24 @@ namespace IPC2.Controllers
                                     }
                                     else if (bidiFichas[k, l].color.Equals(bidiFichas[k - 1, l - 1].color))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
+                                        //indiceY.Push(k);
+                                        //indiceX.Push(l);
+                                        k -= 1;
+                                        l -= 1;
+                                        continue;
                                     }
                                     else if (bidiFichas[k - 1, l - 1].color.Equals(""))
                                     {
-                                        indiceY.Push(k);
-                                        indiceX.Push(l);
-                                        int maximo = indiceX.Count();
-                                        for (int m = 0; m < maximo - 2; m++)
-                                        {
-                                            indiceY.Pop();
-                                            indiceX.Pop();
-                                        }
-                                        bidiFichas[indiceY.Pop() - 1, indiceX.Pop() - 1].permitida = "si";
+                                        //indiceY.Push(k);
+                                        //indiceX.Push(l);
+                                        //int maximo = indiceX.Count();
+                                        //for (int m = 0; m < maximo - 2; m++)
+                                        //{
+                                        //    indiceY.Pop();
+                                        //    indiceX.Pop();
+                                        //}
+                                        //bidiFichas[indiceY.Pop() - 1, indiceX.Pop() - 1].permitida = "si";
+                                        bidiFichas[k-1, l-1].permitida = "si";
                                         break;
                                     }
                                     else if (bidiFichas[k, l].color != bidiFichas[k - 1, l - 1].color)
@@ -706,12 +732,6 @@ namespace IPC2.Controllers
                                 }
                             }
                         }
-
-
-
-
-                        //sss
-
                     }
                 }
             }
@@ -836,7 +856,6 @@ namespace IPC2.Controllers
 
             ViewBag.numeroBlancas = contarBlancas();
             ViewBag.numeroNegras = contarNegras();
-
             return View(bidiFichas);
         }
 
@@ -863,6 +882,132 @@ namespace IPC2.Controllers
             ViewBag.turno = "negras";
             Verificar("fa-circle");
             return View(bidiFichas);
+        }
+
+        public ActionResult Single2()
+        {
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    bidiFichas[i, j] = new Fichas(i.ToString(), j.ToString());
+                }
+            }
+
+
+            bidiFichas[3, 3] = new Fichas("3", "3", "fa-circle white");
+            bidiFichas[4, 4] = new Fichas("4", "4", "fa-circle white");
+            bidiFichas[4, 3] = new Fichas("4", "3", "fa-circle");
+            bidiFichas[3, 4] = new Fichas("3", "4", "fa-circle");
+
+            ViewBag.numeroBlancas = contarBlancas();
+            ViewBag.numeroNegras = contarNegras();
+            TempData["Turno"] = "fa-circle";
+            ViewBag.turno = "negras";
+            Verificar("fa-circle");
+            return View(bidiFichas);
+        }
+
+        [HttpPost]
+        public ActionResult Single2(int fila, int columna, string color)
+        {
+            List<Fichas> tirosMaquina = new List<Fichas>();
+
+            bidiFichas[fila, columna] = new Fichas(fila.ToString(), columna.ToString(), color);
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    bidiFichas[i, j].permitida = "no";
+                }
+            }
+
+            /*
+            string turno = color;
+
+            ViewBag.turno = "";
+            if (color == "fa-circle white")
+            {
+                TempData["Turno"] = "fa-circle";
+                turno = "fa-circle";
+                ViewBag.turno = "negras";
+            }
+            else
+            {
+                TempData["Turno"] = "fa-circle white";
+                turno = "fa-circle white";
+                ViewBag.turno = "blancas";
+            }
+            */
+
+            Cambiar(fila, columna);
+            Verificar("fa-circle white");
+
+            int verificadas = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (bidiFichas[i, j].permitida.Equals("si"))
+                    {
+                        verificadas += 1;
+                        tirosMaquina.Add(bidiFichas[i,j]);
+                    }
+                }
+            }
+
+            ViewBag.mensaje = "";
+    
+            
+            if (verificadas != 0)
+            {
+                //RANDOM
+                int r = random.Next(tirosMaquina.Count());
+                Fichas fichaObtenida = tirosMaquina[r];
+
+                bidiFichas[Int32.Parse(fichaObtenida.fila), Int32.Parse(fichaObtenida.columna)] = new Fichas(fichaObtenida.fila, fichaObtenida.color, "fa-circle white");
+
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        bidiFichas[i, j].permitida = "no";
+                    }
+                }
+
+                Cambiar(Int32.Parse(fichaObtenida.fila), Int32.Parse(fichaObtenida.columna));
+                Verificar("fa-circle");
+            }
+
+            
+
+            if (contarBlancas() + contarNegras() == 64)
+            {
+                if (contarNegras() > contarBlancas())
+                {
+                    ViewBag.ganador = "El ganador es: Fichas Negras";
+                }
+                else
+                {
+                    ViewBag.ganador = "El ganador es: Fichas Blancas";
+                }
+
+            }
+
+            TempData["Turno"] = "fa-circle";
+            ViewBag.numeroBlancas = contarBlancas();
+            ViewBag.numeroNegras = contarNegras();
+            return View(bidiFichas);
+        }
+
+        [HttpPost]
+        public ActionResult Iniciar()
+        {
+
+            return RedirectToAction("Single");
         }
 
             
@@ -947,8 +1092,7 @@ namespace IPC2.Controllers
                 }
                 outputFile.WriteLine("</tablero>");
             }
-            
-            return RedirectToAction("Single");
+            return Redirect("~/Home/Index");
         }
 
     }

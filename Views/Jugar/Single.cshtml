@@ -121,12 +121,18 @@
 
 
             <div class="col-sm">
-                @using (Html.BeginForm("GuardarTablero", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Iniciar", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <input type="submit" value="Guardar y Reiniciar" class="btn btn-success" />
+                    <input type="submit" value="Reiniciar Tablero" class="btn btn-dark" />
                 }
             </div>
+            <div class="col-sm">
 
+                @using (Html.BeginForm("GuardarTablero", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="submit" value="Guardar y Salir" class="btn btn-dark" />
+                }
+            </div>
         </div>
 
     </div>

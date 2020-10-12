@@ -1,26 +1,146 @@
 <tablero>
   <ficha>
       <color>negro</color>
+      <fila>1</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>1</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>1</fila>
+      <columna>C</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>1</fila>
+      <columna>D</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>1</fila>
+      <columna>E</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>1</fila>
+      <columna>F</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>1</fila>
+      <columna>G</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>1</fila>
+      <columna>H</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>2</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>2</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>2</fila>
+      <columna>C</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>2</fila>
+      <columna>D</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
       <fila>2</fila>
       <columna>E</columna>
   </ficha>
   <ficha>
       <color>negro</color>
+      <fila>2</fila>
+      <columna>F</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>2</fila>
+      <columna>G</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>2</fila>
+      <columna>H</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>3</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>3</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>3</fila>
+      <columna>C</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
       <fila>3</fila>
       <columna>D</columna>
   </ficha>
   <ficha>
-      <color>negro</color>
+      <color>blanco</color>
       <fila>3</fila>
       <columna>E</columna>
   </ficha>
   <ficha>
+      <color>blanco</color>
+      <fila>3</fila>
+      <columna>F</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>3</fila>
+      <columna>G</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>3</fila>
+      <columna>H</columna>
+  </ficha>
+  <ficha>
       <color>negro</color>
+      <fila>4</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>4</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>4</fila>
+      <columna>C</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
       <fila>4</fila>
       <columna>D</columna>
   </ficha>
   <ficha>
-      <color>negro</color>
+      <color>blanco</color>
       <fila>4</fila>
       <columna>E</columna>
   </ficha>
@@ -31,6 +151,26 @@
   </ficha>
   <ficha>
       <color>blanco</color>
+      <fila>4</fila>
+      <columna>G</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>4</fila>
+      <columna>H</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>5</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>5</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
       <fila>5</fila>
       <columna>C</columna>
   </ficha>
@@ -40,9 +180,14 @@
       <columna>D</columna>
   </ficha>
   <ficha>
-      <color>negro</color>
+      <color>blanco</color>
       <fila>5</fila>
       <columna>E</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>5</fila>
+      <columna>F</columna>
   </ficha>
   <ficha>
       <color>blanco</color>
@@ -50,8 +195,128 @@
       <columna>G</columna>
   </ficha>
   <ficha>
+      <color>blanco</color>
+      <fila>5</fila>
+      <columna>H</columna>
+  </ficha>
+  <ficha>
       <color>negro</color>
       <fila>6</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>6</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>6</fila>
+      <columna>C</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>6</fila>
+      <columna>D</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>6</fila>
       <columna>E</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>6</fila>
+      <columna>F</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>6</fila>
+      <columna>G</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>6</fila>
+      <columna>H</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>7</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>7</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>7</fila>
+      <columna>C</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>7</fila>
+      <columna>D</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>7</fila>
+      <columna>E</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>7</fila>
+      <columna>F</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>7</fila>
+      <columna>G</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>7</fila>
+      <columna>H</columna>
+  </ficha>
+  <ficha>
+      <color>negro</color>
+      <fila>8</fila>
+      <columna>A</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>8</fila>
+      <columna>B</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>8</fila>
+      <columna>C</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>8</fila>
+      <columna>D</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>8</fila>
+      <columna>E</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>8</fila>
+      <columna>F</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>8</fila>
+      <columna>G</columna>
+  </ficha>
+  <ficha>
+      <color>blanco</color>
+      <fila>8</fila>
+      <columna>H</columna>
   </ficha>
 </tablero>

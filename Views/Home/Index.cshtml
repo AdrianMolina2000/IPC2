@@ -74,7 +74,10 @@
 
             <div class="col-md-4 bg-dark">
                 <h2 class="text-white padd2">Guardar Partida</h2>
-                <p class="padd2"><a class="btn btn-light" href="#">Bajar Documento <i class="fas fa-file-download"></i></a></p>
+                @using (Html.BeginForm("GuardarTablero", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="submit" value="Guardar"class="btn btn-light" />
+                }
             </div>
             <div class="col-md-4 bg-light">
                 <h2 class="padd2">Reportes</h2>
