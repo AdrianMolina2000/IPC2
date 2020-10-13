@@ -1,5 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OthelloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id_estado" />
+    </Key>
+    <Property Name="id_estado" Type="int" Nullable="false" />
+    <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Partida">
+    <Key>
+      <PropertyRef Name="id_partida" />
+    </Key>
+    <Property Name="id_partida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tipo_partida" Type="int" Nullable="false" />
+    <Property Name="id_estado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Partida_Jugador">
+    <Key>
+      <PropertyRef Name="id_partida_jugador" />
+    </Key>
+    <Property Name="id_partida_jugador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_partida" Type="int" Nullable="false" />
+    <Property Name="nickname" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_Partida">
+    <Key>
+      <PropertyRef Name="id_Tipo_Partida" />
+    </Key>
+    <Property Name="id_Tipo_Partida" Type="int" Nullable="false" />
+    <Property Name="Nombre_Tipo_Partida" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="usuarios">
     <Key>
       <PropertyRef Name="nickname" />
@@ -14,7 +44,75 @@
     <Property Name="contraseña" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <Association Name="fk_estado">
+    <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+    <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="Partida">
+        <PropertyRef Name="id_tipo_partida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_id_partida">
+    <End Role="Partida" Type="Self.Partida" Multiplicity="1" />
+    <End Role="Partida_Jugador" Type="Self.Partida_Jugador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partida">
+        <PropertyRef Name="id_partida" />
+      </Principal>
+      <Dependent Role="Partida_Jugador">
+        <PropertyRef Name="id_partida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_nickname">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="Partida_Jugador" Type="Self.Partida_Jugador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="nickname" />
+      </Principal>
+      <Dependent Role="Partida_Jugador">
+        <PropertyRef Name="nickname" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tipo_partida">
+    <End Role="Tipo_Partida" Type="Self.Tipo_Partida" Multiplicity="1" />
+    <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Partida">
+        <PropertyRef Name="id_Tipo_Partida" />
+      </Principal>
+      <Dependent Role="Partida">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="OthelloModelStoreContainer">
+    <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Partida" EntityType="Self.Partida" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Partida_Jugador" EntityType="Self.Partida_Jugador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_Partida" EntityType="Self.Tipo_Partida" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_estado" Association="Self.fk_estado">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Partida" EntitySet="Partida" />
+    </AssociationSet>
+    <AssociationSet Name="fk_id_partida" Association="Self.fk_id_partida">
+      <End Role="Partida" EntitySet="Partida" />
+      <End Role="Partida_Jugador" EntitySet="Partida_Jugador" />
+    </AssociationSet>
+    <AssociationSet Name="fk_nickname" Association="Self.fk_nickname">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="Partida_Jugador" EntitySet="Partida_Jugador" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tipo_partida" Association="Self.fk_tipo_partida">
+      <End Role="Tipo_Partida" EntitySet="Tipo_Partida" />
+      <End Role="Partida" EntitySet="Partida" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -12,25 +12,21 @@ namespace IPC2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class usuarios
+    public partial class Partida
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public usuarios()
+        public Partida()
         {
             this.Partida_Jugador = new HashSet<Partida_Jugador>();
         }
     
-        public string nickname { get; set; }
-        public string primer_nombre { get; set; }
-        public string segundo_nombre { get; set; }
-        public string primer_apellido { get; set; }
-        public string segundo_apellido { get; set; }
-        public System.DateTime fecha_nacimiento { get; set; }
-        public string pais { get; set; }
-        public string contraseña { get; set; }
-        public string email { get; set; }
+        public int id_partida { get; set; }
+        public int id_tipo_partida { get; set; }
+        public int id_estado { get; set; }
     
+        public virtual Estado Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partida_Jugador> Partida_Jugador { get; set; }
+        public virtual Tipo_Partida Tipo_Partida { get; set; }
     }
 }

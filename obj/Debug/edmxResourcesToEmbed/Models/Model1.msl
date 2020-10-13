@@ -16,5 +16,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Estado">
+      <EntityTypeMapping TypeName="OthelloModel.Estado">
+        <MappingFragment StoreEntitySet="Estado">
+          <ScalarProperty Name="estado1" ColumnName="estado" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Partida">
+      <EntityTypeMapping TypeName="OthelloModel.Tipo_Partida">
+        <MappingFragment StoreEntitySet="Tipo_Partida">
+          <ScalarProperty Name="Nombre_Tipo_Partida" ColumnName="Nombre_Tipo_Partida" />
+          <ScalarProperty Name="id_Tipo_Partida" ColumnName="id_Tipo_Partida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partida">
+      <EntityTypeMapping TypeName="OthelloModel.Partida">
+        <MappingFragment StoreEntitySet="Partida">
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="id_tipo_partida" ColumnName="id_tipo_partida" />
+          <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Partida_Jugador">
+      <EntityTypeMapping TypeName="OthelloModel.Partida_Jugador">
+        <MappingFragment StoreEntitySet="Partida_Jugador">
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="id_partida" ColumnName="id_partida" />
+          <ScalarProperty Name="id_partida_jugador" ColumnName="id_partida_jugador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

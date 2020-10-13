@@ -38,6 +38,7 @@ namespace IPC2.Controllers
                 {
                     usuarios oUser = lst.First();
                     Session["User"] = oUser;
+                    TempData["Usuario"] = oUser.nickname;
                     return Redirect("~/Home/Index");
                 }
                 else

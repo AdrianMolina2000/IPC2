@@ -39,7 +39,7 @@ namespace IPC2.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public ActionResult Nuevo(TablaViewModel model)
         {

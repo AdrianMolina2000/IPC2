@@ -10,119 +10,142 @@
 
 @if (ViewBag.ShowList)
 {
-    List<IPC2.Models.Fichas> fichasVector = new List<IPC2.Models.Fichas>();
-    foreach (var item in Model)
-    {
-        string color = item.color;
-        string columna = item.columna;
-        string fila = item.fila;
-        IPC2.Models.Fichas ficha = new IPC2.Models.Fichas();
-        ficha.color = color;
-        ficha.columna = columna;
-        ficha.fila = fila;
-        fichasVector.Add(ficha);
-    }
+    @model IPC2.Models.Fichas[,]
 
-    bool buscar(string fila, string columna, List<IPC2.Models.Fichas> lista)
-    {
-        bool bandera = false;
-        foreach (var item in lista)
-        {
-            if (item.fila == columna && item.columna == fila)
-            {
-                bandera = true;
-                return bandera;
-            }
-            else
-            {
-                bandera = false;
-            }
-        }
-        return bandera;
-    }
+    <div class="container">
+        <div class="row justify-content-center">
 
-    IPC2.Models.Fichas devolver(string fila, string columna, List<IPC2.Models.Fichas> lista)
-    {
-        IPC2.Models.Fichas ficha = null;
-        foreach (var item in lista)
-        {
-            if (item.fila == columna && item.columna == fila)
-            {
-                ficha = item;
-            }
-        }
-        return ficha;
-    }
+            <div class="jumbotron">
+                <p> BLANCAS </p>
+                <p class="text-center">@ViewBag.numeroBlancas </p>
+            </div>
 
-    <main id="Tablero" class="bg-dark">
-        <div class="font-weight-bold text-black">
-            <div class="casilla dentro border-0"></div>
-            <div class="casilla dentro border-0">A</div>
-            <div class="casilla dentro border-0">B</div>
-            <div class="casilla dentro border-0">C</div>
-            <div class="casilla dentro border-0">D</div>
-            <div class="casilla dentro border-0">E</div>
-            <div class="casilla dentro border-0">F</div>
-            <div class="casilla dentro border-0">G</div>
-            <div class="casilla dentro border-0">H</div>
-            <div class="casilla dentro border-0"></div>
-        </div>
-
-        @{
-
-            string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H" };
-
-
-            for (int i = 0; i < letras.Length; i++)
-            {
-                var id2 = i + 1;
-                <div class="fila font-weight-bold text-black">
-                    <div class="casilla dentro border-0">@(i+1)</div>
-
-                    @for (int j = 0; j < letras.Length; j++)
-                    {
-                        var id = letras[j] + (i + 1);
-
-                        if (buscar(letras[j], id2.ToString(), fichasVector))
-                        {
-                            IPC2.Models.Fichas ficha2 = devolver(letras[j], id2.ToString(), fichasVector);
-
-                            if (ficha2.color == "blanco")
-                            {
-                                <div id=@id class="casilla dentro"><i class="fas fa-circle white"></i></div>
-                            }
-                            else
-                            {
-                                <div id=@id class="casilla dentro"><i class="fas fa-circle"></i></div>
-                            }
-
-                        }
-                        else
-                        {
-                            <div id=@id class="casilla dentro"></div>
-                        }
-
-                    }
-
-                    <div class="casilla dentro border-0">@(i+1)</div>
+            <main id="Tablero" class="bg-dark">
+                <div class="font-weight-bold text-black">
+                    <div class="casilla dentro border-0"></div>
+                    <div class="casilla dentro border-0">A</div>
+                    <div class="casilla dentro border-0">B</div>
+                    <div class="casilla dentro border-0">C</div>
+                    <div class="casilla dentro border-0">D</div>
+                    <div class="casilla dentro border-0">E</div>
+                    <div class="casilla dentro border-0">F</div>
+                    <div class="casilla dentro border-0">G</div>
+                    <div class="casilla dentro border-0">H</div>
+                    <div class="casilla dentro border-0"></div>
                 </div>
 
-            }
-        }
+                @{
 
-        <div class="font-weight-bold text-black">
-            <div class="casilla dentro border-0"></div>
-            <div class="casilla dentro border-0">A</div>
-            <div class="casilla dentro border-0">B</div>
-            <div class="casilla dentro border-0">C</div>
-            <div class="casilla dentro border-0">D</div>
-            <div class="casilla dentro border-0">E</div>
-            <div class="casilla dentro border-0">F</div>
-            <div class="casilla dentro border-0">G</div>
-            <div class="casilla dentro border-0">H</div>
-            <div class="casilla dentro border-0"></div>
+                    for (int i = 0; i < 8; i++)
+                    {
+                        <div class="font-weight-bold text-black">
+                            <div class="casilla dentro border-0">@(i+1)</div>
+                            @{
+                                for (int j = 0; j < 8; j++)
+                                {
+                                    if (Model[i, j].color != "")
+                                    {
+                                        <button type="submit" class="casilla dentro"><i class="fas @Model[i,j].color"></i></button>
+                                    }
+                                    else
+                                    {
+                                        if (TempData["Turno"].Equals("fa-circle white"))
+                                        {
+                                            if (Model[i, j].permitida.Equals("no"))
+                                            {
+                                                <button type="submit" class="casilla dentro"><i class="fas @Model[i,j].color"></i></button>
+                                            }
+                                            else if (Model[i, j].permitida.Equals("si"))
+                                            {
+                                                <form method="post">
+                                                    <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
+                                                    <input type="hidden" name="fila" value=@i>
+                                                    <input type="hidden" name="columna" value=@j>
+                                                    <input type="hidden" name="color" value="fa-circle white">
+                                                </form>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            if (Model[i, j].permitida.Equals("no"))
+                                            {
+                                                <button type="submit" class="casilla dentro"><i class="fas @Model[i,j].color"></i></button>
+                                            }
+                                            else if (Model[i, j].permitida.Equals("si"))
+                                            {
+                                                <form method="post" action="~/Jugar/Single">
+                                                    <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
+                                                    <input type="hidden" name="fila" value=@i>
+                                                    <input type="hidden" name="columna" value=@j>
+                                                    <input type="hidden" name="color" value="fa-circle">
+                                                </form>
+                                            }
+                                        }
+                                    };
+                                }
+                            }
+
+                            <div class="casilla dentro border-0">@(i+1)</div>
+                        </div>
+                    }
+                }
+
+                <div class="font-weight-bold text-black">
+                    <div class="casilla dentro border-0"></div>
+                    <div class="casilla dentro border-0">A</div>
+                    <div class="casilla dentro border-0">B</div>
+                    <div class="casilla dentro border-0">C</div>
+                    <div class="casilla dentro border-0">D</div>
+                    <div class="casilla dentro border-0">E</div>
+                    <div class="casilla dentro border-0">F</div>
+                    <div class="casilla dentro border-0">G</div>
+                    <div class="casilla dentro border-0">H</div>
+                    <div class="casilla dentro border-0"></div>
+                </div>
+            </main>
+
+            <div class="jumbotron">
+                <p> NEGRAS </p>
+                <p class="text-center">@ViewBag.numeroNegras</p>
+            </div>
         </div>
-    </main>
 
-    <p class="padd2"><a class="btn btn-dark" href="~/Home/Index">Ir a Home<i class="fas fa-home"></i></a></p>
+        <hr />
+
+        <div class="row justify-content-center">
+
+            <div class="col-sm">
+                Es turno de las fichas @ViewBag.turno
+            </div>
+
+            <div class="col-sm">
+                @ViewBag.mensaje
+            </div>
+
+            <div class="col-sm">
+                @ViewBag.ganador
+            </div>
+
+            <div class="col-sm">
+                <p class="padd2"><a class="btn btn-dark" href="~/Home/Index">Ir a Home<i class="fas fa-home"></i></a></p>
+            </div>
+
+
+            <div class="col-sm">
+                @using (Html.BeginForm("Iniciar", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="submit" value="Reiniciar Tablero" class="btn btn-dark" />
+                }
+            </div>
+            <div class="col-sm">
+
+                @using (Html.BeginForm("GuardarTablero", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="submit" value="Guardar y Salir" class="btn btn-dark" />
+                }
+            </div>
+        </div>
+
+    </div>
 }

@@ -846,10 +846,40 @@ namespace IPC2.Controllers
                 if (contarNegras() > contarBlancas())
                 {
                     ViewBag.ganador = "El ganador es: Fichas Negras";
+                    using (var db = new OthelloEntities())
+                    {
+                        Partida partidita = new Partida();
+                        partidita.id_tipo_partida = 2;
+                        partidita.id_estado = 1;
+
+                        Partida_Jugador partida_jug = new Partida_Jugador();
+                        partida_jug.id_partida = partidita.id_partida;
+                        partida_jug.nickname = TempData["Usuario"].ToString();
+
+                        db.Partida.Add(partidita);
+                        db.Partida_Jugador.Add(partida_jug);
+
+                        db.SaveChanges();
+                    }
                 }
                 else
                 {
                     ViewBag.ganador = "El ganador es: Fichas Blancas";
+                    using (var db = new OthelloEntities())
+                    {
+                        Partida partidita = new Partida();
+                        partidita.id_tipo_partida = 2;
+                        partidita.id_estado = 2;
+
+                        Partida_Jugador partida_jug = new Partida_Jugador();
+                        partida_jug.id_partida = partidita.id_partida;
+                        partida_jug.nickname = TempData["Usuario"].ToString();
+
+                        db.Partida.Add(partidita);
+                        db.Partida_Jugador.Add(partida_jug);
+
+                        db.SaveChanges();
+                    }
                 }
                 
             }
@@ -982,19 +1012,48 @@ namespace IPC2.Controllers
                 Verificar("fa-circle");
             }
 
-            
+
 
             if (contarBlancas() + contarNegras() == 64)
             {
                 if (contarNegras() > contarBlancas())
                 {
                     ViewBag.ganador = "El ganador es: Fichas Negras";
+                    using (var db = new OthelloEntities())
+                    {
+                        Partida partidita = new Partida();
+                        partidita.id_tipo_partida = 1;
+                        partidita.id_estado = 1;
+
+                        Partida_Jugador partida_jug = new Partida_Jugador();
+                        partida_jug.id_partida = partidita.id_partida;
+                        partida_jug.nickname = TempData["Usuario"].ToString();
+
+                        db.Partida.Add(partidita);
+                        db.Partida_Jugador.Add(partida_jug);
+
+                        db.SaveChanges();
+                    }
                 }
                 else
                 {
                     ViewBag.ganador = "El ganador es: Fichas Blancas";
-                }
+                    using (var db = new OthelloEntities())
+                    {
+                        Partida partidita = new Partida();
+                        partidita.id_tipo_partida = 1;
+                        partidita.id_estado = 2;
 
+                        Partida_Jugador partida_jug = new Partida_Jugador();
+                        partida_jug.id_partida = partidita.id_partida;
+                        partida_jug.nickname = TempData["Usuario"].ToString();
+
+                        db.Partida.Add(partidita);
+                        db.Partida_Jugador.Add(partida_jug);
+
+                        db.SaveChanges();
+                    }
+                }
             }
 
             TempData["Turno"] = "fa-circle";
@@ -1022,8 +1081,50 @@ namespace IPC2.Controllers
             else
             {
                 List<Fichas> empList = (List<Fichas>)TempData["tableroData"];
+                
+                string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H" };
+
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        bidiFichas[i, j] = new Fichas(i.ToString(), j.ToString());
+                    }
+                }
+
+                foreach (var item in empList)
+                {
+                    string color = "";
+                    int posicion = 0;
+                    for(int i = 0; i<8; i++)
+                    {
+                        if (letras[i] == item.columna)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            posicion++;
+                        }
+                    }
+                    if(item.color == "negro")
+                    {
+                        color = "fa-circle";
+                    }
+                    else
+                    {
+                        color = "fa-circle white";
+                    }
+
+                    int fila = Int32.Parse(item.fila) - 1;
+                    bidiFichas[fila, posicion] = new Fichas(fila.ToString(), posicion.ToString(), color);
+                }
+                
+                TempData["Turno"] = "fa-circle";
+                ViewBag.turno = "negras";
+                Verificar("fa-circle");
                 ViewBag.ShowList = true;
-                return View(empList);
+                return View(bidiFichas);
             }
         }
         [HttpPost]

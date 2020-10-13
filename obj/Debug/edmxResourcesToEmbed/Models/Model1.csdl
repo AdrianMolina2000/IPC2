@@ -13,8 +13,114 @@
     <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Partida_Jugador" Relationship="OthelloModel.fk_nickname" FromRole="usuarios" ToRole="Partida_Jugador" />
   </EntityType>
   <EntityContainer Name="OthelloEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+    <EntitySet Name="Estado" EntityType="OthelloModel.Estado" />
+    <EntitySet Name="Tipo_Partida" EntityType="OthelloModel.Tipo_Partida" />
+    <EntitySet Name="Partida" EntityType="OthelloModel.Partida" />
+    <EntitySet Name="Partida_Jugador" EntityType="OthelloModel.Partida_Jugador" />
+    <AssociationSet Name="fk_estado" Association="OthelloModel.fk_estado">
+      <End Role="Estado" EntitySet="Estado" />
+      <End Role="Partida" EntitySet="Partida" />
+    </AssociationSet>
+    <AssociationSet Name="fk_id_partida" Association="OthelloModel.fk_id_partida">
+      <End Role="Partida" EntitySet="Partida" />
+      <End Role="Partida_Jugador" EntitySet="Partida_Jugador" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tipo_partida" Association="OthelloModel.fk_tipo_partida">
+      <End Role="Tipo_Partida" EntitySet="Tipo_Partida" />
+      <End Role="Partida" EntitySet="Partida" />
+    </AssociationSet>
+    <AssociationSet Name="fk_nickname" Association="OthelloModel.fk_nickname">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="Partida_Jugador" EntitySet="Partida_Jugador" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Estado">
+    <Key>
+      <PropertyRef Name="id_estado" />
+    </Key>
+    <Property Name="id_estado" Type="Int32" Nullable="false" />
+    <Property Name="estado1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_estado" FromRole="Estado" ToRole="Partida" />
+  </EntityType>
+  <EntityType Name="Tipo_Partida">
+    <Key>
+      <PropertyRef Name="id_Tipo_Partida" />
+    </Key>
+    <Property Name="id_Tipo_Partida" Type="Int32" Nullable="false" />
+    <Property Name="Nombre_Tipo_Partida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_tipo_partida" FromRole="Tipo_Partida" ToRole="Partida" />
+  </EntityType>
+  <EntityType Name="Partida">
+    <Key>
+      <PropertyRef Name="id_partida" />
+    </Key>
+    <Property Name="id_partida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tipo_partida" Type="Int32" Nullable="false" />
+    <Property Name="id_estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Estado" Relationship="OthelloModel.fk_estado" FromRole="Partida" ToRole="Estado" />
+    <NavigationProperty Name="Partida_Jugador" Relationship="OthelloModel.fk_id_partida" FromRole="Partida" ToRole="Partida_Jugador" />
+    <NavigationProperty Name="Tipo_Partida" Relationship="OthelloModel.fk_tipo_partida" FromRole="Partida" ToRole="Tipo_Partida" />
+  </EntityType>
+  <EntityType Name="Partida_Jugador">
+    <Key>
+      <PropertyRef Name="id_partida_jugador" />
+    </Key>
+    <Property Name="id_partida_jugador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_partida" Type="Int32" Nullable="false" />
+    <Property Name="nickname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_id_partida" FromRole="Partida_Jugador" ToRole="Partida" />
+    <NavigationProperty Name="usuarios" Relationship="OthelloModel.fk_nickname" FromRole="Partida_Jugador" ToRole="usuarios" />
+  </EntityType>
+  <Association Name="fk_estado">
+    <End Type="OthelloModel.Estado" Role="Estado" Multiplicity="1" />
+    <End Type="OthelloModel.Partida" Role="Partida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="Partida">
+        <PropertyRef Name="id_tipo_partida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_id_partida">
+    <End Type="OthelloModel.Partida" Role="Partida" Multiplicity="1" />
+    <End Type="OthelloModel.Partida_Jugador" Role="Partida_Jugador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partida">
+        <PropertyRef Name="id_partida" />
+      </Principal>
+      <Dependent Role="Partida_Jugador">
+        <PropertyRef Name="id_partida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tipo_partida">
+    <End Type="OthelloModel.Tipo_Partida" Role="Tipo_Partida" Multiplicity="1" />
+    <End Type="OthelloModel.Partida" Role="Partida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Partida">
+        <PropertyRef Name="id_Tipo_Partida" />
+      </Principal>
+      <Dependent Role="Partida">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_nickname">
+    <End Type="OthelloModel.usuarios" Role="usuarios" Multiplicity="1" />
+    <End Type="OthelloModel.Partida_Jugador" Role="Partida_Jugador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="nickname" />
+      </Principal>
+      <Dependent Role="Partida_Jugador">
+        <PropertyRef Name="nickname" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
