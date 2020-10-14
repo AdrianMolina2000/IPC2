@@ -14,6 +14,13 @@
     justify-content: center;
 }
 
+#Tablero-X {
+    margin: auto;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
 .fila {
     padding: 0px;
 }

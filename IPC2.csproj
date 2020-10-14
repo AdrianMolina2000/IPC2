@@ -397,6 +397,7 @@
     <Content Include="Views\Jugar\Single.cshtml" />
     <Content Include="Views\Jugar\Cargar.cshtml" />
     <Content Include="Views\Jugar\Cargar2.cshtml" />
+    <Content Include="Views\Jugar\Xtream.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

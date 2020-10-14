@@ -73,11 +73,74 @@
             </div>
 
             <div class="col-md-4 bg-dark">
-                <h2 class="text-white padd2">Guardar Partida</h2>
-                @using (Html.BeginForm("GuardarTablero", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    <input type="submit" value="Guardar"class="btn btn-light" />
-                }
+                <h2 class="text-white padd2">XTREAM</h2>
+
+                @*@using (Html.BeginForm("GuardarTablero", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="submit" value="Guardar" class="btn btn-light" />
+        }*@
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#staticBackdrop">
+                    Jugar <i class="fas fa-skull"></i>
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Preferencias de Juego</h5>
+                            </div>
+                            <div class="modal-body">
+                                <!--Cuerpo del Tablero-->
+
+                                <form class="form" action="~/Jugar/Xtream" method="post">
+
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <label class="my-1 mr-2" for="filasElegidas">Filas</label>
+
+                                            <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                                <option value=6>6</option>
+                                                <option value=8 selected>8</option>
+                                                <option value=10>10</option>
+                                                <option value=12>12</option>
+                                                <option value=14>14</option>
+                                                <option value=16>16</option>
+                                                <option value=18>18</option>
+                                                <option value=20>20</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm">
+                                            <label class="my-1 mr-2" for="columnasElegidas">Columnas</label>
+
+                                            <select class="custom-select my-1 mr-sm-2" id="columnasElegidas" name="columnas">
+                                                <option value=6>6</option>
+                                                <option value=8 selected>8</option>
+                                                <option value=10>10</option>
+                                                <option value=12>12</option>
+                                                <option value=14>14</option>
+                                                <option value=16>16</option>
+                                                <option value=18>18</option>
+                                                <option value=20>20</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark">Empezar <i class="fas fa-skull"></i></button>
+                                </form>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-4 bg-light">
                 <h2 class="padd2">Reportes</h2>

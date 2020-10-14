@@ -12,6 +12,7 @@ namespace IPC2.Controllers
     public class JugarController : Controller
     {
         public static Fichas[,] bidiFichas = new Fichas[8,8];
+        public static Fichas[,] bidiFichas2;
         public static Random random = new Random();
         public void Cambiar(int fila, int columna)
         {
@@ -1069,8 +1070,6 @@ namespace IPC2.Controllers
             return RedirectToAction("Single");
         }
 
-            
-
         public ActionResult Cargar()
         {
             if (TempData["tableroData"] == null)
@@ -1194,6 +1193,18 @@ namespace IPC2.Controllers
                 outputFile.WriteLine("</tablero>");
             }
             return Redirect("~/Home/Index");
+        }
+
+        
+        [HttpPost]
+        public ActionResult Xtream(int filas, int columnas)
+        {
+            bidiFichas2 = new Fichas[filas, columnas];
+
+
+            ViewBag.filas = filas;
+            ViewBag.columnas = columnas;
+            return View();
         }
 
     }
