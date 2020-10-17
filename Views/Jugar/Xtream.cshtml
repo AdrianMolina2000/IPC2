@@ -1,8 +1,18 @@
-﻿
+﻿<div>@ViewBag.mensaje</div>
+<div>@ViewBag.turno</div>
+
+
 <div class="container">
+
     <div class="row justify-content-center">
-        @{ 
-            string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"};
+
+        <div class="jumbotron">
+            <p> BLANCAS </p>
+            <p class="text-center">@ViewBag.numeroBlancas </p>
+        </div>
+
+        @{
+            string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T" };
         }
         <main class="bg-dark">
             <div class="font-weight-bold text-black">
@@ -23,7 +33,48 @@
                         @{
                             for (int j = 0; j < ViewBag.columnas; j++)
                             {
-                                    <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
+                                if (Model[i, j].color != "")
+                                {
+                                    <button type="submit" class="casilla dentro"><i class="fas fa-circle" style="color:@Model[i,j].color"></i></button>
+                                }
+                                else
+                                {
+                                    if (Model[i, j].permitida.Equals("no"))
+                                    {
+                                        <button type="submit" class="casilla dentro"></button>
+                                    }
+                                    else if (Model[i, j].permitida.Equals("si"))
+                                    {
+                                        <form method="post">
+                                            <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
+                                            <input type="hidden" name="fila" value=@i>
+                                            <input type="hidden" name="columna" value=@j>
+                                            <input type="hidden" name="color" value="@ViewBag.turno_color">
+                                            <input type="hidden" name="turno" value="@ViewBag.turno">
+                                        </form>
+                                    }
+                                }
+
+                                @*else
+                                    {
+                                        if (TempData["Turno"].Equals("fa-circle white"))
+                                        {
+                                            if (Model[i, j].permitida.Equals("no"))
+                                            {
+                                                <button type="submit" class="casilla dentro"><i class="fas @Model[i, j].color"></i></button>
+                                            }
+                                            else if (Model[i, j].permitida.Equals("si"))
+                                            {
+                                                <form method="post">
+                                                    <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
+                                                    <input type="hidden" name="fila" value=@i>
+                                                    <input type="hidden" name="columna" value=@j>
+                                                    <input type="hidden" name="color" value="fa-circle white">
+                                                </form>
+                                            }
+
+
+                                        }*@
                             }
                         }
 
@@ -32,17 +83,56 @@
                 }
             }
 
-        <div class="font-weight-bold text-black">
-            <div class="casilla dentro border-0"></div>
-            @for (int i = 0; i < ViewBag.columnas; i++)
-            {
-                <div class="casilla dentro border-0">@letras[i]</div>
-            }
-            <div class="casilla dentro border-0"></div>
-        </div>
+            <div class="font-weight-bold text-black">
+                <div class="casilla dentro border-0"></div>
+                @for (int i = 0; i < ViewBag.columnas; i++)
+                {
+                    <div class="casilla dentro border-0">@letras[i]</div>
+                }
+                <div class="casilla dentro border-0"></div>
+            </div>
         </main>
 
+        <div class="jumbotron">
+            <p> NEGRAS </p>
+            <p class="text-center">@ViewBag.numeroNegras</p>
+        </div>
     </div>
 
+    <hr />
+
+    <div class="row justify-content-center">
+
+        <div class="col-sm">
+            Es turno de las fichas @ViewBag.turno
+        </div>
+
+        <div class="col-sm">
+            @ViewBag.mensaje
+        </div>
+
+        <div class="col-sm">
+            @ViewBag.ganador
+        </div>
+
+        <div class="col-sm">
+            <p class="padd2"><a class="btn btn-dark" href="~/Home/Index">Ir a Home<i class="fas fa-home"></i></a></p>
+        </div>
+
+
+        <div class="col-sm">
+            @using (Html.BeginForm("Iniciar", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="submit" value="Reiniciar Tablero" class="btn btn-dark" />
+            }
+        </div>
+        <div class="col-sm">
+
+            @using (Html.BeginForm("GuardarTablero", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="submit" value="Guardar y Salir" class="btn btn-dark" />
+            }
+        </div>
+    </div>
 
 </div>

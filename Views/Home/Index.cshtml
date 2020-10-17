@@ -95,13 +95,14 @@
                             <div class="modal-body">
                                 <!--Cuerpo del Tablero-->
 
-                                <form class="form" action="~/Jugar/Xtream" method="post">
+                                <form class="form" action="~/Jugar/InicializarXtream" method="post">
 
                                     <div class="row">
                                         <div class="col-sm">
                                             <label class="my-1 mr-2" for="filasElegidas">Filas</label>
 
                                             <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                                <option value=4>4</option>
                                                 <option value=6>6</option>
                                                 <option value=8 selected>8</option>
                                                 <option value=10>10</option>
@@ -117,6 +118,7 @@
                                             <label class="my-1 mr-2" for="columnasElegidas">Columnas</label>
 
                                             <select class="custom-select my-1 mr-sm-2" id="columnasElegidas" name="columnas">
+                                                <option value=4>4</option>
                                                 <option value=6>6</option>
                                                 <option value=8 selected>8</option>
                                                 <option value=10>10</option>
@@ -128,6 +130,34 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <label class="my-1 mr-2" for="colores1">Tus colores</label>
+
+                                            <select class="custom-select my-1 mr-sm-2" id="Colores1" name="c1">
+                                                @*<option value=1 selected>1</option>*@
+                                                <option value=2 selected>2</option>
+                                                <option value=3>3</option>
+                                                <option value=4>4</option>
+                                                <option value=5>5</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-sm">
+                                            <label class="my-1 mr-2" for="colores2">Colores del oponente</label>
+
+                                            <select class="custom-select my-1 mr-sm-2" id="colores2" name="c2">
+                                                @*<option value=1 selected>1</option>*@
+                                                <option value=2 selected>2</option>
+                                                <option value=3>3</option>
+                                                <option value=4>4</option>
+                                                <option value=5>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
 
                                     <button type="submit" class="btn btn-dark">Empezar <i class="fas fa-skull"></i></button>
                                 </form>

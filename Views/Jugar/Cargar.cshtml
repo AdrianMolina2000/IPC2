@@ -57,7 +57,7 @@
                                             }
                                             else if (Model[i, j].permitida.Equals("si"))
                                             {
-                                                <form method="post">
+                                                <form method="post" action="~/Jugar/Single">
                                                     <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
                                                     <input type="hidden" name="fila" value=@i>
                                                     <input type="hidden" name="columna" value=@j>

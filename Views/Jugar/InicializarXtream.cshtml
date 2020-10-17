@@ -1,0 +1,32 @@
+﻿<div class="container text-center">
+
+    <hr />
+    <form class="form" action="~/Jugar/Xtream1" method="post">
+
+        <div class="row">
+            <div class="col-sm">
+                @for (int i = 0; i < ViewBag.c1; i++)
+                {
+                    <div class="col-sm">
+                        <label class="my-1 mr-2" for="color@(i)">Tu color #@(i+1)</label>
+                        <input type="color" class="form-control" name="j1c@(i)" id="color@(i)" />
+                    </div>
+                }
+            </div>
+
+            <div class="col-sm">
+                @for (int i = 0; i < ViewBag.c2; i++)
+                {
+                    <div class="col-sm ">
+                        <label class="my-1 mr-2" for="color@(i)">Color del oponente #@(i+1)</label>
+                        <input type="color" class="form-control" name="j2c@(i)" id="color@(i)" />
+                    </div>
+                }
+            </div>
+        </div>
+        <hr />
+
+
+        <button type="submit" class="btn btn-dark">Iniciar Tablero<i class="fas fa-skull"></i></button>
+    </form>
+</div>
