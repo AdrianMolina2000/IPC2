@@ -1,34 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OthelloModelStoreContainer" CdmEntityContainer="OthelloEntities">
-    <EntitySetMapping Name="usuarios">
-      <EntityTypeMapping TypeName="OthelloModel.usuarios">
-        <MappingFragment StoreEntitySet="usuarios">
-          <ScalarProperty Name="nickname" ColumnName="nickname" />
-          <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
-          <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
-          <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
-          <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
-          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-          <ScalarProperty Name="pais" ColumnName="pais" />
-          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-          <ScalarProperty Name="email" ColumnName="email" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Estado">
       <EntityTypeMapping TypeName="OthelloModel.Estado">
         <MappingFragment StoreEntitySet="Estado">
           <ScalarProperty Name="estado1" ColumnName="estado" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Tipo_Partida">
-      <EntityTypeMapping TypeName="OthelloModel.Tipo_Partida">
-        <MappingFragment StoreEntitySet="Tipo_Partida">
-          <ScalarProperty Name="Nombre_Tipo_Partida" ColumnName="Nombre_Tipo_Partida" />
-          <ScalarProperty Name="id_Tipo_Partida" ColumnName="id_Tipo_Partida" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -47,6 +24,29 @@
           <ScalarProperty Name="nickname" ColumnName="nickname" />
           <ScalarProperty Name="id_partida" ColumnName="id_partida" />
           <ScalarProperty Name="id_partida_jugador" ColumnName="id_partida_jugador" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Partida">
+      <EntityTypeMapping TypeName="OthelloModel.Tipo_Partida">
+        <MappingFragment StoreEntitySet="Tipo_Partida">
+          <ScalarProperty Name="Nombre_Tipo_Partida" ColumnName="Nombre_Tipo_Partida" />
+          <ScalarProperty Name="id_Tipo_Partida" ColumnName="id_Tipo_Partida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios">
+      <EntityTypeMapping TypeName="OthelloModel.usuarios">
+        <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+          <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+          <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+          <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+          <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
+          <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

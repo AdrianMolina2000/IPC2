@@ -10,21 +10,14 @@ namespace IPC2.Controllers
 {
     public class CuentaController : Controller
     {
-        /*SqlConnection connect = new SqlConnection();
-        SqlCommand command = new SqlCommand();
-        SqlDataReader rd;*/
-        // GET: Usuario
+        public static string usuario;
+
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
-
-        /*void connectionString()
-        {
-            connect.ConnectionString = "data source= localhost; database= Othello; integrated security = SSPI;";
-        }*/
         [HttpPost]
 
         public ActionResult Verify(Cuenta account)
@@ -38,6 +31,7 @@ namespace IPC2.Controllers
                 {
                     usuarios oUser = lst.First();
                     Session["User"] = oUser;
+                    usuario = oUser.nickname;
                     TempData["Usuario"] = oUser.nickname;
                     return Redirect("~/Home/Index");
                 }
@@ -46,24 +40,6 @@ namespace IPC2.Controllers
                     return Redirect("~/Cuenta/Login");
                 }
             }
-            /*
-            connectionString();
-            connect.Open();
-            command.Connection = connect;
-            command.CommandText = "select * from usuarios where nickname='"+account.Nickname+"' and contraseña= '"+account.Password+"'";
-            rd = command.ExecuteReader();
-            if(rd.Read())
-            {
-
-                connect.Close();
-                return Redirect("~/Home/Index");
-            }
-            else
-            {
-                connect.Close();
-                return Content("Datos no encontrados");
-            }
-            */
         }
 
     }

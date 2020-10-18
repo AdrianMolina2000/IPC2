@@ -11,7 +11,8 @@ namespace IPC2.Controllers
 {
     public class JugarController : Controller
     {
-        public static Fichas[,] bidiFichas = new Fichas[8,8];
+
+        public static Fichas[,] bidiFichas = new Fichas[8, 8];
         public static Fichas[,] bidiFichas2;
         public static Fichas[,] bidiFichas3;
 
@@ -19,7 +20,7 @@ namespace IPC2.Controllers
         public static int indice1 = 0;
         public static int indice2 = 0;
         public static List<string> coloresJ2;
-        
+
         public static Random random = new Random();
 
         public static int filasXtreme;
@@ -77,13 +78,13 @@ namespace IPC2.Controllers
 
                     indiceX.Push(0);
                     indiceY.Push(0);
-                    
+
                     int i = fila - 1;
                     int j = columna + 1;
-                    
-                    while(i>0 && j<8)
+
+                    while (i > 0 && j < 8)
                     {
-                        if ((i - 1) < 0 || (j + 1) > 7 || bidiFichas[i - 1, j+1].color.Equals(""))
+                        if ((i - 1) < 0 || (j + 1) > 7 || bidiFichas[i - 1, j + 1].color.Equals(""))
                         {
                             break;
                         }
@@ -97,7 +98,7 @@ namespace IPC2.Controllers
                             indiceY.Push(i);
                             indiceX.Push(j);
                             int maximo = indiceX.Count();
-                            for (int k = 0; k < maximo-1; k++)
+                            for (int k = 0; k < maximo - 1; k++)
                             {
                                 int x = indiceY.Pop();
                                 int y = indiceX.Pop();
@@ -197,27 +198,27 @@ namespace IPC2.Controllers
 
 
             //ABAJO
-            if ( fila < 7)
+            if (fila < 7)
             {
                 if (bidiFichas[fila + 1, columna].color == "")
                 {
                     int nu = 0;
                 }
-                else if (bidiFichas[fila, columna].color != bidiFichas[fila+1, columna].color)
+                else if (bidiFichas[fila, columna].color != bidiFichas[fila + 1, columna].color)
                 {
                     List<int> indices = new List<int>();
 
                     for (int i = fila + 1; i < 8; i += 1)
                     {
-                        if ((i+1)>7|| bidiFichas[i + 1, columna].color.Equals(""))
+                        if ((i + 1) > 7 || bidiFichas[i + 1, columna].color.Equals(""))
                         {
                             break;
                         }
-                        else if (bidiFichas[i,columna].color == bidiFichas[i + 1, columna].color)
+                        else if (bidiFichas[i, columna].color == bidiFichas[i + 1, columna].color)
                         {
                             indices.Add(i);
                         }
-                        else if (bidiFichas[i, columna].color != bidiFichas[fila,columna].color)
+                        else if (bidiFichas[i, columna].color != bidiFichas[fila, columna].color)
                         {
                             indices.Add(i);
                             foreach (var item in indices)
@@ -385,7 +386,7 @@ namespace IPC2.Controllers
                             {
                                 for (int k = i - 1; k > 0; k -= 1)
                                 {
-                                    if ((k - 1) < 0 )
+                                    if ((k - 1) < 0)
                                     {
                                         break;
                                     }
@@ -396,10 +397,10 @@ namespace IPC2.Controllers
                                     }
                                     else if (bidiFichas[k - 1, j].color.Equals(""))
                                     {
-                                        bidiFichas[k-1, j].permitida = "si";
+                                        bidiFichas[k - 1, j].permitida = "si";
                                         break;
                                     }
-                                    else if (bidiFichas[i, k].color != bidiFichas[k-1, j].color)
+                                    else if (bidiFichas[i, k].color != bidiFichas[k - 1, j].color)
                                     {
                                         break;
                                     }
@@ -443,7 +444,7 @@ namespace IPC2.Controllers
                                         l += 1;
                                         continue;
                                     }
-                                    else if (bidiFichas[k-1, l+1].color.Equals(""))
+                                    else if (bidiFichas[k - 1, l + 1].color.Equals(""))
                                     {
                                         //indiceY.Push(k);
                                         //indiceX.Push(l);
@@ -456,7 +457,7 @@ namespace IPC2.Controllers
                                         bidiFichas[k - 1, l + 1].permitida = "si";
                                         break;
                                     }
-                                    else if (bidiFichas[k, l].color != bidiFichas[k-1, l + 1].color)
+                                    else if (bidiFichas[k, l].color != bidiFichas[k - 1, l + 1].color)
                                     {
                                         break;
                                     }
@@ -465,7 +466,7 @@ namespace IPC2.Controllers
                                 }
                             }
                         }
-                       
+
 
                         //DERECHA
                         if (j < 7)
@@ -732,7 +733,7 @@ namespace IPC2.Controllers
                                         //    indiceX.Pop();
                                         //}
                                         //bidiFichas[indiceY.Pop() - 1, indiceX.Pop() - 1].permitida = "si";
-                                        bidiFichas[k-1, l-1].permitida = "si";
+                                        bidiFichas[k - 1, l - 1].permitida = "si";
                                         break;
                                     }
                                     else if (bidiFichas[k, l].color != bidiFichas[k - 1, l - 1].color)
@@ -752,7 +753,7 @@ namespace IPC2.Controllers
 
         public bool buscarL1(string color)
         {
-            for(int i = 0; i< coloresJ1.Count(); i++)
+            for (int i = 0; i < coloresJ1.Count(); i++)
             {
                 if (color.Equals(coloresJ1[i]))
                 {
@@ -782,7 +783,7 @@ namespace IPC2.Controllers
             {
                 for (int j = 0; j < columnasXtreme; j++)
                 {
-                    
+
                     if (bidiFichas2[i, j].color.Equals(color))
                     {
 
@@ -824,7 +825,7 @@ namespace IPC2.Controllers
                         }
 
                         //ARRIBA-DERECHA
-                        if (i > 0 && j < (columnasXtreme-1))
+                        if (i > 0 && j < (columnasXtreme - 1))
                         {
                             if (bidiFichas2[i - 1, j + 1].color.Equals(""))
                             {
@@ -838,7 +839,7 @@ namespace IPC2.Controllers
 
                                 while (k > 0 && l < columnasXtreme)
                                 {
-                                    if ((k - 1) < 0 || (l + 1) > (columnasXtreme-1))
+                                    if ((k - 1) < 0 || (l + 1) > (columnasXtreme - 1))
                                     {
                                         break;
                                     }
@@ -865,7 +866,7 @@ namespace IPC2.Controllers
 
 
                         //DERECHA
-                        if (j < (columnasXtreme-1))
+                        if (j < (columnasXtreme - 1))
                         {
                             if (bidiFichas2[i, j + 1].color == "")
                             {
@@ -875,7 +876,7 @@ namespace IPC2.Controllers
                             {
                                 for (int k = j + 1; k < columnasXtreme; k += 1)
                                 {
-                                    if ((k + 1) > (columnasXtreme-1))
+                                    if ((k + 1) > (columnasXtreme - 1))
                                     {
                                         break;
                                     }
@@ -903,7 +904,7 @@ namespace IPC2.Controllers
                         }
 
                         //DERECHA-ABAJO
-                        if (i < (filasXtreme-1) && j < (columnasXtreme-1))
+                        if (i < (filasXtreme - 1) && j < (columnasXtreme - 1))
                         {
                             if (bidiFichas2[i + 1, j + 1].color.Equals(""))
                             {
@@ -916,7 +917,7 @@ namespace IPC2.Controllers
 
                                 while (k < filasXtreme && l < columnasXtreme)
                                 {
-                                    if ((k + 1) > (filasXtreme-1) || (l + 1) > (columnasXtreme-1))
+                                    if ((k + 1) > (filasXtreme - 1) || (l + 1) > (columnasXtreme - 1))
                                     {
                                         break;
                                     }
@@ -942,7 +943,7 @@ namespace IPC2.Controllers
                         }
 
                         //ABAJO
-                        if (i < (filasXtreme-1))
+                        if (i < (filasXtreme - 1))
                         {
                             if (bidiFichas2[i + 1, j].color == "")
                             {
@@ -952,7 +953,7 @@ namespace IPC2.Controllers
                             {
                                 for (int k = i + 1; k > 0; k += 1)
                                 {
-                                    if ((k + 1) > (filasXtreme-1))
+                                    if ((k + 1) > (filasXtreme - 1))
                                     {
                                         break;
                                     }
@@ -980,7 +981,7 @@ namespace IPC2.Controllers
                         }
 
                         //ABAJO-IZQUIERDA
-                        if (i < (filasXtreme-1) && j > 0)
+                        if (i < (filasXtreme - 1) && j > 0)
                         {
                             if (bidiFichas2[i + 1, j - 1].color.Equals(""))
                             {
@@ -993,7 +994,7 @@ namespace IPC2.Controllers
 
                                 while (k < filasXtreme && l > 0)
                                 {
-                                    if ((k + 1) > (filasXtreme-1) || (l - 1) < 0)
+                                    if ((k + 1) > (filasXtreme - 1) || (l - 1) < 0)
                                     {
                                         break;
                                     }
@@ -1461,7 +1462,7 @@ namespace IPC2.Controllers
             }
 
             //ARRIBA-DERECHA
-            if (fila > 0 && columna < (columnasXtreme-1))
+            if (fila > 0 && columna < (columnasXtreme - 1))
             {
                 if (bidiFichas2[fila - 1, columna + 1].color == "")
                 {
@@ -1480,7 +1481,7 @@ namespace IPC2.Controllers
 
                     while (i > 0 && j < columnasXtreme)
                     {
-                        if ((i - 1) < 0 || (j + 1) > (columnasXtreme-1) || bidiFichas2[i - 1, j + 1].color.Equals(""))
+                        if ((i - 1) < 0 || (j + 1) > (columnasXtreme - 1) || bidiFichas2[i - 1, j + 1].color.Equals(""))
                         {
                             break;
                         }
@@ -1510,7 +1511,7 @@ namespace IPC2.Controllers
 
 
             //DERECHA
-            if (columna < (columnasXtreme-1))
+            if (columna < (columnasXtreme - 1))
             {
                 if (bidiFichas2[fila, columna + 1].color == "")
                 {
@@ -1522,7 +1523,7 @@ namespace IPC2.Controllers
 
                     for (int i = columna + 1; i < filasXtreme; i += 1)
                     {
-                        if ((i + 1) > (filasXtreme-1) || bidiFichas2[fila, i + 1].color.Equals(""))
+                        if ((i + 1) > (filasXtreme - 1) || bidiFichas2[fila, i + 1].color.Equals(""))
                         {
                             break;
                         }
@@ -1545,7 +1546,7 @@ namespace IPC2.Controllers
             }
 
             //DERECHA-ABAJO
-            if (fila < (filasXtreme-1) && columna < (columnasXtreme-1))
+            if (fila < (filasXtreme - 1) && columna < (columnasXtreme - 1))
             {
                 if (bidiFichas2[fila + 1, columna + 1].color == "")
                 {
@@ -1564,7 +1565,7 @@ namespace IPC2.Controllers
 
                     while (i < filasXtreme && j < columnasXtreme)
                     {
-                        if ((i + 1) > (filasXtreme-1) || (j + 1) > (columnasXtreme-1) || bidiFichas2[i + 1, j + 1].color.Equals(""))
+                        if ((i + 1) > (filasXtreme - 1) || (j + 1) > (columnasXtreme - 1) || bidiFichas2[i + 1, j + 1].color.Equals(""))
                         {
                             break;
                         }
@@ -1594,7 +1595,7 @@ namespace IPC2.Controllers
 
 
             //ABAJO
-            if (fila < (filasXtreme-1))
+            if (fila < (filasXtreme - 1))
             {
                 if (bidiFichas2[fila + 1, columna].color == "")
                 {
@@ -1606,7 +1607,7 @@ namespace IPC2.Controllers
 
                     for (int i = fila + 1; i < filasXtreme; i += 1)
                     {
-                        if ((i + 1) > (filasXtreme-1) || bidiFichas2[i + 1, columna].color.Equals(""))
+                        if ((i + 1) > (filasXtreme - 1) || bidiFichas2[i + 1, columna].color.Equals(""))
                         {
                             break;
                         }
@@ -1629,7 +1630,7 @@ namespace IPC2.Controllers
             }
 
             //ABAJO-IZQUIERDA
-            if (fila < (filasXtreme-1) && columna > 0)
+            if (fila < (filasXtreme - 1) && columna > 0)
             {
                 if (bidiFichas2[fila + 1, columna - 1].color == "")
                 {
@@ -1648,7 +1649,7 @@ namespace IPC2.Controllers
 
                     while (i < filasXtreme && j > 0)
                     {
-                        if ((i + 1) > (filasXtreme-1) || (j - 1) < 0 || bidiFichas2[i + 1, j - 1].color.Equals(""))
+                        if ((i + 1) > (filasXtreme - 1) || (j - 1) < 0 || bidiFichas2[i + 1, j - 1].color.Equals(""))
                         {
                             break;
                         }
@@ -2098,19 +2099,18 @@ namespace IPC2.Controllers
             }
         }
 
-
         public int contarNegras()
         {
             int contador = 0;
-            for(int i = 0; i<8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                for(int j = 0; j<8; j++)
+                for (int j = 0; j < 8; j++)
                 {
                     if (bidiFichas[i, j].color.Equals("fa-circle"))
                     {
                         contador += 1;
                     }
-                    
+
                 }
             }
             return contador;
@@ -2140,7 +2140,7 @@ namespace IPC2.Controllers
             {
                 for (int j = 0; j < columnasXtreme; j++)
                 {
-                    if (buscarL1(bidiFichas2[i,j].color))
+                    if (buscarL1(bidiFichas2[i, j].color))
                     {
                         contador += 1;
                     }
@@ -2172,7 +2172,7 @@ namespace IPC2.Controllers
         public ActionResult Single(int fila, int columna, string color)
         {
             bidiFichas[fila, columna] = new Fichas(fila.ToString(), columna.ToString(), color);
-            
+
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -2184,7 +2184,7 @@ namespace IPC2.Controllers
             string turno = color;
 
             ViewBag.turno = "";
-            if(color == "fa-circle white")
+            if (color == "fa-circle white")
             {
                 TempData["Turno"] = "fa-circle";
                 turno = "fa-circle";
@@ -2206,7 +2206,7 @@ namespace IPC2.Controllers
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    if(bidiFichas[i, j].permitida.Equals("si"))
+                    if (bidiFichas[i, j].permitida.Equals("si"))
                     {
                         verificadas += 1;
                     }
@@ -2238,7 +2238,7 @@ namespace IPC2.Controllers
             {
                 if (contarNegras() > contarBlancas())
                 {
-                    ViewBag.ganador = "El ganador es: Fichas Negras";
+                    ViewBag.ganador = "El ganador es:" + IPC2.Controllers.CuentaController.usuario;
                     using (var db = new OthelloEntities())
                     {
                         Partida partidita = new Partida();
@@ -2247,7 +2247,7 @@ namespace IPC2.Controllers
 
                         Partida_Jugador partida_jug = new Partida_Jugador();
                         partida_jug.id_partida = partidita.id_partida;
-                        partida_jug.nickname = TempData["Usuario"].ToString();
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
 
                         db.Partida.Add(partidita);
                         db.Partida_Jugador.Add(partida_jug);
@@ -2266,7 +2266,7 @@ namespace IPC2.Controllers
 
                         Partida_Jugador partida_jug = new Partida_Jugador();
                         partida_jug.id_partida = partidita.id_partida;
-                        partida_jug.nickname = TempData["Usuario"].ToString();
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
 
                         db.Partida.Add(partidita);
                         db.Partida_Jugador.Add(partida_jug);
@@ -2274,7 +2274,7 @@ namespace IPC2.Controllers
                         db.SaveChanges();
                     }
                 }
-                
+
             }
 
             ViewBag.numeroBlancas = contarBlancas();
@@ -2285,19 +2285,19 @@ namespace IPC2.Controllers
         public ActionResult Single()
         {
 
-            for(int i = 0; i<8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                for(int j = 0; j<8; j++)
+                for (int j = 0; j < 8; j++)
                 {
                     bidiFichas[i, j] = new Fichas(i.ToString(), j.ToString());
                 }
             }
 
 
-            bidiFichas[3,3] = new Fichas("3","3", "fa-circle white");
-            bidiFichas[4,4] = new Fichas("4","4", "fa-circle white");
-            bidiFichas[4,3] = new Fichas("4","3", "fa-circle");
-            bidiFichas[3,4] = new Fichas("3","4", "fa-circle");
+            bidiFichas[3, 3] = new Fichas("3", "3", "fa-circle white");
+            bidiFichas[4, 4] = new Fichas("4", "4", "fa-circle white");
+            bidiFichas[4, 3] = new Fichas("4", "3", "fa-circle");
+            bidiFichas[3, 4] = new Fichas("3", "4", "fa-circle");
 
             ViewBag.numeroBlancas = contarBlancas();
             ViewBag.numeroNegras = contarNegras();
@@ -2377,14 +2377,13 @@ namespace IPC2.Controllers
                     if (bidiFichas[i, j].permitida.Equals("si"))
                     {
                         verificadas += 1;
-                        tirosMaquina.Add(bidiFichas[i,j]);
+                        tirosMaquina.Add(bidiFichas[i, j]);
                     }
                 }
             }
 
             ViewBag.mensaje = "";
-    
-            
+
             if (verificadas != 0)
             {
                 //RANDOM
@@ -2411,7 +2410,7 @@ namespace IPC2.Controllers
             {
                 if (contarNegras() > contarBlancas())
                 {
-                    ViewBag.ganador = "El ganador es: Fichas Negras";
+                    ViewBag.ganador = "El ganador es :" + IPC2.Controllers.CuentaController.usuario;
                     using (var db = new OthelloEntities())
                     {
                         Partida partidita = new Partida();
@@ -2420,7 +2419,7 @@ namespace IPC2.Controllers
 
                         Partida_Jugador partida_jug = new Partida_Jugador();
                         partida_jug.id_partida = partidita.id_partida;
-                        partida_jug.nickname = TempData["Usuario"].ToString();
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
 
                         db.Partida.Add(partidita);
                         db.Partida_Jugador.Add(partida_jug);
@@ -2439,7 +2438,7 @@ namespace IPC2.Controllers
 
                         Partida_Jugador partida_jug = new Partida_Jugador();
                         partida_jug.id_partida = partidita.id_partida;
-                        partida_jug.nickname = TempData["Usuario"].ToString();
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
 
                         db.Partida.Add(partidita);
                         db.Partida_Jugador.Add(partida_jug);
@@ -2472,7 +2471,7 @@ namespace IPC2.Controllers
             else
             {
                 List<Fichas> empList = (List<Fichas>)TempData["tableroData"];
-                
+
                 string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H" };
 
                 for (int i = 0; i < 8; i++)
@@ -2487,7 +2486,7 @@ namespace IPC2.Controllers
                 {
                     string color = "";
                     int posicion = 0;
-                    for(int i = 0; i<8; i++)
+                    for (int i = 0; i < 8; i++)
                     {
                         if (letras[i] == item.columna)
                         {
@@ -2498,7 +2497,7 @@ namespace IPC2.Controllers
                             posicion++;
                         }
                     }
-                    if(item.color == "negro")
+                    if (item.color == "negro")
                     {
                         color = "fa-circle";
                     }
@@ -2510,7 +2509,7 @@ namespace IPC2.Controllers
                     int fila = Int32.Parse(item.fila) - 1;
                     bidiFichas[fila, posicion] = new Fichas(fila.ToString(), posicion.ToString(), color);
                 }
-                
+
                 TempData["Turno"] = "fa-circle";
                 ViewBag.turno = "negras";
                 Verificar("fa-circle");
@@ -2553,41 +2552,41 @@ namespace IPC2.Controllers
         [HttpPost]
         public ActionResult GuardarTablero()
         {
-            string[] letras= { "A", "B", "C", "D", "E", "F", "G", "H"};
+            string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H" };
 
             using (StreamWriter outputFile = new StreamWriter("C:\\Users\\Amc\\Desktop\\AS\\Programacion\\Visual\\IPC2 Proyect\\IPC2\\files\\guardado.xml"))
             {
                 outputFile.WriteLine("<tablero>");
-                for(int i = 0; i < 8; i++)
+                for (int i = 0; i < 8; i++)
                 {
-                    for (int j=0; j<8; j++)
+                    for (int j = 0; j < 8; j++)
                     {
-                        if (bidiFichas[i,j].color.Equals("fa-circle"))
+                        if (bidiFichas[i, j].color.Equals("fa-circle"))
                         {
                             outputFile.WriteLine("  <ficha>");
                             outputFile.WriteLine("      <color>negro</color>");
-                            outputFile.WriteLine("      <fila>"+(i+1)+"</fila>");
-                            outputFile.WriteLine("      <columna>"+letras[j]+"</columna>");
+                            outputFile.WriteLine("      <fila>" + (i + 1) + "</fila>");
+                            outputFile.WriteLine("      <columna>" + letras[j] + "</columna>");
                             outputFile.WriteLine("  </ficha>");
                         }
-                        else if(bidiFichas[i, j].color.Equals("fa-circle white"))
+                        else if (bidiFichas[i, j].color.Equals("fa-circle white"))
                         {
                             outputFile.WriteLine("  <ficha>");
                             outputFile.WriteLine("      <color>blanco</color>");
-                            outputFile.WriteLine("      <fila>" + (i+1) + "</fila>");
+                            outputFile.WriteLine("      <fila>" + (i + 1) + "</fila>");
                             outputFile.WriteLine("      <columna>" + letras[j] + "</columna>");
                             outputFile.WriteLine("  </ficha>");
                         }
 
                     }
-                   
+
                 }
                 outputFile.WriteLine("</tablero>");
             }
             return Redirect("~/Home/Index");
         }
 
-        
+
         [HttpPost]
         public ActionResult InicializarXtream(int filas, int columnas, int c1, int c2)
         {
@@ -2662,22 +2661,24 @@ namespace IPC2.Controllers
                 }
             }
 
-            int mitadF = (filasXtreme-2) / 2;
+            int mitadF = (filasXtreme - 2) / 2;
             int mitadC = (columnasXtreme - 2) / 2;
 
-            bidiFichas2[mitadF, mitadC] = new Fichas(mitadF.ToString(), mitadC.ToString(), per : "si");
-            bidiFichas2[mitadF+1, mitadC+1] = new Fichas((mitadF+1).ToString(), (mitadC+1).ToString(), per: "si");
-            bidiFichas2[mitadF+1, mitadC] = new Fichas((mitadF + 1).ToString(), (mitadC + 1).ToString(), per: "si");
-            bidiFichas2[mitadF, mitadC+1] = new Fichas((mitadC + 1).ToString(), (mitadF + 1).ToString(), per: "si");
+            bidiFichas2[mitadF, mitadC] = new Fichas(mitadF.ToString(), mitadC.ToString(), per: "si");
+            bidiFichas2[mitadF + 1, mitadC + 1] = new Fichas((mitadF + 1).ToString(), (mitadC + 1).ToString(), per: "si");
+            bidiFichas2[mitadF + 1, mitadC] = new Fichas((mitadF + 1).ToString(), (mitadC + 1).ToString(), per: "si");
+            bidiFichas2[mitadF, mitadC + 1] = new Fichas((mitadC + 1).ToString(), (mitadF + 1).ToString(), per: "si");
 
-            
-            
+
+
 
             return RedirectToAction("Xtream");
         }
 
         public ActionResult Xtream()
         {
+            indice1 = 0;
+            indice2 = 0;
             ViewBag.turno = "J1";
             ViewBag.turno_color = coloresJ1[indice1];
             indice1++;
@@ -2688,14 +2689,14 @@ namespace IPC2.Controllers
         }
 
 
-            [HttpPost]
+        [HttpPost]
 
         public ActionResult Xtream(int fila, int columna, string color, string turno)
         {
             string turn = turno;
             ViewBag.filas = filasXtreme;
             ViewBag.columnas = columnasXtreme;
-
+            ViewBag.ganador = "";
             bidiFichas2[fila, columna] = new Fichas(fila.ToString(), columna.ToString(), color);
 
 
@@ -2709,11 +2710,13 @@ namespace IPC2.Controllers
                     ViewBag.turno_color = coloresJ2[indice2++];
                     indice2 = 0;
                     ViewBag.turno = "J2";
+                    turn = "J2";
                 }
                 else
                 {
                     ViewBag.turno_color = coloresJ2[indice2++];
                     ViewBag.turno = "J2";
+                    turn = "J2";
                 }
             }
             else
@@ -2723,11 +2726,13 @@ namespace IPC2.Controllers
                     ViewBag.turno_color = coloresJ1[indice1++];
                     indice1 = 0;
                     ViewBag.turno = "J1";
+                    turn = "J1";
                 }
                 else
                 {
                     ViewBag.turno_color = coloresJ1[indice1++];
                     ViewBag.turno = "J1";
+                    turn = "J1";
                 }
             }
 
@@ -2736,7 +2741,7 @@ namespace IPC2.Controllers
                 bidiFichas2[mitadF + 1, mitadC].color != "" && bidiFichas2[mitadF, mitadC + 1].color != "")
             {
 
-               
+
 
                 for (int i = 0; i < filasXtreme; i++)
                 {
@@ -2766,7 +2771,7 @@ namespace IPC2.Controllers
                             }
                         }
 
-                        
+
                     }
                 }
 
@@ -2774,27 +2779,28 @@ namespace IPC2.Controllers
                 CambiarX2(fila, columna);
 
                 VerificarX2(ViewBag.turno_color);
+
             }
             else
             {
-                if(bidiFichas2[mitadF, mitadC].color != "")
+                if (bidiFichas2[mitadF, mitadC].color != "")
                 {
                     bidiFichas2[mitadF, mitadC].permitida = "no";
                 }
 
-                if (bidiFichas2[mitadF+1, mitadC+1].color != "")
+                if (bidiFichas2[mitadF + 1, mitadC + 1].color != "")
                 {
-                    bidiFichas2[mitadF+1, mitadC+1].permitida = "no";
+                    bidiFichas2[mitadF + 1, mitadC + 1].permitida = "no";
                 }
 
-                if (bidiFichas2[mitadF+1, mitadC].color != "")
+                if (bidiFichas2[mitadF + 1, mitadC].color != "")
                 {
-                    bidiFichas2[mitadF+1, mitadC].permitida = "no";
+                    bidiFichas2[mitadF + 1, mitadC].permitida = "no";
                 }
 
-                if (bidiFichas2[mitadF, mitadC+1].color != "")
+                if (bidiFichas2[mitadF, mitadC + 1].color != "")
                 {
-                    bidiFichas2[mitadF, mitadC+1].permitida = "no";
+                    bidiFichas2[mitadF, mitadC + 1].permitida = "no";
                 }
 
             }
@@ -2816,8 +2822,6 @@ namespace IPC2.Controllers
 
             if (verificadas == 0)
             {
-
-
                 if (turn.Equals("J1"))
                 {
                     if (coloresJ2.Count() == (indice2 + 1))
@@ -2878,60 +2882,158 @@ namespace IPC2.Controllers
                 }
 
                 VerificarX2(ViewBag.turno_color);
+
+
+                verificadas = 0;
+
+                for (int i = 0; i < filasXtreme; i++)
+                {
+                    for (int j = 0; j < columnasXtreme; j++)
+                    {
+                        if (bidiFichas2[i, j].permitida.Equals("si"))
+                        {
+                            verificadas += 1;
+                        }
+                    }
+                }
+
+
+
+                if (verificadas == 0)
+                {
+                    ViewBag.mensaje = "No queda tiro para ningun jugador";
+                    ViewBag.ganador = "";
+                    if (contarJ1() < contarJ2() && (contarJ1() + contarJ2() != (filasXtreme*columnasXtreme)))
+                    {
+                        ViewBag.ganador = "El ganador es: " + IPC2.Controllers.CuentaController.usuario;
+
+                        using (var db = new OthelloEntities())
+                        {
+                            Partida partidita = new Partida();
+                            partidita.id_tipo_partida = 3;
+                            partidita.id_estado = 1;
+
+                            Partida_Jugador partida_jug = new Partida_Jugador();
+                            partida_jug.id_partida = partidita.id_partida;
+                            partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                            db.Partida.Add(partidita);
+                            db.Partida_Jugador.Add(partida_jug);
+
+                            db.SaveChanges();
+                        }
+
+                    }
+                    else if (contarJ1() == contarJ2() && (contarJ1() + contarJ2() != (filasXtreme * columnasXtreme)))
+                    {
+                        ViewBag.ganador = "Empate";
+
+                        using (var db = new OthelloEntities())
+                        {
+                            Partida partidita = new Partida();
+                            partidita.id_tipo_partida = 3;
+                            partidita.id_estado = 3;
+
+                            Partida_Jugador partida_jug = new Partida_Jugador();
+                            partida_jug.id_partida = partidita.id_partida;
+                            partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                            db.Partida.Add(partidita);
+                            db.Partida_Jugador.Add(partida_jug);
+
+                            db.SaveChanges();
+                        }
+                    }
+                    else if (contarJ1() > contarJ2() && (contarJ1() + contarJ2() != (filasXtreme * columnasXtreme))) 
+                    {
+                        ViewBag.ganador = "El ganador es: Jugador Invitado";
+                        using (var db = new OthelloEntities())
+                        {
+                            Partida partidita = new Partida();
+                            partidita.id_tipo_partida = 3;
+                            partidita.id_estado = 2;
+
+                            Partida_Jugador partida_jug = new Partida_Jugador();
+                            partida_jug.id_partida = partidita.id_partida;
+                            partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                            db.Partida.Add(partidita);
+                            db.Partida_Jugador.Add(partida_jug);
+
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
             }
 
-            ViewBag.ganador = "";
-            if (contarJ1() + contarJ2() == (filasXtreme*columnasXtreme))
+
+            if (contarJ1() + contarJ2() == (filasXtreme * columnasXtreme))
             {
                 if (contarJ1() < contarJ2())
                 {
-                    ViewBag.ganador = "El ganador es: Usuario";
-            /*
+                    ViewBag.ganador = "El ganador es: " + IPC2.Controllers.CuentaController.usuario;
+
                     using (var db = new OthelloEntities())
                     {
                         Partida partidita = new Partida();
-                        partidita.id_tipo_partida = 2;
+                        partidita.id_tipo_partida = 3;
                         partidita.id_estado = 1;
 
                         Partida_Jugador partida_jug = new Partida_Jugador();
                         partida_jug.id_partida = partidita.id_partida;
-                        partida_jug.nickname = TempData["Usuario"].ToString();
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
 
                         db.Partida.Add(partidita);
                         db.Partida_Jugador.Add(partida_jug);
 
                         db.SaveChanges();
                     }
-            */
+                }
+                else if (contarJ1() == contarJ2())
+                {
+                    ViewBag.ganador = "Empate";
+
+                    using (var db = new OthelloEntities())
+                    {
+                        Partida partidita = new Partida();
+                        partidita.id_tipo_partida = 3;
+                        partidita.id_estado = 3;
+
+                        Partida_Jugador partida_jug = new Partida_Jugador();
+                        partida_jug.id_partida = partidita.id_partida;
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                        db.Partida.Add(partidita);
+                        db.Partida_Jugador.Add(partida_jug);
+
+                        db.SaveChanges();
+                    }
                 }
                 else
                 {
                     ViewBag.ganador = "El ganador es: Jugador Invitado";
-              /*      using (var db = new OthelloEntities())
+                    using (var db = new OthelloEntities())
                     {
                         Partida partidita = new Partida();
-                        partidita.id_tipo_partida = 2;
+                        partidita.id_tipo_partida = 3;
                         partidita.id_estado = 2;
 
                         Partida_Jugador partida_jug = new Partida_Jugador();
                         partida_jug.id_partida = partidita.id_partida;
-                        partida_jug.nickname = TempData["Usuario"].ToString();
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
 
                         db.Partida.Add(partidita);
                         db.Partida_Jugador.Add(partida_jug);
 
                         db.SaveChanges();
                     }
-             */
+
                 }
 
             }
-            ViewBag.numeroBlancas = contarJ1();
-            ViewBag.numeroNegras = contarJ2();
-
-
-
-
+            ViewBag.numeroJ1 = contarJ1();
+            ViewBag.numeroJ2 = contarJ2();
 
             return View(bidiFichas2);
         }

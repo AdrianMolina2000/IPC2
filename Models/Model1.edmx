@@ -124,27 +124,12 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OthelloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="usuarios">
-          <Key>
-            <PropertyRef Name="nickname" />
-          </Key>
-          <Property Name="nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="primer_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="segundo_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="primer_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="segundo_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contraseña" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Partida_Jugador" Relationship="OthelloModel.fk_nickname" FromRole="usuarios" ToRole="Partida_Jugador" />
-        </EntityType>
         <EntityContainer Name="OthelloEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
           <EntitySet Name="Estado" EntityType="OthelloModel.Estado" />
-          <EntitySet Name="Tipo_Partida" EntityType="OthelloModel.Tipo_Partida" />
           <EntitySet Name="Partida" EntityType="OthelloModel.Partida" />
           <EntitySet Name="Partida_Jugador" EntityType="OthelloModel.Partida_Jugador" />
+          <EntitySet Name="Tipo_Partida" EntityType="OthelloModel.Tipo_Partida" />
+          <EntitySet Name="usuarios" EntityType="OthelloModel.usuarios" />
           <AssociationSet Name="fk_estado" Association="OthelloModel.fk_estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Partida" EntitySet="Partida" />
@@ -170,14 +155,6 @@
           <Property Name="estado1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_estado" FromRole="Estado" ToRole="Partida" />
         </EntityType>
-        <EntityType Name="Tipo_Partida">
-          <Key>
-            <PropertyRef Name="id_Tipo_Partida" />
-          </Key>
-          <Property Name="id_Tipo_Partida" Type="Int32" Nullable="false" />
-          <Property Name="Nombre_Tipo_Partida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_tipo_partida" FromRole="Tipo_Partida" ToRole="Partida" />
-        </EntityType>
         <EntityType Name="Partida">
           <Key>
             <PropertyRef Name="id_partida" />
@@ -198,6 +175,29 @@
           <Property Name="nickname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_id_partida" FromRole="Partida_Jugador" ToRole="Partida" />
           <NavigationProperty Name="usuarios" Relationship="OthelloModel.fk_nickname" FromRole="Partida_Jugador" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="Tipo_Partida">
+          <Key>
+            <PropertyRef Name="id_Tipo_Partida" />
+          </Key>
+          <Property Name="id_Tipo_Partida" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Tipo_Partida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_tipo_partida" FromRole="Tipo_Partida" ToRole="Partida" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="nickname" />
+          </Key>
+          <Property Name="nickname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="primer_nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="segundo_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="primer_apellido" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="segundo_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contraseña" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Partida_Jugador" Relationship="OthelloModel.fk_nickname" FromRole="usuarios" ToRole="Partida_Jugador" />
         </EntityType>
         <Association Name="fk_estado">
           <End Type="OthelloModel.Estado" Role="Estado" Multiplicity="1" />
@@ -247,40 +247,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OthelloModelStoreContainer" CdmEntityContainer="OthelloEntities">
-          <EntitySetMapping Name="usuarios">
-            <EntityTypeMapping TypeName="OthelloModel.usuarios">
-              <MappingFragment StoreEntitySet="usuarios">
-                <ScalarProperty Name="nickname" ColumnName="nickname" />
-                <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
-                <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
-                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
-                <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
-                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
-                <ScalarProperty Name="pais" ColumnName="pais" />
-                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
-                <ScalarProperty Name="email" ColumnName="email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Estado">
             <EntityTypeMapping TypeName="OthelloModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
                 <ScalarProperty Name="estado1" ColumnName="estado" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tipo_Partida">
-            <EntityTypeMapping TypeName="OthelloModel.Tipo_Partida">
-              <MappingFragment StoreEntitySet="Tipo_Partida">
-                <ScalarProperty Name="Nombre_Tipo_Partida" ColumnName="Nombre_Tipo_Partida" />
-                <ScalarProperty Name="id_Tipo_Partida" ColumnName="id_Tipo_Partida" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -299,6 +276,29 @@
                 <ScalarProperty Name="nickname" ColumnName="nickname" />
                 <ScalarProperty Name="id_partida" ColumnName="id_partida" />
                 <ScalarProperty Name="id_partida_jugador" ColumnName="id_partida_jugador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Partida">
+            <EntityTypeMapping TypeName="OthelloModel.Tipo_Partida">
+              <MappingFragment StoreEntitySet="Tipo_Partida">
+                <ScalarProperty Name="Nombre_Tipo_Partida" ColumnName="Nombre_Tipo_Partida" />
+                <ScalarProperty Name="id_Tipo_Partida" ColumnName="id_Tipo_Partida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="OthelloModel.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+                <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
+                <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

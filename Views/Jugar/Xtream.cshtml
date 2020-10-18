@@ -1,14 +1,11 @@
-﻿<div>@ViewBag.mensaje</div>
-<div>@ViewBag.turno</div>
-
-
+﻿
 <div class="container">
 
     <div class="row justify-content-center">
 
         <div class="jumbotron">
-            <p> BLANCAS </p>
-            <p class="text-center">@ViewBag.numeroBlancas </p>
+            <p> @IPC2.Controllers.CuentaController.usuario </p>
+            <p class="text-center">@ViewBag.numeroJ1 </p>
         </div>
 
         @{
@@ -46,7 +43,7 @@
                                     else if (Model[i, j].permitida.Equals("si"))
                                     {
                                         <form method="post">
-                                            <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
+                                            <button type="submit" class="casilla dentro"><i class="far fa-times-circle" style="color:@ViewBag.turno_color"></i></button>
                                             <input type="hidden" name="fila" value=@i>
                                             <input type="hidden" name="columna" value=@j>
                                             <input type="hidden" name="color" value="@ViewBag.turno_color">
@@ -54,27 +51,6 @@
                                         </form>
                                     }
                                 }
-
-                                @*else
-                                    {
-                                        if (TempData["Turno"].Equals("fa-circle white"))
-                                        {
-                                            if (Model[i, j].permitida.Equals("no"))
-                                            {
-                                                <button type="submit" class="casilla dentro"><i class="fas @Model[i, j].color"></i></button>
-                                            }
-                                            else if (Model[i, j].permitida.Equals("si"))
-                                            {
-                                                <form method="post">
-                                                    <button type="submit" class="casilla dentro"><i class="fas fa-circle grey"></i></button>
-                                                    <input type="hidden" name="fila" value=@i>
-                                                    <input type="hidden" name="columna" value=@j>
-                                                    <input type="hidden" name="color" value="fa-circle white">
-                                                </form>
-                                            }
-
-
-                                        }*@
                             }
                         }
 
@@ -94,8 +70,8 @@
         </main>
 
         <div class="jumbotron">
-            <p> NEGRAS </p>
-            <p class="text-center">@ViewBag.numeroNegras</p>
+            <p> Jugador Invitado </p>
+            <p class="text-center">@ViewBag.numeroJ2</p>
         </div>
     </div>
 
@@ -104,7 +80,7 @@
     <div class="row justify-content-center">
 
         <div class="col-sm">
-            Es turno de las fichas @ViewBag.turno
+            Es turno de @ViewBag.turno <i class="fas fa-circle" style="color:@ViewBag.turno_color"></i>
         </div>
 
         <div class="col-sm">
@@ -120,7 +96,7 @@
         </div>
 
 
-        <div class="col-sm">
+        @*<div class="col-sm">
             @using (Html.BeginForm("Iniciar", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <input type="submit" value="Reiniciar Tablero" class="btn btn-dark" />
@@ -132,7 +108,7 @@
             {
                 <input type="submit" value="Guardar y Salir" class="btn btn-dark" />
             }
-        </div>
+        </div>*@
     </div>
 
 </div>

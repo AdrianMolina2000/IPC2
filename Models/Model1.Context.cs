@@ -25,10 +25,10 @@ namespace IPC2.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<usuarios> usuarios { get; set; }
         public virtual DbSet<Estado> Estado { get; set; }
-        public virtual DbSet<Tipo_Partida> Tipo_Partida { get; set; }
         public virtual DbSet<Partida> Partida { get; set; }
         public virtual DbSet<Partida_Jugador> Partida_Jugador { get; set; }
+        public virtual DbSet<Tipo_Partida> Tipo_Partida { get; set; }
+        public virtual DbSet<usuarios> usuarios { get; set; }
     }
 }
