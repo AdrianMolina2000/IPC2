@@ -26,6 +26,8 @@ namespace IPC2.Controllers
         public static int filasXtreme;
         public static int columnasXtreme;
 
+        public static double tiempo1 = 0;
+        public static double tiempo2 = 0;
         public void Cambiar(int fila, int columna)
         {
 
@@ -400,11 +402,11 @@ namespace IPC2.Controllers
                                         bidiFichas[k - 1, j].permitida = "si";
                                         break;
                                     }
-                                    else if (bidiFichas[i, k].color != bidiFichas[k - 1, j].color)
+                                    else if (bidiFichas[k, j].color != bidiFichas[k - 1, j].color)
                                     {
                                         break;
                                     }
-                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[k - 1, j].color))
+                                    else if (bidiFichas[k, j].color.Equals(bidiFichas[k - 1, j].color))
                                     {
                                         break;
                                     }
@@ -586,11 +588,11 @@ namespace IPC2.Controllers
                                         bidiFichas[k + 1, j].permitida = "si";
                                         break;
                                     }
-                                    else if (bidiFichas[i, k].color != bidiFichas[k + 1, j].color)
+                                    else if (bidiFichas[k, j].color != bidiFichas[k + 1, j].color)
                                     {
                                         break;
                                     }
-                                    else if (bidiFichas[i, k].color.Equals(bidiFichas[k + 1, j].color))
+                                    else if (bidiFichas[k, j].color.Equals(bidiFichas[k + 1, j].color))
                                     {
                                         break;
                                     }
@@ -1135,11 +1137,11 @@ namespace IPC2.Controllers
                                         bidiFichas2[k - 1, j].permitida = "si";
                                         break;
                                     }
-                                    else if (bidiFichas3[i, k].color != bidiFichas3[k - 1, j].color)
+                                    else if (bidiFichas3[k, j].color != bidiFichas3[k - 1, j].color)
                                     {
                                         break;
                                     }
-                                    else if (bidiFichas3[i, k].color.Equals(bidiFichas3[k - 1, j].color))
+                                    else if (bidiFichas3[k, j].color.Equals(bidiFichas3[k - 1, j].color))
                                     {
                                         break;
                                     }
@@ -1290,11 +1292,11 @@ namespace IPC2.Controllers
                                         bidiFichas2[k + 1, j].permitida = "si";
                                         break;
                                     }
-                                    else if (bidiFichas3[i, k].color != bidiFichas3[k + 1, j].color)
+                                    else if (bidiFichas3[k, j].color != bidiFichas3[k + 1, j].color)
                                     {
                                         break;
                                     }
-                                    else if (bidiFichas3[i, k].color.Equals(bidiFichas3[k + 1, j].color))
+                                    else if (bidiFichas3[k, j].color.Equals(bidiFichas3[k + 1, j].color))
                                     {
                                         break;
                                     }
@@ -1859,9 +1861,9 @@ namespace IPC2.Controllers
                 {
                     List<int> indices = new List<int>();
 
-                    for (int i = columna + 1; i < filasXtreme; i += 1)
+                    for (int i = columna + 1; i < columnasXtreme; i += 1)
                     {
-                        if ((i + 1) > (filasXtreme - 1) || bidiFichas3[fila, i + 1].color.Equals(""))
+                        if ((i + 1) > (columnasXtreme - 1) || bidiFichas3[fila, i + 1].color.Equals(""))
                         {
                             break;
                         }

@@ -399,6 +399,7 @@
     <Content Include="Views\Jugar\Cargar2.cshtml" />
     <Content Include="Views\Jugar\Xtream.cshtml" />
     <Content Include="Views\Jugar\InicializarXtream.cshtml" />
+    <Content Include="Views\Shared\_Contador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

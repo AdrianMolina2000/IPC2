@@ -1,11 +1,20 @@
 ﻿@model IPC2.Models.Fichas[,]
 
+@{ 
+    var endTime = DateTime.UtcNow.AddSeconds(0);
+    var timeRemaining = TimeSpan.FromTicks(endTime.Ticks - DateTime.UtcNow.Ticks).TotalSeconds;
+}
+
     <div class="container">
         <div class="row justify-content-center">
 
             <div class="jumbotron">
                 <p> BLANCAS </p>
                 <p class="text-center">@ViewBag.numeroBlancas </p>
+                @if (ViewBag.turno == "blancas")
+                {
+                    <p> tiempo : <span id="minRemaining"></span>:<span id="secRemaining"></span></p>
+                }
             </div>
 
             <main id="Tablero" class="bg-dark">
@@ -96,6 +105,10 @@
             <div class="jumbotron">
                 <p> NEGRAS </p>
                 <p class="text-center">@ViewBag.numeroNegras</p>
+                @if (ViewBag.turno == "negras")
+                {
+                    <p> tiempo : <span id="minRemaining"></span>:<span id="secRemaining"></span></p>
+                }
             </div>
         </div>
 
@@ -137,3 +150,35 @@
 
     </div>
 
+<script>
+
+    var remSeconds = @timeRemaining;
+    var secondsCounter = remSeconds % 60;
+
+    function formatNumber(number) {
+
+        if (number < 10) return '0' + number;
+        else return '' + number;
+
+    }
+
+
+    function startTick() {
+        document.getElementById('secRemaining').innerText = formatNumber(secondsCounter);
+        document.getElementById('minRemaining').innerText = formatNumber(parseInt(remSeconds / 60));
+
+        var _tick = setInterval(function () {
+            remSeconds = remSeconds + 1;
+            secondsCounter = secondsCounter + 1;
+
+            document.getElementById('secRemaining').innerText = formatNumber(secondsCounter);
+            document.getElementById('minRemaining').innerText = formatNumber(parseInt(remSeconds / 60));
+
+            if (secondsCounter == 59)
+                secondsCounter = -1;
+
+        }, 1000)
+    }
+    startTick();
+
+</script>
