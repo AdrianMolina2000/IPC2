@@ -18,6 +18,7 @@ namespace IPC2.Models
         public usuarios()
         {
             this.Partida_Jugador = new HashSet<Partida_Jugador>();
+            this.Torneo = new HashSet<Torneo>();
         }
     
         public string nickname { get; set; }
@@ -32,5 +33,7 @@ namespace IPC2.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partida_Jugador> Partida_Jugador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Torneo> Torneo { get; set; }
     }
 }

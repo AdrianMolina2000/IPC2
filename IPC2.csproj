@@ -141,6 +141,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Archi.cs" />
+    <Compile Include="Models\TableroConfi.cs" />
+    <Compile Include="Models\Equipo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Estado.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -162,6 +166,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuenta.cs" />
+    <Compile Include="Models\Participante.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Partida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -169,6 +176,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tipo_Partida.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Torneo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\usuarios.cs">
@@ -400,6 +410,7 @@
     <Content Include="Views\Jugar\Xtream.cshtml" />
     <Content Include="Views\Jugar\InicializarXtream.cshtml" />
     <Content Include="Views\Shared\_Contador.cshtml" />
+    <Content Include="Views\Jugar\CargarXtream.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -28,6 +28,8 @@ namespace IPC2.Controllers
 
         public static double tiempo1 = 0;
         public static double tiempo2 = 0;
+
+        TableroConfi configuraciones = new TableroConfi();
         public void Cambiar(int fila, int columna)
         {
 
@@ -3040,5 +3042,289 @@ namespace IPC2.Controllers
             return View(bidiFichas2);
         }
 
+        public List<string> cambiarColores(List<string> lista)
+        {
+            List<string> nueva = new List<string>();
+
+            foreach (String color in lista)
+            {
+                if (color.Equals("rojo"))
+                {
+                    nueva.Add("#f23d3d");
+                }
+                else if (color.Equals("amarillo"))
+                {
+                    nueva.Add("#f2b705");
+                }
+                else if (color.Equals("azul"))
+                {
+                    nueva.Add("#024059");
+                }
+                else if (color.Equals("anaranjado"))
+                {
+                    nueva.Add("#f25c05");
+                }
+                else if (color.Equals("verde"))
+                {
+                    nueva.Add("#618033");
+                }
+                else if (color.Equals("violeta"))
+                {
+                    nueva.Add("#523380");
+                }
+                else if (color.Equals("blanco"))
+                {
+                    nueva.Add("#FFFFFF");
+                }
+                else if (color.Equals("negro"))
+                {
+                    nueva.Add("#000000");
+                }
+                else if (color.Equals("celeste"))
+                {
+                    nueva.Add("#04bfbf");
+                }
+                else if (color.Equals("gris"))
+                {
+                    nueva.Add("#7b836a");
+                }
+            }
+            return nueva;
+        }
+
+        public string cambiarColores2(string color)
+        {
+            string nueva = "#000000";
+
+            if (color.Equals("rojo"))
+            {
+                nueva = "#f23d3d";
+            }
+            else if (color.Equals("amarillo"))
+            {
+                nueva = "#f2b705";
+            }
+            else if (color.Equals("azul"))
+            {
+                nueva = "#024059";
+            }
+            else if (color.Equals("anaranjado"))
+            {
+                nueva = "#f25c05";
+            }
+            else if (color.Equals("verde"))
+            {
+                nueva = "#618033";
+            }
+            else if (color.Equals("violeta"))
+            {
+                nueva = "#523380";
+            }
+            else if (color.Equals("blanco"))
+            {
+                nueva = "#FFFFFF";
+            }
+            else if (color.Equals("negro"))
+            {
+                nueva = "#000000";
+            }
+            else if (color.Equals("celeste"))
+            {
+                nueva = "#04bfbf";
+            }
+            else if (color.Equals("gris"))
+            {
+                nueva = "#7b836a";
+            }
+
+            return nueva;
+        }
+
+        [HttpPost]
+        public ActionResult UploadXtream()
+        {
+            try
+            {
+                List<Fichas> empList = new List<Fichas>();
+                configuraciones = new TableroConfi();
+                List<string> colores1 = new List<string>();
+                List<string> colores2 = new List<string>();
+
+                var xmlFile = Request.Files[0];
+                if (xmlFile != null && xmlFile.ContentLength > 0)
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(xmlFile.InputStream);
+                    XmlNodeList empNodes = xmlDocument.SelectNodes("partida/tablero/ficha");
+                    foreach (XmlNode emp in empNodes)
+                    {
+                        empList.Add(new Fichas()
+                        {
+                            color = emp["color"].InnerText,
+                            columna = emp["columna"].InnerText,
+                            fila = emp["fila"].InnerText,
+                        });
+                    }
+
+                    //Filas y Columnas
+                    XmlNode empNodes2 = xmlDocument.SelectSingleNode("partida");
+                    configuraciones.filas = empNodes2["filas"].InnerText;
+                    configuraciones.columnas = empNodes2["columnas"].InnerText;
+
+                    //Colores 1
+                    XmlNodeList empNodes3 = xmlDocument.SelectNodes("partida/Jugador1/color");
+                    foreach (XmlNode emp in empNodes3)
+                    {
+                        colores1.Add(emp.InnerText);
+                    }
+                    configuraciones.colores1 = colores1;
+
+                    //Colores 2
+                    XmlNodeList empNodes4 = xmlDocument.SelectNodes("partida/Jugador2/color");
+                    foreach (XmlNode emp in empNodes4)
+                    {
+                        colores2.Add(emp.InnerText);
+                    }
+                    configuraciones.colores2 = colores2;
+
+
+                    TempData["tableroDataXtream"] = empList;
+                    TempData["confi"] = configuraciones;
+                }
+                return RedirectToAction("CargarXtream");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("CargarXtream");
+            }
+        }
+
+        public ActionResult CargarXtream()
+        {
+            if (TempData["tableroDataXtream"] == null)
+            {
+                ViewBag.ShowList = false;
+                return View();
+            }
+            else
+            {
+                List<Fichas> empList = (List<Fichas>)TempData["tableroDataXtream"];
+                TableroConfi confi = (TableroConfi)TempData["confi"];
+
+                filasXtreme = Int32.Parse(confi.filas);
+                columnasXtreme = Int32.Parse(confi.columnas);
+
+                coloresJ1 = cambiarColores(confi.colores1);
+                coloresJ2 = cambiarColores(confi.colores2);
+
+                string[] letras = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T" };
+
+                //INICIALIZAR TABLERO
+                bidiFichas2 = new Fichas[filasXtreme, columnasXtreme];
+                bidiFichas3 = new Fichas[filasXtreme, columnasXtreme];
+
+                for (int i = 0; i < filasXtreme; i++)
+                {
+                    for (int j = 0; j < columnasXtreme; j++)
+                    {
+                        bidiFichas2[i, j] = new Fichas(i.ToString(), j.ToString());
+                    }
+                }
+
+                int mitadF = (filasXtreme - 2) / 2;
+                int mitadC = (columnasXtreme - 2) / 2;
+
+                bidiFichas2[mitadF, mitadC] = new Fichas(mitadF.ToString(), mitadC.ToString(), per: "si");
+                bidiFichas2[mitadF + 1, mitadC + 1] = new Fichas((mitadF + 1).ToString(), (mitadC + 1).ToString(), per: "si");
+                bidiFichas2[mitadF + 1, mitadC] = new Fichas((mitadF + 1).ToString(), (mitadC + 1).ToString(), per: "si");
+                bidiFichas2[mitadF, mitadC + 1] = new Fichas((mitadC + 1).ToString(), (mitadF + 1).ToString(), per: "si");
+
+                foreach (var item in empList)
+                {
+                    int posicion = 0;
+                    for (int i = 0; i < columnasXtreme; i++)
+                    {
+                        if (letras[i] == item.columna)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            posicion++;
+                        }
+                    }
+
+                    int fila = Int32.Parse(item.fila) - 1;
+                    bidiFichas2[fila, posicion] = new Fichas(fila.ToString(), posicion.ToString(), cambiarColores2(item.color));
+                }
+
+                ViewBag.turno = "J1";
+
+                if (ViewBag.turno.Equals("J1"))
+            {
+                if (coloresJ2.Count() == (indice2 + 1))
+                {
+                    ViewBag.turno_color = coloresJ2[indice2++];
+                    indice2 = 0;
+                    ViewBag.turno = "J2";
+                }
+                else
+                {
+                    ViewBag.turno_color = coloresJ2[indice2++];
+                    ViewBag.turno = "J2";
+                }
+            }
+            else
+            {
+                if (coloresJ1.Count() == (indice1 + 1))
+                {
+                    ViewBag.turno_color = coloresJ1[indice1++];
+                    indice1 = 0;
+                    ViewBag.turno = "J1";
+                }
+                else
+                {
+                    ViewBag.turno_color = coloresJ1[indice1++];
+                    ViewBag.turno = "J1";
+                }
+            }
+
+                for (int i = 0; i < filasXtreme; i++)
+                {
+                    for (int j = 0; j < columnasXtreme; j++)
+                    {
+                        bidiFichas3[i, j] = new Fichas(i.ToString(), j.ToString());
+
+                        bidiFichas3[i, j].color = bidiFichas2[i, j].color;
+
+                        bidiFichas2[i, j].permitida = "no";
+
+                        if (ViewBag.turno == "J1")
+                        {
+                            if (buscarL1(bidiFichas3[i, j].color))
+                            {
+                                bidiFichas3[i, j].color = ViewBag.turno_color;
+                            }
+                        }
+                        else
+                        {
+                            if (buscarL2(bidiFichas3[i, j].color))
+                            {
+                                bidiFichas3[i, j].color = ViewBag.turno_color;
+                            }
+                        }
+
+
+                    }
+                }
+
+                VerificarX2(ViewBag.turno_color);
+                ViewBag.ShowList = true;
+
+                ViewBag.columnas = columnasXtreme;
+                ViewBag.filas = filasXtreme;
+                return View(bidiFichas2);
+            }
+        }
     }
 }

@@ -5,12 +5,28 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OthelloModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_equipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_torneo" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="id_estado" />
           </Key>
           <Property Name="id_estado" Type="int" Nullable="false" />
           <Property Name="estado" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_participante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_participante" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_equipo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Partida">
           <Key>
@@ -35,6 +51,15 @@
           <Property Name="id_Tipo_Partida" Type="int" Nullable="false" />
           <Property Name="Nombre_Tipo_Partida" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Torneo">
+          <Key>
+            <PropertyRef Name="id_torneo" />
+          </Key>
+          <Property Name="id_torneo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_torneo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nickname_creador" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ganador" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="usuarios">
           <Key>
             <PropertyRef Name="nickname" />
@@ -49,6 +74,18 @@
           <Property Name="contraseña" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Equipo_Torneo">
+          <End Role="Torneo" Type="Self.Torneo" Multiplicity="1" />
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Torneo">
+              <PropertyRef Name="id_torneo" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="id_torneo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
@@ -85,6 +122,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Participante_Equipo">
+          <End Role="Equipo" Type="Self.Equipo" Multiplicity="1" />
+          <End Role="Participante" Type="Self.Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="id_equipo" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_tipo_partida">
           <End Role="Tipo_Partida" Type="Self.Tipo_Partida" Multiplicity="1" />
           <End Role="Partida" Type="Self.Partida" Multiplicity="*" />
@@ -97,12 +146,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Torneo_usuarios">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="Torneo" Type="Self.Torneo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="nickname" />
+            </Principal>
+            <Dependent Role="Torneo">
+              <PropertyRef Name="nickname_creador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OthelloModelStoreContainer">
+          <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participante" EntityType="Self.Participante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Partida" EntityType="Self.Partida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Partida_Jugador" EntityType="Self.Partida_Jugador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tipo_Partida" EntityType="Self.Tipo_Partida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Torneo" EntityType="Self.Torneo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Equipo_Torneo" Association="Self.FK_Equipo_Torneo">
+            <End Role="Torneo" EntitySet="Torneo" />
+            <End Role="Equipo" EntitySet="Equipo" />
+          </AssociationSet>
           <AssociationSet Name="fk_estado" Association="Self.fk_estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Partida" EntitySet="Partida" />
@@ -115,9 +183,17 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="Partida_Jugador" EntitySet="Partida_Jugador" />
           </AssociationSet>
+          <AssociationSet Name="FK_Participante_Equipo" Association="Self.FK_Participante_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
           <AssociationSet Name="fk_tipo_partida" Association="Self.fk_tipo_partida">
             <End Role="Tipo_Partida" EntitySet="Tipo_Partida" />
             <End Role="Partida" EntitySet="Partida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Torneo_usuarios" Association="Self.FK_Torneo_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="Torneo" EntitySet="Torneo" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -125,11 +201,22 @@
     <edmx:ConceptualModels>
       <Schema Namespace="OthelloModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="OthelloEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipo" EntityType="OthelloModel.Equipo" />
           <EntitySet Name="Estado" EntityType="OthelloModel.Estado" />
+          <EntitySet Name="Participante" EntityType="OthelloModel.Participante" />
           <EntitySet Name="Partida" EntityType="OthelloModel.Partida" />
           <EntitySet Name="Partida_Jugador" EntityType="OthelloModel.Partida_Jugador" />
           <EntitySet Name="Tipo_Partida" EntityType="OthelloModel.Tipo_Partida" />
+          <EntitySet Name="Torneo" EntityType="OthelloModel.Torneo" />
           <EntitySet Name="usuarios" EntityType="OthelloModel.usuarios" />
+          <AssociationSet Name="FK_Equipo_Torneo" Association="OthelloModel.FK_Equipo_Torneo">
+            <End Role="Torneo" EntitySet="Torneo" />
+            <End Role="Equipo" EntitySet="Equipo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participante_Equipo" Association="OthelloModel.FK_Participante_Equipo">
+            <End Role="Equipo" EntitySet="Equipo" />
+            <End Role="Participante" EntitySet="Participante" />
+          </AssociationSet>
           <AssociationSet Name="fk_estado" Association="OthelloModel.fk_estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Partida" EntitySet="Partida" />
@@ -146,7 +233,21 @@
             <End Role="usuarios" EntitySet="usuarios" />
             <End Role="Partida_Jugador" EntitySet="Partida_Jugador" />
           </AssociationSet>
+          <AssociationSet Name="FK_Torneo_usuarios" Association="OthelloModel.FK_Torneo_usuarios">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="Torneo" EntitySet="Torneo" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Equipo">
+          <Key>
+            <PropertyRef Name="id_equipo" />
+          </Key>
+          <Property Name="id_equipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_equipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_torneo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Torneo" Relationship="OthelloModel.FK_Equipo_Torneo" FromRole="Equipo" ToRole="Torneo" />
+          <NavigationProperty Name="Participante" Relationship="OthelloModel.FK_Participante_Equipo" FromRole="Equipo" ToRole="Participante" />
+        </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="id_estado" />
@@ -154,6 +255,15 @@
           <Property Name="id_estado" Type="Int32" Nullable="false" />
           <Property Name="estado1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_estado" FromRole="Estado" ToRole="Partida" />
+        </EntityType>
+        <EntityType Name="Participante">
+          <Key>
+            <PropertyRef Name="id_participante" />
+          </Key>
+          <Property Name="id_participante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_participante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_equipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipo" Relationship="OthelloModel.FK_Participante_Equipo" FromRole="Participante" ToRole="Equipo" />
         </EntityType>
         <EntityType Name="Partida">
           <Key>
@@ -184,6 +294,17 @@
           <Property Name="Nombre_Tipo_Partida" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Partida" Relationship="OthelloModel.fk_tipo_partida" FromRole="Tipo_Partida" ToRole="Partida" />
         </EntityType>
+        <EntityType Name="Torneo">
+          <Key>
+            <PropertyRef Name="id_torneo" />
+          </Key>
+          <Property Name="id_torneo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_torneo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nickname_creador" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ganador" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Equipo" Relationship="OthelloModel.FK_Equipo_Torneo" FromRole="Torneo" ToRole="Equipo" />
+          <NavigationProperty Name="usuarios" Relationship="OthelloModel.FK_Torneo_usuarios" FromRole="Torneo" ToRole="usuarios" />
+        </EntityType>
         <EntityType Name="usuarios">
           <Key>
             <PropertyRef Name="nickname" />
@@ -198,7 +319,32 @@
           <Property Name="contraseña" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Partida_Jugador" Relationship="OthelloModel.fk_nickname" FromRole="usuarios" ToRole="Partida_Jugador" />
+          <NavigationProperty Name="Torneo" Relationship="OthelloModel.FK_Torneo_usuarios" FromRole="usuarios" ToRole="Torneo" />
         </EntityType>
+        <Association Name="FK_Equipo_Torneo">
+          <End Type="OthelloModel.Torneo" Role="Torneo" Multiplicity="1" />
+          <End Type="OthelloModel.Equipo" Role="Equipo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Torneo">
+              <PropertyRef Name="id_torneo" />
+            </Principal>
+            <Dependent Role="Equipo">
+              <PropertyRef Name="id_torneo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participante_Equipo">
+          <End Type="OthelloModel.Equipo" Role="Equipo" Multiplicity="1" />
+          <End Type="OthelloModel.Participante" Role="Participante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipo">
+              <PropertyRef Name="id_equipo" />
+            </Principal>
+            <Dependent Role="Participante">
+              <PropertyRef Name="id_equipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_estado">
           <End Type="OthelloModel.Estado" Role="Estado" Multiplicity="1" />
           <End Type="OthelloModel.Partida" Role="Partida" Multiplicity="*" />
@@ -247,17 +393,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Torneo_usuarios">
+          <End Type="OthelloModel.usuarios" Role="usuarios" Multiplicity="1" />
+          <End Type="OthelloModel.Torneo" Role="Torneo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="nickname" />
+            </Principal>
+            <Dependent Role="Torneo">
+              <PropertyRef Name="nickname_creador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OthelloModelStoreContainer" CdmEntityContainer="OthelloEntities">
+          <EntitySetMapping Name="Equipo">
+            <EntityTypeMapping TypeName="OthelloModel.Equipo">
+              <MappingFragment StoreEntitySet="Equipo">
+                <ScalarProperty Name="id_torneo" ColumnName="id_torneo" />
+                <ScalarProperty Name="Nombre_equipo" ColumnName="Nombre_equipo" />
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Estado">
             <EntityTypeMapping TypeName="OthelloModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
                 <ScalarProperty Name="estado1" ColumnName="estado" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participante">
+            <EntityTypeMapping TypeName="OthelloModel.Participante">
+              <MappingFragment StoreEntitySet="Participante">
+                <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+                <ScalarProperty Name="nombre_participante" ColumnName="nombre_participante" />
+                <ScalarProperty Name="id_participante" ColumnName="id_participante" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -284,6 +460,16 @@
               <MappingFragment StoreEntitySet="Tipo_Partida">
                 <ScalarProperty Name="Nombre_Tipo_Partida" ColumnName="Nombre_Tipo_Partida" />
                 <ScalarProperty Name="id_Tipo_Partida" ColumnName="id_Tipo_Partida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Torneo">
+            <EntityTypeMapping TypeName="OthelloModel.Torneo">
+              <MappingFragment StoreEntitySet="Torneo">
+                <ScalarProperty Name="ganador" ColumnName="ganador" />
+                <ScalarProperty Name="nickname_creador" ColumnName="nickname_creador" />
+                <ScalarProperty Name="Nombre_torneo" ColumnName="Nombre_torneo" />
+                <ScalarProperty Name="id_torneo" ColumnName="id_torneo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

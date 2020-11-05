@@ -5,15 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f7010fb63a0f4718a17a404713e92122" Name="Diagram1" ZoomLevel="45">
-        <EntityTypeShape EntityType="OthelloModel.Estado" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="OthelloModel.Equipo" Width="1.5" PointX="7.5" PointY="6.5" />
+        <EntityTypeShape EntityType="OthelloModel.Estado" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="OthelloModel.Participante" Width="1.5" PointX="9.75" PointY="6.625" />
         <EntityTypeShape EntityType="OthelloModel.Partida" Width="1.5" PointX="3" PointY="0.875" />
         <EntityTypeShape EntityType="OthelloModel.Partida_Jugador" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="OthelloModel.Tipo_Partida" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="OthelloModel.usuarios" Width="1.5" PointX="3" PointY="5.75" />
+        <EntityTypeShape EntityType="OthelloModel.Tipo_Partida" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="OthelloModel.Torneo" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="OthelloModel.usuarios" Width="1.5" PointX="3" PointY="5.875" />
+        <AssociationConnector Association="OthelloModel.FK_Equipo_Torneo" />
+        <AssociationConnector Association="OthelloModel.FK_Participante_Equipo" />
         <AssociationConnector Association="OthelloModel.fk_estado" />
         <AssociationConnector Association="OthelloModel.fk_id_partida" />
         <AssociationConnector Association="OthelloModel.fk_tipo_partida" />
         <AssociationConnector Association="OthelloModel.fk_nickname" />
+        <AssociationConnector Association="OthelloModel.FK_Torneo_usuarios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

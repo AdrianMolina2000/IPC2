@@ -1,11 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OthelloModelStoreContainer" CdmEntityContainer="OthelloEntities">
+    <EntitySetMapping Name="Equipo">
+      <EntityTypeMapping TypeName="OthelloModel.Equipo">
+        <MappingFragment StoreEntitySet="Equipo">
+          <ScalarProperty Name="id_torneo" ColumnName="id_torneo" />
+          <ScalarProperty Name="Nombre_equipo" ColumnName="Nombre_equipo" />
+          <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Estado">
       <EntityTypeMapping TypeName="OthelloModel.Estado">
         <MappingFragment StoreEntitySet="Estado">
           <ScalarProperty Name="estado1" ColumnName="estado" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participante">
+      <EntityTypeMapping TypeName="OthelloModel.Participante">
+        <MappingFragment StoreEntitySet="Participante">
+          <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+          <ScalarProperty Name="nombre_participante" ColumnName="nombre_participante" />
+          <ScalarProperty Name="id_participante" ColumnName="id_participante" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -32,6 +50,16 @@
         <MappingFragment StoreEntitySet="Tipo_Partida">
           <ScalarProperty Name="Nombre_Tipo_Partida" ColumnName="Nombre_Tipo_Partida" />
           <ScalarProperty Name="id_Tipo_Partida" ColumnName="id_Tipo_Partida" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Torneo">
+      <EntityTypeMapping TypeName="OthelloModel.Torneo">
+        <MappingFragment StoreEntitySet="Torneo">
+          <ScalarProperty Name="ganador" ColumnName="ganador" />
+          <ScalarProperty Name="nickname_creador" ColumnName="nickname_creador" />
+          <ScalarProperty Name="Nombre_torneo" ColumnName="Nombre_torneo" />
+          <ScalarProperty Name="id_torneo" ColumnName="id_torneo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
