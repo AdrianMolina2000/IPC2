@@ -1,0 +1,101 @@
+﻿
+
+@using (Html.BeginForm("UploadTorneo", "Jugar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" id="fileUpload" name="fileUpload" style="float:left" class="btn btn-primary" />
+    <input type="submit" value="Mostrar" style="float:right" class="btn btn-success" />
+}
+
+@if (ViewBag.ShowList)
+{
+    @model IPC2.Models.Campeonato
+<div class="container">
+    <div class="di text-center" style="position: absolute; margin: 200px 0px 0px 0px;">
+        @Model.equipos[0].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 200px 0px 0px 990px;">
+        @Model.equipos[1].nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: 200px 0px 0px 0px;">
+        @Model.equipos[2].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 200px 0px 0px 990px;">
+        @Model.equipos[3].nombre
+    </div>
+
+
+
+    <!-- Button trigger modal -->
+    <button type="button" style="position: absolute; margin: -180px 0px 0px 180px;" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[0].nombre vs @Model.equipos[2].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[0].nombre vs @Model.equipos[2].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[0].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[2].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[1].nombre vs @Model.equipos[2].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[0].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[2].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[2].nombre vs @Model.equipos[2].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[0].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[2].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -180px 0px 0px 180px;"></div>-->
+
+
+    <div class="di" style="position: absolute; margin: -180px 0px 0px 810px;">
+    </div>
+
+    <div class="di" style="position: absolute; margin: -180px 0px 0px 490px;">
+    </div>
+
+
+    <div class="di2" style="position: absolute; margin: -430px 0px 0px 450px;">
+        @Model.nombre
+    </div>
+</div>
+}

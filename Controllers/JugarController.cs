@@ -29,7 +29,8 @@ namespace IPC2.Controllers
         public static double tiempo1 = 0;
         public static double tiempo2 = 0;
 
-        TableroConfi configuraciones = new TableroConfi();
+        public static TableroConfi configuraciones = new TableroConfi();
+        public static Campeonato torneito = new Campeonato();
         public void Cambiar(int fila, int columna)
         {
 
@@ -3325,6 +3326,66 @@ namespace IPC2.Controllers
                 ViewBag.filas = filasXtreme;
                 return View(bidiFichas2);
             }
+        }
+
+        [HttpPost]
+        public ActionResult UploadTorneo()
+        {
+            try
+            {
+                Campeonato torneo = new Campeonato();
+                
+                List<Team> equipos = new List<Team>();
+
+                var xmlFile = Request.Files[0];
+                if (xmlFile != null && xmlFile.ContentLength > 0)
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load(xmlFile.InputStream);
+
+                    //Nombre Torneo
+                    XmlNode empNodes = xmlDocument.SelectSingleNode("campeonato");
+                    torneo.nombre = empNodes["nombre"].InnerText;
+
+                    //Team
+                    XmlNodeList empNodes2 = xmlDocument.SelectNodes("campeonato/equipo");
+                    foreach (XmlNode emp in empNodes2)
+                    {
+                        Team equipo = new Team();
+                        equipo.nombre = emp["nombreEquipo"].InnerText;
+
+                        List<player> jugs = new List<player>();
+                        
+                        foreach (XmlNode empi in emp.SelectNodes("jugador"))
+                        {
+                            player jugador = new player(empi.InnerText);
+                            jugs.Add(jugador);
+                        }
+
+                        equipo.jugadores = jugs;
+                        equipos.Add(equipo);
+                    }
+                    torneo.equipos = equipos;
+                    torneito = torneo;
+                    TempData["Torneo"] = "si";
+                }
+                return RedirectToAction("CargarTorneo");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("CargarTorneo");
+            }
+        }
+
+        public ActionResult CargarTorneo()
+        {
+            if (TempData["Torneo"] == null)
+            {
+                ViewBag.ShowList = false;
+                return View();
+            }
+            ViewBag.ShowList = true;
+            return View(torneito);
         }
     }
 }

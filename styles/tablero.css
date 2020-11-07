@@ -64,3 +64,26 @@
     background-color: rgb(35, 35, 35);
 }
 
+.container {
+    margin-top: 20px;
+    border: 1px solid white;
+}
+
+.di {
+    width: 120px;
+    height: 50px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.di2 {
+    width: 200px;
+    height: 50px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

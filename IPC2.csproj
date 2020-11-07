@@ -141,6 +141,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Archi.cs" />
+    <Compile Include="Models\Campeonato.cs" />
+    <Compile Include="Models\player.cs" />
     <Compile Include="Models\TableroConfi.cs" />
     <Compile Include="Models\Equipo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -175,6 +177,7 @@
     <Compile Include="Models\Partida_Jugador.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Team.cs" />
     <Compile Include="Models\Tipo_Partida.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -411,6 +414,7 @@
     <Content Include="Views\Jugar\InicializarXtream.cshtml" />
     <Content Include="Views\Shared\_Contador.cshtml" />
     <Content Include="Views\Jugar\CargarXtream.cshtml" />
+    <Content Include="Views\Jugar\CargarTorneo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
