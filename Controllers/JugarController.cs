@@ -25,6 +25,7 @@ namespace IPC2.Controllers
 
         public static int filasXtreme;
         public static int columnasXtreme;
+        public static string modalidadXtream;
 
         public static double tiempo1 = 0;
         public static double tiempo2 = 0;
@@ -2593,14 +2594,14 @@ namespace IPC2.Controllers
 
 
         [HttpPost]
-        public ActionResult InicializarXtream(int filas, int columnas, int c1, int c2)
+        public ActionResult InicializarXtream(int filas, int columnas, int c1, int c2, string mo)
         {
 
             filasXtreme = filas;
             columnasXtreme = columnas;
             ViewBag.c1 = c1;
             ViewBag.c2 = c2;
-
+            modalidadXtream = mo;
             return View();
         }
 
@@ -2908,7 +2909,28 @@ namespace IPC2.Controllers
                 {
                     ViewBag.mensaje = "No queda tiro para ningun jugador";
                     ViewBag.ganador = "";
-                    if (contarJ1() < contarJ2() && (contarJ1() + contarJ2() != (filasXtreme*columnasXtreme)))
+                    if (contarJ1() < contarJ2() && (contarJ1() + contarJ2() != (filasXtreme*columnasXtreme)) && (modalidadXtream.Equals("normal")))
+                    {
+                        ViewBag.ganador = "El ganador es: " + IPC2.Controllers.CuentaController.usuario;
+
+                        using (var db = new OthelloEntities())
+                        {
+                            Partida partidita = new Partida();
+                            partidita.id_tipo_partida = 3;
+                            partidita.id_estado = 1;
+
+                            Partida_Jugador partida_jug = new Partida_Jugador();
+                            partida_jug.id_partida = partidita.id_partida;
+                            partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                            db.Partida.Add(partidita);
+                            db.Partida_Jugador.Add(partida_jug);
+
+                            db.SaveChanges();
+                        }
+
+                    }
+                    else if (contarJ1() > contarJ2() && (contarJ1() + contarJ2() != (filasXtreme * columnasXtreme)) && (modalidadXtream.Equals("normal")))
                     {
                         ViewBag.ganador = "El ganador es: " + IPC2.Controllers.CuentaController.usuario;
 
@@ -2949,7 +2971,26 @@ namespace IPC2.Controllers
                             db.SaveChanges();
                         }
                     }
-                    else if (contarJ1() > contarJ2() && (contarJ1() + contarJ2() != (filasXtreme * columnasXtreme))) 
+                    else if (contarJ1() > contarJ2() && (contarJ1() + contarJ2() != (filasXtreme * columnasXtreme)) && (modalidadXtream.Equals("inversa"))) 
+                    {
+                        ViewBag.ganador = "El ganador es: Jugador Invitado";
+                        using (var db = new OthelloEntities())
+                        {
+                            Partida partidita = new Partida();
+                            partidita.id_tipo_partida = 3;
+                            partidita.id_estado = 2;
+
+                            Partida_Jugador partida_jug = new Partida_Jugador();
+                            partida_jug.id_partida = partidita.id_partida;
+                            partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                            db.Partida.Add(partidita);
+                            db.Partida_Jugador.Add(partida_jug);
+
+                            db.SaveChanges();
+                        }
+                    }
+                    else if (contarJ1() < contarJ2() && (contarJ1() + contarJ2() != (filasXtreme * columnasXtreme)) && (modalidadXtream.Equals("normal")))
                     {
                         ViewBag.ganador = "El ganador es: Jugador Invitado";
                         using (var db = new OthelloEntities())
@@ -2975,7 +3016,27 @@ namespace IPC2.Controllers
 
             if (contarJ1() + contarJ2() == (filasXtreme * columnasXtreme))
             {
-                if (contarJ1() < contarJ2())
+                if (contarJ1() < contarJ2() && modalidadXtream.Equals("inversa"))
+                {
+                    ViewBag.ganador = "El ganador es: " + IPC2.Controllers.CuentaController.usuario;
+
+                    using (var db = new OthelloEntities())
+                    {
+                        Partida partidita = new Partida();
+                        partidita.id_tipo_partida = 3;
+                        partidita.id_estado = 1;
+
+                        Partida_Jugador partida_jug = new Partida_Jugador();
+                        partida_jug.id_partida = partidita.id_partida;
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                        db.Partida.Add(partidita);
+                        db.Partida_Jugador.Add(partida_jug);
+
+                        db.SaveChanges();
+                    }
+                }
+                else if (contarJ1() > contarJ2() && modalidadXtream.Equals("normal"))
                 {
                     ViewBag.ganador = "El ganador es: " + IPC2.Controllers.CuentaController.usuario;
 
@@ -3015,7 +3076,7 @@ namespace IPC2.Controllers
                         db.SaveChanges();
                     }
                 }
-                else
+                else if (contarJ1() > contarJ2() && modalidadXtream.Equals("inversa"))
                 {
                     ViewBag.ganador = "El ganador es: Jugador Invitado";
                     using (var db = new OthelloEntities())
@@ -3035,7 +3096,25 @@ namespace IPC2.Controllers
                     }
 
                 }
+                else if (contarJ1() < contarJ2() && modalidadXtream.Equals("normal"))
+                {
+                    ViewBag.ganador = "El ganador es: Jugador Invitado";
+                    using (var db = new OthelloEntities())
+                    {
+                        Partida partidita = new Partida();
+                        partidita.id_tipo_partida = 3;
+                        partidita.id_estado = 2;
 
+                        Partida_Jugador partida_jug = new Partida_Jugador();
+                        partida_jug.id_partida = partidita.id_partida;
+                        partida_jug.nickname = IPC2.Controllers.CuentaController.usuario;
+
+                        db.Partida.Add(partidita);
+                        db.Partida_Jugador.Add(partida_jug);
+
+                        db.SaveChanges();
+                    }
+                }
             }
             ViewBag.numeroJ1 = contarJ1();
             ViewBag.numeroJ2 = contarJ2();
@@ -3187,6 +3266,10 @@ namespace IPC2.Controllers
                         colores2.Add(emp.InnerText);
                     }
                     configuraciones.colores2 = colores2;
+
+                    //modalidad
+                    XmlNode empNodes5 = xmlDocument.SelectSingleNode("partida");
+                    modalidadXtream = empNodes2["modalidad"].InnerText;
 
 
                     TempData["tableroDataXtream"] = empList;

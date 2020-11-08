@@ -9,36 +9,203 @@
 @if (ViewBag.ShowList)
 {
     @model IPC2.Models.Campeonato
+    if (Model.equipos.Count() == 4)
+    {
+
+
+        <div class="container">
+            <div class="di text-center" style="position: absolute; margin: 200px 0px 0px 0px;">
+                @Model.equipos[0].nombre
+            </div>
+
+            <div class="di" style="position: relative; margin: 200px 0px 0px 990px;">
+                @Model.equipos[1].nombre
+            </div>
+
+            <div class="di" style="position: absolute; margin: 200px 0px 0px 0px;">
+                @Model.equipos[2].nombre
+            </div>
+
+            <div class="di" style="position: relative; margin: 200px 0px 0px 990px;">
+                @Model.equipos[3].nombre
+            </div>
+
+
+
+            <!-- Button trigger modal -->
+            <button type="button" style="position: absolute; margin: -180px 0px 0px 180px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop1">
+                Ganador
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[0].nombre vs @Model.equipos[2].nombre</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!--Cuerpo del Tablero-->
+                            <form class="form" action="#" method="post">
+
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[0].nombre vs @Model.equipos[2].jugadores[0].nombre</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                            <option value="gana jugador1">Gana @Model.equipos[0].jugadores[0].nombre</option>
+                                            <option value="gana jugador2">Gana @Model.equipos[2].jugadores[0].nombre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[1].nombre vs @Model.equipos[2].jugadores[1].nombre</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                            <option value="gana jugador1">Gana @Model.equipos[0].jugadores[1].nombre</option>
+                                            <option value="gana jugador2">Gana @Model.equipos[2].jugadores[1].nombre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[2].nombre vs @Model.equipos[2].jugadores[2].nombre</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                            <option value="gana jugador1">Gana @Model.equipos[0].jugadores[2].nombre</option>
+                                            <option value="gana jugador2">Gana @Model.equipos[2].jugadores[2].nombre</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark">Enviar</button>
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="di" style="position: absolute; margin: -180px 0px 0px 180px;"></div>-->
+            <!-- Button trigger modal -->
+            <button type="button" style="        position: absolute;
+        margin: -180px 0px 0px 810px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop2">
+                Ganador
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[1].nombre vs @Model.equipos[3].nombre</h5>
+                        </div>
+                        <div class="modal-body">
+                            <!--Cuerpo del Tablero-->
+                            <form class="form" action="#" method="post">
+
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[1].jugadores[0].nombre vs @Model.equipos[3].jugadores[0].nombre</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                            <option value="gana jugador1">Gana @Model.equipos[1].jugadores[0].nombre</option>
+                                            <option value="gana jugador2">Gana @Model.equipos[3].jugadores[0].nombre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[1].jugadores[1].nombre vs @Model.equipos[3].jugadores[1].nombre</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                            <option value="gana jugador1">Gana @Model.equipos[1].jugadores[1].nombre</option>
+                                            <option value="gana jugador2">Gana @Model.equipos[3].jugadores[1].nombre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[1].jugadores[2].nombre vs @Model.equipos[3].jugadores[2].nombre</label>
+                                        <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                            <option value="gana jugador1">Gana @Model.equipos[1].jugadores[2].nombre</option>
+                                            <option value="gana jugador2">Gana @Model.equipos[3].jugadores[2].nombre</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-dark">Enviar</button>
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="di" style="position: absolute; margin: -180px 0px 0px 810px;">
+            </div>-->
+
+            <div class="di" style="position: absolute; margin: -180px 0px 0px 490px;">
+            </div>
+
+
+            <div class="di2" style="position: absolute; margin: -430px 0px 0px 450px;">
+                @Model.nombre
+            </div>
+        </div>
+    }
+    else if (Model.equipos.Count() == 8)
+    {
 <div class="container">
-    <div class="di text-center" style="position: absolute; margin: 200px 0px 0px 0px;">
+    <div class="di text-center" style="position: absolute; margin: 120px 0px 0px 0px;">
         @Model.equipos[0].nombre
     </div>
 
-    <div class="di" style="position: relative; margin: 200px 0px 0px 990px;">
+    <div class="di" style="position: relative; margin: 120px 0px 0px 990px;">
+        @Model.equipos[4].nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: 40px 0px 0px 0px;">
         @Model.equipos[1].nombre
     </div>
 
-    <div class="di" style="position: absolute; margin: 200px 0px 0px 0px;">
+    <div class="di" style="position: relative; margin: 40px 0px 0px 990px;">
+        @Model.equipos[5].nombre
+    </div>
+
+    <div class="di text-center" style="position: absolute; margin: 120px 0px 0px 0px;">
         @Model.equipos[2].nombre
     </div>
 
-    <div class="di" style="position: relative; margin: 200px 0px 0px 990px;">
+    <div class="di" style="position: relative; margin: 120px 0px 0px 990px;">
+        @Model.equipos[6].nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: 40px 0px 0px 0px;">
         @Model.equipos[3].nombre
     </div>
 
+    <div class="di" style="position: relative; margin: 40px 0px 0px 990px;">
+        @Model.equipos[7].nombre
+    </div>
 
-
+    <!--<div class="di" style="position: absolute; margin: -355px 0px 0px 140px;">
+    </div>-->
     <!-- Button trigger modal -->
-    <button type="button" style="position: absolute; margin: -180px 0px 0px 180px;" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop">
+    <button type="button" style="        position: absolute;
+        margin: -355px 0px 0px 140px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop1">
         Ganador
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[0].nombre vs @Model.equipos[2].nombre</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[0].nombre vs @Model.equipos[1].nombre</h5>
                 </div>
                 <div class="modal-body">
                     <!--Cuerpo del Tablero-->
@@ -46,28 +213,28 @@
 
                         <div class="row">
                             <div class="col-sm">
-                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[0].nombre vs @Model.equipos[2].jugadores[0].nombre</label>
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[0].nombre vs @Model.equipos[1].jugadores[0].nombre</label>
                                 <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
                                     <option value="gana jugador1">Gana @Model.equipos[0].jugadores[0].nombre</option>
-                                    <option value="gana jugador2">Gana @Model.equipos[2].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[1].jugadores[0].nombre</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[1].nombre vs @Model.equipos[2].jugadores[1].nombre</label>
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[1].nombre vs @Model.equipos[1].jugadores[1].nombre</label>
                                 <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
                                     <option value="gana jugador1">Gana @Model.equipos[0].jugadores[1].nombre</option>
-                                    <option value="gana jugador2">Gana @Model.equipos[2].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[1].jugadores[1].nombre</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[2].nombre vs @Model.equipos[2].jugadores[2].nombre</label>
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[2].nombre vs @Model.equipos[1].jugadores[2].nombre</label>
                                 <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
                                     <option value="gana jugador1">Gana @Model.equipos[0].jugadores[2].nombre</option>
-                                    <option value="gana jugador2">Gana @Model.equipos[2].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[1].jugadores[2].nombre</option>
                                 </select>
                             </div>
                         </div>
@@ -84,18 +251,773 @@
         </div>
     </div>
 
-    <!--<div class="di" style="position: absolute; margin: -180px 0px 0px 180px;"></div>-->
+    <!--<div class="di" style="position: absolute; margin: -95px 0px 0px 140px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -95px 0px 0px 140px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop2">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[2].nombre vs @Model.equipos[3].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[2].jugadores[0].nombre vs @Model.equipos[3].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[2].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[3].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[2].jugadores[1].nombre vs @Model.equipos[3].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[2].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[3].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[2].jugadores[2].nombre vs @Model.equipos[3].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[2].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[3].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
 
 
-    <div class="di" style="position: absolute; margin: -180px 0px 0px 810px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="di" style="position: absolute; margin: -180px 0px 0px 490px;">
+    <!--<div class="di" style="position: absolute; margin: -355px 0px 0px 850px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -355px 0px 0px 850px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop3">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop3" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[4].nombre vs @Model.equipos[5].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[4].jugadores[0].nombre vs @Model.equipos[5].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[4].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[5].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[4].jugadores[1].nombre vs @Model.equipos[5].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[4].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[5].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[4].jugadores[2].nombre vs @Model.equipos[5].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[4].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[5].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -95px 0px 0px 850px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -95px 0px 0px 850px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop4">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop4" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[6].nombre vs @Model.equipos[7].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[6].jugadores[0].nombre vs @Model.equipos[7].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[6].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[7].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[6].jugadores[1].nombre vs @Model.equipos[7].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[6].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[7].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[6].jugadores[2].nombre vs @Model.equipos[7].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[6].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[7].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="di" style="position: absolute; margin: -235px 0px 0px 380px;">
+        380, -235
     </div>
 
 
-    <div class="di2" style="position: absolute; margin: -430px 0px 0px 450px;">
+    <div class="di" style="position: absolute; margin: -235px 0px 0px 610px;">
+        610, -235
+    </div>
+
+
+    <div class="di" style="position: absolute; margin: -330px 0px 0px 495px;">
+        Ganador
+    </div>
+
+    <div class="di" style="position: absolute; margin: -480px 0px 0px 430px; width: 250px;">
         @Model.nombre
     </div>
 </div>
+    
+    }
+    else if (Model.equipos.Count() == 16)
+    {
+<div class="container">
+    <div class="di text-center" style="position: absolute; margin: 0px 0px 0px 0px;">
+        @Model.equipos[0].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 0px 0px 0px 990px;">
+        @Model.equipos[8].nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: 10px 0px 0px 0px;">
+        @Model.equipos[1].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 10px 0px 0px 990px;">
+        @Model.equipos[9].nombre
+    </div>
+
+    <div class="di text-center" style="position: absolute; margin: 40px 0px 0px 0px;">
+        @Model.equipos[2].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 40px 0px 0px 990px;">
+        @Model.equipos[10].nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: 10px 0px 0px 0px;">
+        @Model.equipos[3].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 10px 0px 0px 990px;">
+        @Model.equipos[11].nombre
+    </div>
+
+    <div class="di text-center" style="position: absolute; margin: 40px 0px 0px 0px;">
+        @Model.equipos[4].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 40px 0px 0px 990px;">
+        @Model.equipos[12].nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: 10px 0px 0px 0px;">
+        @Model.equipos[5].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 10px 0px 0px 990px;">
+        @Model.equipos[13].nombre
+    </div>
+
+    <div class="di text-center" style="position: absolute; margin: 40px 0px 0px 0px;">
+        @Model.equipos[6].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 40px 0px 0px 990px;">
+        @Model.equipos[14].nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: 10px 0px 0px 0px;">
+        @Model.equipos[7].nombre
+    </div>
+
+    <div class="di" style="position: relative; margin: 10px 0px 0px 990px;">
+        @Model.equipos[15].nombre
+    </div>
+
+
+    <!--<div class="di" style="position: absolute; margin: -530px 0px 0px 140px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -530px 0px 0px 140px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop1">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop1" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[0].nombre vs @Model.equipos[1].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[0].nombre vs @Model.equipos[1].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[0].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[1].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[1].nombre vs @Model.equipos[1].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[0].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[1].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[0].jugadores[2].nombre vs @Model.equipos[1].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[0].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[1].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -380px 0px 0px 140px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -380px 0px 0px 140px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop2">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[2].nombre vs @Model.equipos[3].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[2].jugadores[0].nombre vs @Model.equipos[3].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[2].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[3].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[2].jugadores[1].nombre vs @Model.equipos[3].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[2].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[3].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[2].jugadores[2].nombre vs @Model.equipos[3].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[2].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[3].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -230px 0px 0px 140px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -230px 0px 0px 140px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop3">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop3" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[4].nombre vs @Model.equipos[5].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[4].jugadores[0].nombre vs @Model.equipos[5].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[4].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[5].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[4].jugadores[1].nombre vs @Model.equipos[5].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[5].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[4].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[4].jugadores[2].nombre vs @Model.equipos[5].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[4].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[5].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -80px 0px 0px 140px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -80px 0px 0px 140px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop4">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop4" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[6].nombre vs @Model.equipos[7].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[6].jugadores[0].nombre vs @Model.equipos[7].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[6].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[7].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[6].jugadores[1].nombre vs @Model.equipos[7].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[6].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[7].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[6].jugadores[2].nombre vs @Model.equipos[7].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[6].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[7].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -530px 0px 0px 850px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -530px 0px 0px 850px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop5">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop5" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[8].nombre vs @Model.equipos[9].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[8].jugadores[0].nombre vs @Model.equipos[9].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[8].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[9].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[8].jugadores[1].nombre vs @Model.equipos[9].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[8].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[9].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[8].jugadores[2].nombre vs @Model.equipos[9].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[8].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[9].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -380px 0px 0px 850px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -380px 0px 0px 850px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop6">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop6" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[10].nombre vs @Model.equipos[11].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[10].jugadores[0].nombre vs @Model.equipos[11].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[10].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[11].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[10].jugadores[1].nombre vs @Model.equipos[11].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[10].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[11].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[10].jugadores[2].nombre vs @Model.equipos[11].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[10].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[11].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -230px 0px 0px 850px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -230px 0px 0px 850px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop7">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop7" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[12].nombre vs @Model.equipos[13].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[12].jugadores[0].nombre vs @Model.equipos[13].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[12].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[13].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[12].jugadores[1].nombre vs @Model.equipos[13].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[12].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[13].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[12].jugadores[2].nombre vs @Model.equipos[13].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[12].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[13].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="di" style="position: absolute; margin: -80px 0px 0px 850px;">
+    </div>-->
+    <!-- Button trigger modal -->
+    <button type="button" style="        position: absolute;
+        margin: -80px 0px 0px 850px; border: 1px solid black" class="btn btn-light di" data-toggle="modal" data-target="#staticBackdrop8">
+        Ganador
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop8" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">@Model.equipos[14].nombre vs @Model.equipos[15].nombre</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Cuerpo del Tablero-->
+                    <form class="form" action="#" method="post">
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[14].jugadores[0].nombre vs @Model.equipos[15].jugadores[0].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[14].jugadores[0].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[15].jugadores[0].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[14].jugadores[1].nombre vs @Model.equipos[15].jugadores[1].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[14].jugadores[1].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[15].jugadores[1].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <label class="my-1 mr-2" for="filasElegidas">@Model.equipos[14].jugadores[2].nombre vs @Model.equipos[15].jugadores[2].nombre</label>
+                                <select class="custom-select my-1 mr-sm-2" id="filasElegidas" name="filas">
+                                    <option value="gana jugador1">Gana @Model.equipos[14].jugadores[2].nombre</option>
+                                    <option value="gana jugador2">Gana @Model.equipos[15].jugadores[2].nombre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark">Enviar</button>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="di" style="position: absolute; margin: -455px 0px 0px 240px;">
+    </div>
+
+    <div class="di" style="position: absolute; margin: -155px 0px 0px 240px;">
+    </div>
+
+    <div class="di" style="position: absolute; margin: -455px 0px 0px 750px;">
+    </div>
+
+    <div class="di" style="position: absolute; margin: -155px 0px 0px 750px;">
+    </div>
+
+
+    <div class="di" style="position: absolute; margin: -305px 0px 0px 380px;">
+        380, -305
+    </div>
+
+
+    <div class="di" style="position: absolute; margin: -305px 0px 0px 610px;">
+        610, -305
+    </div>
+
+    <div class="di" style="position: absolute; margin: -530px 0px 0px 430px; width: 250px;">
+        @Model.nombre
+    </div>
+
+    <div class="di" style="position: absolute; margin: -400px 0px 0px 495px;">
+        Ganador
+    </div>
+</div>
+    }
 }
