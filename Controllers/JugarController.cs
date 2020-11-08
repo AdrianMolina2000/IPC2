@@ -3269,7 +3269,7 @@ namespace IPC2.Controllers
 
                     //modalidad
                     XmlNode empNodes5 = xmlDocument.SelectSingleNode("partida");
-                    modalidadXtream = empNodes2["modalidad"].InnerText;
+                    modalidadXtream = empNodes2["Modalidad"].InnerText;
 
 
                     TempData["tableroDataXtream"] = empList;
